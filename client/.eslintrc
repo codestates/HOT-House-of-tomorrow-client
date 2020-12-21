@@ -1,0 +1,20 @@
+{
+    "extends": [
+      "react-app",
+      "airbnb",
+      "prettier"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": 0,
+      "react/prop-types": ["off"]
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true
+    },
+    "parser": "babel-eslint"
+  }
