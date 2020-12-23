@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { typeLoginUser } from '../../modules/systems/user_login/login';
-import LoginModal from '../../components/systems/user_login/LoginModal';
+import { typeLoginUser } from '../../../modules/systems/user_login/login';
+import LoginModal from '../../../components/systems/user_login/LoginModal';
 
 // TODO =====================
 // TODO   LOGIN_CONTAINER(CT)
