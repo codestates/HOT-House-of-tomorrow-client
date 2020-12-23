@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FiChevronDown } from 'react-icons/fi';
 
@@ -18,13 +19,24 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function HousingType() {
+function HousingType({ modalHandler }) {
   return (
-    <Block>
+    <Block
+      onMouseEnter={() => modalHandler('open', 'housingType')}
+      onMouseLeave={() => modalHandler('close', 'housingType')}
+    >
       <strong>주거형태</strong>
       <FiChevronDown />
     </Block>
   );
 }
+
+//* PROP_TYPES
+HousingType.defaultProps = {
+  modalHandler: () => null,
+};
+HousingType.propTypes = {
+  modalHandler: PropTypes.func,
+};
 
 export default HousingType;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FiChevronDown } from 'react-icons/fi';
 
 const Block = styled.div`
@@ -19,13 +20,24 @@ const Block = styled.div`
   }
 `;
 
-function Sort() {
+function Sort({ modalHandler }) {
   return (
-    <Block>
+    <Block
+      onMouseEnter={() => modalHandler('open', 'sort')}
+      onMouseLeave={() => modalHandler('close', 'sort')}
+    >
       <strong>정렬</strong>
       <FiChevronDown />
     </Block>
   );
 }
+
+//* PROP_TYPES
+Sort.defaultProps = {
+  modalHandler: () => null,
+};
+Sort.propTypes = {
+  modalHandler: PropTypes.func,
+};
 
 export default Sort;

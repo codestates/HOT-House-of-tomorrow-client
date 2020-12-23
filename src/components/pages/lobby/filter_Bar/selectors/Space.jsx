@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FiChevronDown } from 'react-icons/fi';
 
 const Block = styled.div`
@@ -18,13 +19,24 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function Space() {
+function Space({ modalHandler }) {
   return (
-    <Block>
+    <Block
+      onMouseEnter={() => modalHandler('open', 'space')}
+      onMouseLeave={() => modalHandler('close', 'space')}
+    >
       <strong>공간</strong>
       <FiChevronDown />
     </Block>
   );
 }
+
+//* PROP_TYPES
+Space.defaultProps = {
+  modalHandler: () => null,
+};
+Space.propTypes = {
+  modalHandler: PropTypes.func,
+};
 
 export default Space;

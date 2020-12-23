@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Sort from './selectors/Sort';
 import HousingType from './selectors/HousingType';
@@ -11,16 +12,23 @@ const Block = styled.div`
   flex-direction: row;
 `;
 
-function FilterBarBlock() {
+function FilterBarBlock({ modalHandler }) {
   return (
     <Block>
-      <Sort />
-      <HousingType />
-      <Space />
-      <RoomSize />
-      <Color />
+      <Sort modalHandler={modalHandler} />
+      <HousingType modalHandler={modalHandler} />
+      <Space modalHandler={modalHandler} />
+      <RoomSize modalHandler={modalHandler} />
+      <Color modalHandler={modalHandler} />
     </Block>
   );
 }
+//* PROP_TYPES
+FilterBarBlock.defaultProps = {
+  modalHandler: () => null,
+};
+FilterBarBlock.propTypes = {
+  modalHandler: PropTypes.func,
+};
 
 export default FilterBarBlock;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FiChevronDown } from 'react-icons/fi';
 
 const Block = styled.div`
@@ -18,13 +19,24 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function RoomSize() {
+function RoomSize({ modalHandler }) {
   return (
-    <Block>
+    <Block
+      onMouseEnter={() => modalHandler('open', 'roomSize')}
+      onMouseLeave={() => modalHandler('close', 'roomSize')}
+    >
       <strong>평수</strong>
       <FiChevronDown />
     </Block>
   );
 }
+
+//* PROP_TYPES
+RoomSize.defaultProps = {
+  modalHandler: () => null,
+};
+RoomSize.propTypes = {
+  modalHandler: PropTypes.func,
+};
 
 export default RoomSize;
