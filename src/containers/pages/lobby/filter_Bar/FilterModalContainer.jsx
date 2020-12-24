@@ -44,6 +44,7 @@ function FilterModalContainer({ modalHandler, tab }) {
           fontSize: '15px',
           fontWeight: '400',
           color: '#414141',
+          outline: 'none',
         }}
       >
         {ele}
