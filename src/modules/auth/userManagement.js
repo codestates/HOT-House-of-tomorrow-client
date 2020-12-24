@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import * as loginApi from '../../../api/systems/user_login/login';
-import { createRequestActionTypes } from '../../../api/createRequestSaga';
+import * as loginApi from '../../api/auth/userManagement';
+import { createRequestActionTypes } from '../../api/createRequestSaga';
 
 //* CREATE_REQUEST_ACTION_TYPES
 const [LOGIN_USER, SUCCESS, FAILURE] = createRequestActionTypes(
@@ -35,7 +35,7 @@ export function* loginWatcherSaga() {
 }
 
 //* REDUCER
-export default function loginReducer(state = {}, action) {
+export default function userManagement(state = {}, action) {
   switch (action.type) {
     case LOGIN_USER:
       return {

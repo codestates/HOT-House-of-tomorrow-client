@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import loginReducer, { loginWatcherSaga } from './systems/user_login/login';
+import userManagement, { loginWatcherSaga } from './auth/userManagement';
+import cards, { getCardWatcherSaga } from './pages/lobby/cards';
+import config from './config/filterTabText';
 
-const rootReducer = combineReducers({ loginReducer });
+const rootReducer = combineReducers({ userManagement, config, cards });
 export function* rootSaga() {
-  yield all([loginWatcherSaga()]);
+  yield all([loginWatcherSaga(), getCardWatcherSaga()]);
 }
 
 export default rootReducer;
