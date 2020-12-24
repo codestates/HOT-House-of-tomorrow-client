@@ -19,7 +19,7 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function Color({ modalHandler }) {
+function Color({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
       onMouseEnter={() => modalHandler('open', 'color')}
@@ -27,6 +27,9 @@ function Color({ modalHandler }) {
     >
       <strong>컬러</strong>
       <FiChevronDown />
+      {openModal.color ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="color" />
+      ) : null}
     </Block>
   );
 }

@@ -19,7 +19,7 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function RoomSize({ modalHandler }) {
+function RoomSize({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
       onMouseEnter={() => modalHandler('open', 'roomSize')}
@@ -27,6 +27,9 @@ function RoomSize({ modalHandler }) {
     >
       <strong>평수</strong>
       <FiChevronDown />
+      {openModal.roomSize ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="roomSize" />
+      ) : null}
     </Block>
   );
 }

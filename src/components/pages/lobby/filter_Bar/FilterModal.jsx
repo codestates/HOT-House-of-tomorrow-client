@@ -1,18 +1,77 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-const ModalBlock = styled.div`
-  ul {
+const boxFade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 `;
-function FilterModal() {
+
+const Block = styled.div`
+  position: absolute;
+  top: 50px;
+  transform: translateX(-71px);
+  animation: ${boxFade} 0.6s forwards;
+`;
+
+const FakeBlock = styled.div`
+  background: none;
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  top: -20px;
+`;
+
+const ModalBlock = styled.div`
+  background: white;
+  text-align: left;
+  width: 170px;
+  border-radius: 8px;
+  box-shadow: -3px 1px 18px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+
+  div {
+    background: white;
+    width: 14px;
+    height: 14px;
+    transform: rotateZ(45deg);
+    z-index: 1;
+    position: absolute;
+    top: -6px;
+    left: 50%;
+  }
+
+  ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 400;
+
+    li {
+      padding: 12px 20px;
+      cursor: pointer;
+      color: #414141;
+      &:hover {
+        background: #e1fff9;
+        border-radius: 8px;
+      }
+    }
+  }
+`;
+
+function FilterModal({ modalHandler, tab, innerTextList }) {
   return (
-    <ModalBlock>
-      <ul>
-        <li>최근 인기순</li>
-        <li>역대 인기순</li>
-      </ul>
-    </ModalBlock>
+    <Block onMouseEnter={() => modalHandler('open', tab)}>
+      <FakeBlock />
+      <ModalBlock>
+        <ul>{innerTextList}</ul>
+        <div />
+      </ModalBlock>
+    </Block>
   );
 }
 

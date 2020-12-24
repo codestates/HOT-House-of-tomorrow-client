@@ -19,7 +19,7 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function Space({ modalHandler }) {
+function Space({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
       onMouseEnter={() => modalHandler('open', 'space')}
@@ -27,6 +27,9 @@ function Space({ modalHandler }) {
     >
       <strong>공간</strong>
       <FiChevronDown />
+      {openModal.space ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="space" />
+      ) : null}
     </Block>
   );
 }

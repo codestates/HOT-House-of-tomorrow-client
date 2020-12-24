@@ -19,7 +19,7 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function HousingType({ modalHandler }) {
+function HousingType({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
       onMouseEnter={() => modalHandler('open', 'housingType')}
@@ -27,6 +27,9 @@ function HousingType({ modalHandler }) {
     >
       <strong>주거형태</strong>
       <FiChevronDown />
+      {openModal.housingType ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="housingType" />
+      ) : null}
     </Block>
   );
 }

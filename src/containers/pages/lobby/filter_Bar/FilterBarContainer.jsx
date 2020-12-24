@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import FilterBarBlock from '../../../../components/pages/lobby/filter_Bar/FilterBarBlock';
+import FilterModalContainer from './FilterModalContainer';
+import { typeChangeTab } from '../../../../modules/config/filterTabText';
+import { tabList } from '../../../../config/tabList';
 
 function FilterBarContainer() {
-  // eslint-disable-next-line no-unused-vars
-  const [openModal, setOpenModal] = useState({
-    sort: false,
-    housingType: false,
-    space: false,
-    roomSize: false,
-    color: false,
-  });
+  const [openModal, setOpenModal] = useState({});
+
+  const dispatch = useDispatch();
 
   const modalHandler = (state, area) => {
     if (state === 'open') {
-      setOpenModal({ ...openModal, [area]: true });
+      setOpenModal({
+        sort: false,
+        housingType: false,
+        space: false,
+        roomSize: false,
+        color: false,
+        [area]: true,
+      });
+      dispatch(typeChangeTab(tabList[area]));
     } else {
       setOpenModal({ ...openModal, [area]: false });
     }
@@ -23,7 +30,7 @@ function FilterBarContainer() {
       <FilterBarBlock
         modalHandler={modalHandler}
         openModal={openModal}
-        setOpenModal={setOpenModal}
+        FilterModalContainer={FilterModalContainer}
       />
     </>
   );

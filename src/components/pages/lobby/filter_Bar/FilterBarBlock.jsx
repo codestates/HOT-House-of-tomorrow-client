@@ -10,16 +10,37 @@ import Color from './selectors/Color';
 const Block = styled.div`
   display: flex;
   flex-direction: row;
+  margin-left: 100px;
 `;
 
-function FilterBarBlock({ modalHandler }) {
+function FilterBarBlock({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block>
-      <Sort modalHandler={modalHandler} />
-      <HousingType modalHandler={modalHandler} />
-      <Space modalHandler={modalHandler} />
-      <RoomSize modalHandler={modalHandler} />
-      <Color modalHandler={modalHandler} />
+      <Sort
+        modalHandler={modalHandler}
+        openModal={openModal}
+        FilterModalContainer={FilterModalContainer}
+      />
+      <HousingType
+        modalHandler={modalHandler}
+        openModal={openModal}
+        FilterModalContainer={FilterModalContainer}
+      />
+      <Space
+        modalHandler={modalHandler}
+        openModal={openModal}
+        FilterModalContainer={FilterModalContainer}
+      />
+      <RoomSize
+        modalHandler={modalHandler}
+        openModal={openModal}
+        FilterModalContainer={FilterModalContainer}
+      />
+      <Color
+        modalHandler={modalHandler}
+        openModal={openModal}
+        FilterModalContainer={FilterModalContainer}
+      />
     </Block>
   );
 }

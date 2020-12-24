@@ -20,7 +20,7 @@ const Block = styled.div`
   }
 `;
 
-function Sort({ modalHandler }) {
+function Sort({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
       onMouseEnter={() => modalHandler('open', 'sort')}
@@ -28,6 +28,9 @@ function Sort({ modalHandler }) {
     >
       <strong>정렬</strong>
       <FiChevronDown />
+      {openModal.sort ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="sort" />
+      ) : null}
     </Block>
   );
 }
