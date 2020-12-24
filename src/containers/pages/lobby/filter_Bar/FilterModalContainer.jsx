@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import FilterModal from '../../../../components/pages/lobby/filter_Bar/FilterModal';
 
 function FilterModalContainer({ modalHandler, tab }) {
@@ -19,5 +20,15 @@ function FilterModalContainer({ modalHandler, tab }) {
     </>
   );
 }
+
+//* PROP_TYPES
+FilterModalContainer.defaultProps = {
+  modalHandler: () => null,
+  tab: 'default',
+};
+FilterModalContainer.propTypes = {
+  modalHandler: PropTypes.func,
+  tab: PropTypes.string,
+};
 
 export default FilterModalContainer;

@@ -37,9 +37,18 @@ function Color({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 Color.defaultProps = {
   modalHandler: () => null,
+  openModal: {
+    sort: false,
+    housingType: false,
+    space: false,
+    roomSize: false,
+    color: false,
+  },
 };
 Color.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default Color;

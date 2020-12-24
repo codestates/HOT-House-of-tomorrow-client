@@ -37,9 +37,18 @@ function HousingType({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 HousingType.defaultProps = {
   modalHandler: () => null,
+  openModal: {
+    sort: false,
+    housingType: false,
+    space: false,
+    roomSize: false,
+    color: false,
+  },
 };
 HousingType.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default HousingType;

@@ -38,9 +38,18 @@ function Sort({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 Sort.defaultProps = {
   modalHandler: () => null,
+  openModal: {
+    sort: false,
+    housingType: false,
+    space: false,
+    roomSize: false,
+    color: false,
+  },
 };
 Sort.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default Sort;

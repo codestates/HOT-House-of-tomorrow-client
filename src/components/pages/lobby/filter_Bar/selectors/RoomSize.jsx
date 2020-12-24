@@ -37,9 +37,18 @@ function RoomSize({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 RoomSize.defaultProps = {
   modalHandler: () => null,
+  openModal: {
+    sort: false,
+    housingType: false,
+    space: false,
+    roomSize: false,
+    color: false,
+  },
 };
 RoomSize.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default RoomSize;

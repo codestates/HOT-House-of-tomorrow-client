@@ -37,9 +37,18 @@ function Space({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 Space.defaultProps = {
   modalHandler: () => null,
+  openModal: {
+    sort: false,
+    housingType: false,
+    space: false,
+    roomSize: false,
+    color: false,
+  },
 };
 Space.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default Space;

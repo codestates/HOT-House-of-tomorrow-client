@@ -47,9 +47,12 @@ function FilterBarBlock({ modalHandler, openModal, FilterModalContainer }) {
 //* PROP_TYPES
 FilterBarBlock.defaultProps = {
   modalHandler: () => null,
+  openModal: {},
 };
 FilterBarBlock.propTypes = {
   modalHandler: PropTypes.func,
+  openModal: PropTypes.objectOf(Boolean),
+  FilterModalContainer: PropTypes.func.isRequired,
 };
 
 export default FilterBarBlock;

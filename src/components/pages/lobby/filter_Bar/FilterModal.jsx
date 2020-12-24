@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const boxFade = keyframes`
   0% {
@@ -74,5 +75,16 @@ function FilterModal({ modalHandler, tab, innerTextList }) {
     </Block>
   );
 }
+//* PROP_TYPES
+FilterModal.defaultProps = {
+  modalHandler: () => null,
+  tab: 'default',
+  innerTextList: [],
+};
+FilterModal.propTypes = {
+  modalHandler: PropTypes.func,
+  tab: PropTypes.string,
+  innerTextList: PropTypes.arrayOf(Array),
+};
 
 export default FilterModal;
