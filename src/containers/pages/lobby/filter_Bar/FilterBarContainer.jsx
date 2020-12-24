@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import FilterBarBlock from '../../../../components/pages/lobby/filter_Bar/FilterBarBlock';
 import FilterModalContainer from './FilterModalContainer';
 import { typeChangeTab } from '../../../../modules/config/filterTabText';
-import { tabList } from '../../../../config/tabList';
+import { tabList } from '../../../../data/lobby/filter_bar/tabList';
 
 function FilterBarContainer() {
   const [openModal, setOpenModal] = useState({});
@@ -20,7 +20,7 @@ function FilterBarContainer() {
         color: false,
         [area]: true,
       });
-      dispatch(typeChangeTab(tabList[area]));
+      dispatch(typeChangeTab(tabList[area], area));
     } else {
       setOpenModal({ ...openModal, [area]: false });
     }

@@ -49,13 +49,9 @@ const ModalBlock = styled.div`
     margin: 0;
     list-style: none;
     padding: 0;
-    font-size: 15px;
-    font-weight: 400;
 
     li {
-      padding: 12px 20px;
       cursor: pointer;
-      color: #414141;
       &:hover {
         background: #e1fff9;
         border-radius: 8px;

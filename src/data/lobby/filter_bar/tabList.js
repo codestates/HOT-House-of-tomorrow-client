@@ -1,9 +1,8 @@
 // eslint-disable-next-line import/prefer-default-export
 export const tabList = {
   sort: {
-    '최근 인기순': 0,
-    '역대 인기순': 1,
-    최신순: 2,
+    '역대 인기순': 'best',
+    최신순: 'recent',
   },
   housingType: {
     원룸오피스텔: 0,
@@ -27,10 +26,10 @@ export const tabList = {
     '50평 이상': 5,
   },
   color: {
-    그레이: 0,
-    화이트: 1,
-    블랙: 2,
-    민트: 3,
-    블루: 4,
+    그레이: 'grey',
+    화이트: 'white',
+    블랙: 'black',
+    민트: 'mint',
+    블루: 'blue',
   },
 };
