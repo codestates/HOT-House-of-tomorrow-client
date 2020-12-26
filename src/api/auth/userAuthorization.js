@@ -6,9 +6,14 @@ export async function loginAsync(formData) {
   // const response = formData;
   // return response;
   const response = await axios.post('/api/auth/login', formData);
-  if (!response.data.loginSuccess) {
-    throw new Error('해당 이메일이 존재하지 않습니다.');
-  }
+  console.log(response);
   localStorage.setItem('CURRENT_USER', JSON.stringify(response.data));
+  return response.data;
+}
+
+export async function isAuthAsync() {
+  const response = await axios.get('/api/auth/isAuth');
+  console.log(response);
+  // localStorage.setItem('CURRENT_USER', JSON.stringify(response.data));
   return response.data;
 }

@@ -1,14 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import * as loginApi from '../../api/auth/userAuthorization';
 
 //* CREATE_REQUEST_ACTION_TYPES
-const AUTH_USER = 'auth/AUTH_USER';
-const AUTH_USER_SUCCESS = 'auth/AUTH_USER_SUCCESS';
-const AUTH_USER_FAILURE = 'auth/AUTH_USER_FAILURE';
+const AUTH_USER = 'userAuthorization/AUTH_USER';
+const AUTH_USER_SUCCESS = 'userAuthorization/AUTH_USER_SUCCESS';
+const AUTH_USER_FAILURE = 'userAuthorization/AUTH_USER_FAILURE';
 
-const LOGIN_USER = 'auth/LOG_OUT_USER';
-const LOGIN_USER_SUCCESS = 'auth/LOG_OUT_USER_SUCCESS';
-const LOGIN_USER_FAILURE = 'auth/LOG_OUT_USER_FAILURE';
+const LOGIN_USER = 'userAuthorization/LOGIN_USER';
+const LOGIN_USER_SUCCESS = 'userAuthorization/LOGIN_USER_SUCCESS';
+const LOGIN_USER_FAILURE = 'userAuthorization/LOGIN_USER_FAILURE';
 
 //* GENERATE_TYPE_FUNCTION
 export const typeAuthUser = () => ({
@@ -22,7 +22,7 @@ export const typeLogin = (formData) => ({
 //* MAIN_SAGA_FUNCTION
 export function* authSaga(action) {
   try {
-    const authResult = yield call(loginApi.loginAsync, action.payload);
+    const authResult = yield call(loginApi.isAuthAsync, action.payload);
     yield put({
       type: AUTH_USER_SUCCESS,
       payload: authResult,
@@ -51,10 +51,10 @@ export function* loginSaga(action) {
 
 //* WATCHER_SAGA_FUNCTION
 export function* authWatcherSaga() {
-  yield takeEvery(AUTH_USER, authSaga);
+  yield takeLatest(AUTH_USER, authSaga);
 }
 export function* loginWatcherSaga() {
-  yield takeEvery(AUTH_USER, loginSaga);
+  yield takeLatest(LOGIN_USER, loginSaga);
 }
 
 //* REDUCER
@@ -67,12 +67,12 @@ export default function authorization(state = {}, action) {
     case AUTH_USER_SUCCESS:
       return {
         ...state,
-        loginSuccess: true,
+        isAuth: action.payload,
       };
     case AUTH_USER_FAILURE:
       return {
         ...state,
-        loginSuccess: false,
+        isAuth: false,
         error: action.payload.message,
       };
 

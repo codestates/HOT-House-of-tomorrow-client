@@ -33,7 +33,11 @@ const KakaoLogin = ({ socialLogin }) => {
   const responseKakao = (response) => {
     const { id } = response.profile;
     const { email } = response.profile.kakao_account;
-    socialLogin({ id, email });
+    const userData = {
+      oAuthId: id,
+      email,
+    };
+    socialLogin(userData);
   };
 
   //* RENDER

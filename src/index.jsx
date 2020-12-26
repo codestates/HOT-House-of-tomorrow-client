@@ -6,7 +6,7 @@ import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
-
+import { typeAuthUser } from './modules/auth/userAuthorization';
 // * ===========================
 // * REDUX & SAGA_MIDDLE_WARE
 // * ===========================
@@ -19,6 +19,14 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 sagaMiddleware.run(rootSaga);
+
+(function () {
+  const user = JSON.parse(localStorage.getItem('CURRENT_USER'));
+  if (!user) {
+    return;
+  }
+  store.dispatch(typeAuthUser());
+})();
 
 ReactDOM.render(
   <React.StrictMode>
