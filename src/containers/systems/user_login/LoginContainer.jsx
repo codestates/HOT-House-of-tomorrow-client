@@ -13,15 +13,14 @@ function LoginContainer() {
 
   //* dispatch 'LOGIN_USER' type
   const socialLogin = (userData) => {
-    console.log(userData);
     dispatch(typeLogin(userData));
   };
 
   //* RENDER
   return (
-    <div>
+    <>
       <LoginModal socialLogin={socialLogin} />
-    </div>
+    </>
   );
 }
 

@@ -1,15 +1,18 @@
 import React from 'react';
 import './App.css';
-import LoginContainer from './containers/systems/user_login/LoginContainer';
-// import FilterBarContainer from './containers/pages/lobby/filter_Bar/FilterBarContainer';
-// import HeaderContainer from './containers/systems/Header/HeaderContainer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import LobbyContainer from './containers/pages/lobby/LobbyContainer';
+import HeaderContainer from './containers/systems/Header/HeaderContainer';
 
 function App() {
   return (
     <div className="App">
-      <LoginContainer />
-      {/* <HeaderContainer /> */}
-      {/* <FilterBarContainer /> */}
+      <HeaderContainer />
+      <Router>
+        <Switch>
+          <Route path="/lobby" component={LobbyContainer} />
+        </Switch>
+      </Router>
     </div>
   );
 }

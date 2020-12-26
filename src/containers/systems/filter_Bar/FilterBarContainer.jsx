@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import FilterBarBlock from '../../../../components/pages/lobby/filter_Bar/FilterBarBlock';
+import FilterBarBlock from '../../../components/systems/filter_Bar/FilterBarBlock';
 import FilterModalContainer from './FilterModalContainer';
-import { typeChangeTab } from '../../../../modules/config/filterTabText';
-import { tabList } from '../../../../data/lobby/filter_bar/tabList';
+import { typeChangeTab } from '../../../modules/config/filterTabText';
+import { tabList } from '../../../data/lobby/filter_bar/tabList';
 
 function FilterBarContainer() {
   const [openModal, setOpenModal] = useState({});

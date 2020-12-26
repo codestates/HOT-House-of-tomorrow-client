@@ -9,6 +9,10 @@ import teamLogo from '../../../public/teamLogo.png';
 const BackgroundBlock = styled.div`
   background: rgb(0, 0, 0, 0.3);
   height: 100vh;
+  z-index: 1;
+  position: relative;
+  position: fixed;
+  width: 100%;
 `;
 const LoginModal = styled.div`
   display: flex;

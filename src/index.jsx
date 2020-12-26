@@ -20,7 +20,7 @@ const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
-(function () {
+(() => {
   const user = JSON.parse(localStorage.getItem('CURRENT_USER'));
   if (!user) {
     return;
