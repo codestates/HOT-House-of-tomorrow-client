@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { typeLoginUser } from '../../../modules/auth/userManagement';
+import { typeLogin } from '../../../modules/auth/userAuthorization';
 import LoginModal from '../../../components/systems/user_login/LoginModal';
 
-// TODO =====================
-// TODO   LOGIN_CONTAINER(CT)
-// TODO =====================
+// * =====================
+// *   LOGIN_CONTAINER(CT)
+// * =====================
 
 function LoginContainer() {
   //* useDispatch
@@ -13,14 +13,14 @@ function LoginContainer() {
 
   //* dispatch 'LOGIN_USER' type
   const socialLogin = (userData) => {
-    dispatch(typeLoginUser(userData));
+    dispatch(typeLogin(userData));
   };
 
   //* RENDER
   return (
-    <div>
+    <>
       <LoginModal socialLogin={socialLogin} />
-    </div>
+    </>
   );
 }
 

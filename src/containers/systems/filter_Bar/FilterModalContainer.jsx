@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import FilterModal from '../../../../components/pages/lobby/filter_Bar/FilterModal';
-import { typeGetFilterCards } from '../../../../modules/pages/lobby/cards';
+import FilterModal from '../../../components/systems/filter_Bar/FilterModal';
+import { typeGetFilterCards } from '../../../modules/pages/lobby/cards';
 
 function FilterModalContainer({ modalHandler, tab }) {
   const dispatch = useDispatch();

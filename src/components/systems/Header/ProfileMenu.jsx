@@ -65,7 +65,7 @@ const IconStyle = styled.div`
   margin-left: 10px;
 `;
 
-const ProfileMenu = ({ position, menuRef }) => {
+const ProfileMenu = ({ position, menuRef, logoutHandler }) => {
   const menuItems = [
     {
       label: '마이 페이지',
@@ -81,7 +81,9 @@ const ProfileMenu = ({ position, menuRef }) => {
     },
     {
       label: '로그아웃',
-      handler: () => {},
+      handler: () => {
+        logoutHandler();
+      },
     },
   ];
   const Icons = [BsPeopleCircle, BsHeart, BsGearWide, BsPower];

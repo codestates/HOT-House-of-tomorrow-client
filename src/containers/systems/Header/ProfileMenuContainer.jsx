@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ProfileMenu from '../../../components/systems/Header/ProfileMenu';
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
-
-function ProfileMenuContainer({ trigger }) {
+function ProfileMenuContainer({ trigger, logoutHandler }) {
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
   const menuRef = useRef(null);
   const [position, setPosition] = useState({});
   const [windowDimensions, setWindowDimensions] = useState(
@@ -55,12 +54,14 @@ function ProfileMenuContainer({ trigger }) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return (
     <ProfileMenu
       triggerBounding={triggerBounding}
       position={position}
       trigger={trigger}
       menuRef={menuRef}
+      logoutHandler={logoutHandler}
     />
   );
 }
