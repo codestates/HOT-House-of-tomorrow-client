@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import FilterBarContainer from '../../../containers/systems/filter_Bar/FilterBarContainer';
 
+// TODO =====================
+// TODO   LOBBY_PAGE (CP)
+// TODO =====================
+
+// * STYLED_COMPONENTS
 const Block = styled.div`
   padding: 10px;
   position: relative;
@@ -11,6 +16,7 @@ const Block = styled.div`
 `;
 
 function LobbyPage({ showLoginModal }) {
+  // * RENDER
   return (
     <div>
       {showLoginModal}

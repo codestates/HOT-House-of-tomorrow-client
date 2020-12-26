@@ -6,7 +6,7 @@
     ],
     "rules": {
       "react/jsx-filename-extension": 0,
-      "react/prop-types": ["off"]
+      "react/prop-types": 0
     },
     "parserOptions": {
         "ecmaFeatures": {

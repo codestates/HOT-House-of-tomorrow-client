@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { typeLogin } from '../../../modules/auth/userAuthorization';
 import LoginModal from '../../../components/systems/user_login/LoginModal';
 
-// TODO =====================
-// TODO   LOGIN_CONTAINER(CT)
-// TODO =====================
+// * =====================
+// *   LOGIN_CONTAINER(CT)
+// * =====================
 
 function LoginContainer() {
   //* useDispatch

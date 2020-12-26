@@ -5,6 +5,11 @@ import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
 import loading from '../../../public/loading.gif';
 
+// TODO =====================
+// TODO   LOBBY_CONTAINER(CT)
+// TODO =====================
+
+// * STYLED_COMPONENTS
 const LoadingImg = styled.img`
   position: fixed;
   width: 15vw;
@@ -29,6 +34,7 @@ function LobbyContainer() {
     loginModal
   );
 
+  // * RENDER
   return <LobbyPage showLoginModal={showLoginModal} />;
 }
 
