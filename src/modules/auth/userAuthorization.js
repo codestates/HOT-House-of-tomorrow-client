@@ -113,17 +113,20 @@ export default function authorization(state = {}, action) {
     case LOGIN_USER:
       return {
         ...state,
+        load: true,
       };
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
         loginSuccess: action.payload.loginSuccess,
+        load: false,
         token: action.payload.token,
       };
     case LOGIN_USER_FAILURE:
       return {
         ...state,
         loginSuccess: false,
+        load: false,
         error: action.payload.message,
       };
 
@@ -139,6 +142,8 @@ export default function authorization(state = {}, action) {
         ...state,
         logout: action.payload.logout,
         isAuth: null,
+        loginSuccess: null,
+        token: null,
       };
     case LOG_OUT_USER_FAILURE:
       return {

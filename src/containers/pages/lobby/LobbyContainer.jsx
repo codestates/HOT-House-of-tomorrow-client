@@ -1,12 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import FilterBarContainer from '../../systems/filter_Bar/FilterBarContainer';
+import styled from 'styled-components';
+import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
+import loading from '../../../public/loading.gif';
+
+const LoadingImg = styled.img`
+  position: fixed;
+  width: 15vw;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 function LobbyContainer() {
-  // eslint-disable-next-line no-unused-vars
-  const { isAuth } = useSelector(({ authorization }) => ({
-    isAuth: authorization.isAuth?.isAuth,
+  const { load } = useSelector(({ authorization }) => ({
+    load: authorization.load,
   }));
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
@@ -14,12 +22,14 @@ function LobbyContainer() {
   if (!userStorage?.token) {
     loginModal = <LoginContainer />;
   }
-  return (
-    <>
-      {loginModal}
-      <FilterBarContainer />
-    </>
+
+  const showLoginModal = load ? (
+    <LoadingImg src={loading} alt="loading" />
+  ) : (
+    loginModal
   );
+
+  return <LobbyPage showLoginModal={showLoginModal} />;
 }
 
 export default LobbyContainer;
