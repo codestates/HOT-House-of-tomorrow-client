@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Fade from 'react-reveal/Fade';
 import SocialLoginBlock from './socialLogin/SocialLoginBlock';
 import logoRow from '../../../public/logoRow.png';
 import teamLogo from '../../../public/teamLogo.png';
@@ -19,12 +20,11 @@ const LoginModal = styled.div`
   background: white;
   margin: 0 auto;
   position: relative;
-  transform: translate(0, -50%);
+  transform: translate(0, 50%);
   box-shadow: -3px 9px 11px rgba(0, 0, 0, 0.1);
   background: white;
   width: 600px;
   top: 50%;
-  position: relative;
   height: 450px;
 
   img {
@@ -70,19 +70,21 @@ const TextBox = styled.div`
 function Login({ socialLogin }) {
   return (
     <BackgroundBlock>
-      <LoginModal>
-        <LeftInnerBlock>
-          <img src={teamLogo} alt="teamLogo" />
-          <strong> &lt;Team_hot /&gt;</strong>
-        </LeftInnerBlock>
-        <RightInnerBlock>
-          <TextBox>
-            <img src={logoRow} alt="logo" />
-            <strong>인테리어 사진 공유 및 소셜 네트워크 서비스</strong>
-          </TextBox>
-          <SocialLoginBlock socialLogin={socialLogin} />
-        </RightInnerBlock>
-      </LoginModal>
+      <Fade top>
+        <LoginModal>
+          <LeftInnerBlock>
+            <img src={teamLogo} alt="teamLogo" />
+            <strong> &lt;Team_hot /&gt;</strong>
+          </LeftInnerBlock>
+          <RightInnerBlock>
+            <TextBox>
+              <img src={logoRow} alt="logo" />
+              <strong>인테리어 사진 공유 및 소셜 네트워크 서비스</strong>
+            </TextBox>
+            <SocialLoginBlock socialLogin={socialLogin} />
+          </RightInnerBlock>
+        </LoginModal>
+      </Fade>
     </BackgroundBlock>
   );
 }

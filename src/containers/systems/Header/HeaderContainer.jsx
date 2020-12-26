@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Header from '../../../components/systems/Header/Header';
 import useModal from '../../../hooks/useModal';
 import { typeLogOut } from '../../../modules/auth/userAuthorization';
+import { setShowModal } from '../../../modules/config/dropDownMenu';
 
 const AppRoot = styled.div`
   z-index: 1;
@@ -23,6 +24,7 @@ function HeaderContainer() {
 
   const logoutHandler = () => {
     dispatch(typeLogOut());
+    dispatch(setShowModal(false));
   };
   return (
     <>
