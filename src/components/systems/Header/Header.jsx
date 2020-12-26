@@ -80,7 +80,7 @@ const ProfileImg = styled.img`
   width: 100%;
 `;
 
-const Header = () => {
+const Header = ({ logoutHandler }) => {
   const [, showModal] = useModal();
   const profileRef = useRef(null);
   return (
@@ -101,7 +101,12 @@ const Header = () => {
           onClick={(e) => {
             profileRef.current = e.target;
             openModal({
-              content: <ProfileMenuContainer trigger={profileRef.current} />,
+              content: (
+                <ProfileMenuContainer
+                  logoutHandler={logoutHandler}
+                  trigger={profileRef.current}
+                />
+              ),
             });
             showModal();
           }}

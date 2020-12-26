@@ -2,13 +2,21 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import * as loginApi from '../../api/auth/userAuthorization';
 
 //* CREATE_REQUEST_ACTION_TYPES
+
+//* AUTH_USER
 const AUTH_USER = 'userAuthorization/AUTH_USER';
 const AUTH_USER_SUCCESS = 'userAuthorization/AUTH_USER_SUCCESS';
 const AUTH_USER_FAILURE = 'userAuthorization/AUTH_USER_FAILURE';
 
+//* LOGIN_USER
 const LOGIN_USER = 'userAuthorization/LOGIN_USER';
 const LOGIN_USER_SUCCESS = 'userAuthorization/LOGIN_USER_SUCCESS';
 const LOGIN_USER_FAILURE = 'userAuthorization/LOGIN_USER_FAILURE';
+
+//* LOG_OUT_USER
+const LOG_OUT_USER = 'userAuthorization/LOG_OUT_USER';
+const LOG_OUT_USER_SUCCESS = 'userAuthorization/LOG_OUT_USER_SUCCESS';
+const LOG_OUT_USER_FAILURE = 'userAuthorization/LOG_OUT_USER_FAILURE';
 
 //* GENERATE_TYPE_FUNCTION
 export const typeAuthUser = () => ({
@@ -17,6 +25,9 @@ export const typeAuthUser = () => ({
 export const typeLogin = (formData) => ({
   type: LOGIN_USER,
   payload: formData,
+});
+export const typeLogOut = () => ({
+  type: LOG_OUT_USER,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -48,6 +59,20 @@ export function* loginSaga(action) {
     });
   }
 }
+export function* logOutSaga(action) {
+  try {
+    const loginRusult = yield call(loginApi.logOutAsync, action.payload);
+    yield put({
+      type: LOG_OUT_USER_SUCCESS,
+      payload: loginRusult,
+    });
+  } catch (e) {
+    yield put({
+      type: LOG_OUT_USER_FAILURE,
+      payload: e,
+    });
+  }
+}
 
 //* WATCHER_SAGA_FUNCTION
 export function* authWatcherSaga() {
@@ -56,10 +81,16 @@ export function* authWatcherSaga() {
 export function* loginWatcherSaga() {
   yield takeLatest(LOGIN_USER, loginSaga);
 }
+export function* logOutWatcherSaga() {
+  yield takeLatest(LOG_OUT_USER, logOutSaga);
+}
 
 //* REDUCER
 export default function authorization(state = {}, action) {
   switch (action.type) {
+    //* =====================
+    //*   AUTH_USER
+    //* =====================
     case AUTH_USER:
       return {
         ...state,
@@ -76,6 +107,9 @@ export default function authorization(state = {}, action) {
         error: action.payload.message,
       };
 
+    //* =====================
+    //*   LOGIN_USER
+    //* =====================
     case LOGIN_USER:
       return {
         ...state,
@@ -90,6 +124,25 @@ export default function authorization(state = {}, action) {
       return {
         ...state,
         loginSuccess: false,
+        error: action.payload.message,
+      };
+
+    //* =====================
+    //*   LOG_OUT_USER
+    //* =====================
+    case LOG_OUT_USER:
+      return {
+        ...state,
+      };
+    case LOG_OUT_USER_SUCCESS:
+      return {
+        ...state,
+        logout: action.payload.logout,
+        isAuth: null,
+      };
+    case LOG_OUT_USER_FAILURE:
+      return {
+        ...state,
         error: action.payload.message,
       };
 

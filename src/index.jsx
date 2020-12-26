@@ -21,10 +21,6 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 (() => {
-  const user = JSON.parse(localStorage.getItem('CURRENT_USER'));
-  if (!user) {
-    return;
-  }
   store.dispatch(typeAuthUser());
 })();
 
