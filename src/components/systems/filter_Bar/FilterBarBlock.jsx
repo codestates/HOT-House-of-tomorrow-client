@@ -10,6 +10,7 @@ import Color from './selectors/Color';
 const Block = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 30px;
 `;
 
 function FilterBarBlock({ modalHandler, openModal, FilterModalContainer }) {

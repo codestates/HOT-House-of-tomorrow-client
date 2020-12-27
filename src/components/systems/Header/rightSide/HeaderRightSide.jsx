@@ -15,7 +15,7 @@ const HeaderNavBtn = styled.button`
   overflow: hidden;
   border-radius: 100%;
 
-  width: 35px;
+  width: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,8 +40,9 @@ const Like = styled(BsHeart)`
   }
 `;
 const ProfileImg = styled.img`
-  height: 100%;
   width: 100%;
+  overflow: hidden;
+  border-radius: 100%;
 `;
 
 function HeaderRightSide({
@@ -51,6 +52,7 @@ function HeaderRightSide({
   onSavedHandler,
   onSettingHandler,
   onLogOutHandler,
+  profileImg,
 }) {
   return (
     <>
@@ -62,7 +64,7 @@ function HeaderRightSide({
           <Like />
         </HeaderNavBtn>
         <HeaderNavBtn type="button" onClick={dropDownHandler}>
-          <ProfileImg src={null} alt="profile" />
+          <ProfileImg src={profileImg} alt="profile" />
         </HeaderNavBtn>
         {openDropDown ? (
           <DropDownTab

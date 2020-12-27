@@ -1,9 +1,15 @@
-/* eslint-disable */
 import axios from 'axios';
 
-export async function getCardsAsync(options) {
-  let { currentTab, option, currentQuery, currentQueryTab } = options;
-  let queryList = {
+export async function getAllCardsAsync() {
+  const response = await axios.get('/api/lobby/getposts');
+  if (response.data.postLoad === false)
+    throw new Error('포스트 불러오기에 실패했습니다.');
+  return response.data.results;
+}
+
+export async function getFilterdCardsAsync(options) {
+  const { currentTab, option, currentQuery, currentQueryTab } = options;
+  const queryList = {
     sort: `sort=${option}`,
     housingType: `housingType=${option}`,
     space: `space=${option}`,
@@ -18,18 +24,13 @@ export async function getCardsAsync(options) {
     currentQuery[currentTab] = `${queryList[currentTab]}`;
   }
 
-  let queryArray = Object.values(currentQuery);
-  let stringQuery = queryArray.map((ele, index) => {
+  const queryArray = Object.values(currentQuery);
+  const stringQuery = queryArray.map((ele, index) => {
     if (index === queryArray.length - 1) {
       return `${ele}`;
-    } else {
-      return `${ele}&`;
     }
+    return `${ele}&`;
   });
-  let query = stringQuery.join('');
+  const query = stringQuery.join('');
   return { currentQuery, currentTab, currentQueryTab, query };
-
-  //   const response = await axios.get(`/api/user_cards?`);
-  //   console.log(response.data);
-  //   return response.data;
 }

@@ -6,6 +6,7 @@ export async function loginAsync(formData) {
     throw new Error('로그인에 실패했습니다.');
   }
   localStorage.setItem('CURRENT_USER', JSON.stringify(response.data));
+
   return response.data;
 }
 
@@ -14,6 +15,7 @@ export async function isAuthAsync() {
   if (!response.data.isAuth) {
     throw new Error('사용자 인증에 실패했습니다.');
   }
+  localStorage.setItem('CURRENT_USER', JSON.stringify(response.data));
   return response.data;
 }
 

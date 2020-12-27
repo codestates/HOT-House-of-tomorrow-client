@@ -1,13 +1,23 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { createRequestActionTypes } from '../../../api/createRequestSaga';
 import * as getCardApi from '../../../api/pages/lobby/cards';
 
 //* CREATE_REQUEST_ACTION_TYPES
-const [GET_FILTER_CARDS, SUCCESS, FAILURE] = createRequestActionTypes(
-  'GET_FILTER_CARDS'
-);
+
+// * GET_FILTER_CARDS
+const GET_ALL_CARDS = 'cards/GET_ALL_CARDS';
+const GET_ALL_CARDS_SUCCESS = 'cards/GET_ALL_CARDS_SUCCESS';
+const GET_ALL_CARDS_FAILURE = 'cards/GET_ALL_CARDS_FAILURE';
+
+// * GET_FILTER_CARDS
+const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS_CARDS';
+const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDSCARDS_SUCCESS';
+const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS_FAILURE';
 
 //* GENERATE_TYPE_FUNCTION
+export const typeGetAllCards = () => ({
+  type: GET_ALL_CARDS,
+});
+
 export const typeGetFilterCards = (
   currentTab,
   option,
@@ -19,11 +29,26 @@ export const typeGetFilterCards = (
 });
 
 //* MAIN_SAGA_FUNCTION
-export function* getCardSaga(action) {
+export function* getAllCardSaga() {
   try {
-    const result = yield call(getCardApi.getCardsAsync, action.payload);
+    const response = yield call(getCardApi.getAllCardsAsync);
     yield put({
-      type: SUCCESS,
+      type: GET_ALL_CARDS_SUCCESS,
+      payload: response,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_ALL_CARDS_FAILURE,
+      payload: e,
+    });
+  }
+}
+
+export function* getFilteredCardSaga(action) {
+  try {
+    const result = yield call(getCardApi.getFilterdCardsAsync, action.payload);
+    yield put({
+      type: GET_FILTER_CARDS_SUCCESS,
       payload: {
         query: result.query,
         queryTab: result.currentTab,
@@ -33,7 +58,7 @@ export function* getCardSaga(action) {
     });
   } catch (e) {
     yield put({
-      type: FAILURE,
+      type: GET_FILTER_CARDS_FAILURE,
       payload: e,
     });
   }
@@ -41,11 +66,12 @@ export function* getCardSaga(action) {
 
 //* WATCHER_SAGA_FUNCTION
 export function* getCardWatcherSaga() {
-  yield takeLatest(GET_FILTER_CARDS, getCardSaga);
+  yield takeLatest(GET_ALL_CARDS, getAllCardSaga);
+  yield takeLatest(GET_FILTER_CARDS, getFilteredCardSaga);
 }
 
 const initialState = {
-  cards: [],
+  currentCards: [],
   query: '',
   currentQuery: {},
   currentQueryTab: [],
@@ -58,18 +84,33 @@ export default function cards(state = initialState, action) {
       return {
         ...state,
       };
-    case SUCCESS:
+    case GET_FILTER_CARDS_SUCCESS:
       return {
         ...state,
-        cards: action.payload,
+        currentCards: action.payload,
         currentQuery: action.payload.currentQuery,
         currentQueryTab: action.payload.currentQueryTab,
         query: action.payload.query,
       };
-    case FAILURE:
+    case GET_FILTER_CARDS_FAILURE:
       return {
         ...state,
         loginSuccess: false,
+        error: action.payload.message,
+      };
+
+    case GET_ALL_CARDS:
+      return {
+        ...state,
+      };
+    case GET_ALL_CARDS_SUCCESS:
+      return {
+        ...state,
+        currentCards: action.payload,
+      };
+    case GET_ALL_CARDS_FAILURE:
+      return {
+        ...state,
         error: action.payload.message,
       };
     default:

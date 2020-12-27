@@ -1,9 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
 import loading from '../../../public/loading.gif';
+import { typeAuthUser } from '../../../modules/auth/userAuthorization';
+import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
 
 // TODO =====================
 // TODO   LOBBY_CONTAINER(CT)
@@ -18,13 +21,15 @@ const LoadingImg = styled.img`
 `;
 
 function LobbyContainer() {
-  const { load } = useSelector(({ authorization }) => ({
+  const dispatch = useDispatch();
+  const { load, loginSuccess } = useSelector(({ authorization }) => ({
     load: authorization.load,
+    loginSuccess: authorization.loginSuccess,
   }));
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
   let loginModal = null;
-  if (!userStorage?.token) {
+  if (!userStorage) {
     loginModal = <LoginContainer />;
   }
 
@@ -34,7 +39,19 @@ function LobbyContainer() {
     loginModal
   );
 
-  // * RENDER
+  // * ===================
+  // *   USE_EFFECT
+  // * ===================
+  useEffect(() => {
+    if (loginSuccess) {
+      dispatch(typeAuthUser());
+      dispatch(typeGetAllCards());
+    }
+  }, [loginSuccess, dispatch]);
+
+  // * ===================
+  // *   RENDER
+  // * ===================
   return <LobbyPage showLoginModal={showLoginModal} />;
 }
 
