@@ -11,7 +11,7 @@ export async function loginAsync(formData) {
 
 export async function isAuthAsync() {
   const response = await axios.get('/api/auth/isAuth');
-  if (!response.data.auth) {
+  if (!response.data.isAuth) {
     throw new Error('사용자 인증에 실패했습니다.');
   }
   return response.data;
