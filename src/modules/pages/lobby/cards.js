@@ -5,16 +5,16 @@ import * as getCardApi from '../../../api/pages/lobby/cards';
 
 // * GET_FILTER_CARDS
 const GET_ALL_CARDS = 'cards/GET_ALL_CARDS';
-const GET_ALL_CARDS_SUCCESS = 'cards/GET_ALL_CARDS';
-const GET_ALL_CARDS_FAILURE = 'cards/GET_ALL_CARDS';
+const GET_ALL_CARDS_SUCCESS = 'cards/GET_ALL_CARDS_SUCCESS';
+const GET_ALL_CARDS_FAILURE = 'cards/GET_ALL_CARDS_FAILURE';
 
 // * GET_FILTER_CARDS
-const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS';
-const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDS';
-const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS';
+const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS_CARDS';
+const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDSCARDS_SUCCESS';
+const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS_FAILURE';
 
 //* GENERATE_TYPE_FUNCTION
-export const typeAllCards = () => ({
+export const typeGetAllCards = () => ({
   type: GET_ALL_CARDS,
 });
 
@@ -29,17 +29,12 @@ export const typeGetFilterCards = (
 });
 
 //* MAIN_SAGA_FUNCTION
-export function* getAllCardSaga(action) {
+export function* getAllCardSaga() {
   try {
-    const result = yield call(getCardApi.getCardsAsync, action.payload);
+    const response = yield call(getCardApi.getAllCardsAsync);
     yield put({
       type: GET_ALL_CARDS_SUCCESS,
-      payload: {
-        query: result.query,
-        queryTab: result.currentTab,
-        currentQueryTab: result.currentQueryTab,
-        currentQuery: result.currentQuery,
-      },
+      payload: response,
     });
   } catch (e) {
     yield put({
@@ -51,7 +46,7 @@ export function* getAllCardSaga(action) {
 
 export function* getFilteredCardSaga(action) {
   try {
-    const result = yield call(getCardApi.getCardsAsync, action.payload);
+    const result = yield call(getCardApi.getFilterdCardsAsync, action.payload);
     yield put({
       type: GET_FILTER_CARDS_SUCCESS,
       payload: {
@@ -70,15 +65,13 @@ export function* getFilteredCardSaga(action) {
 }
 
 //* WATCHER_SAGA_FUNCTION
-export function* getAllCardWatcherSaga() {
+export function* getCardWatcherSaga() {
   yield takeLatest(GET_ALL_CARDS, getAllCardSaga);
-}
-export function* getFilteredCardWatcherSaga() {
   yield takeLatest(GET_FILTER_CARDS, getFilteredCardSaga);
 }
 
 const initialState = {
-  cards: [],
+  currentCards: [],
   query: '',
   currentQuery: {},
   currentQueryTab: [],
@@ -94,7 +87,7 @@ export default function cards(state = initialState, action) {
     case GET_FILTER_CARDS_SUCCESS:
       return {
         ...state,
-        cards: action.payload,
+        currentCards: action.payload,
         currentQuery: action.payload.currentQuery,
         currentQueryTab: action.payload.currentQueryTab,
         query: action.payload.query,
@@ -103,6 +96,21 @@ export default function cards(state = initialState, action) {
       return {
         ...state,
         loginSuccess: false,
+        error: action.payload.message,
+      };
+
+    case GET_ALL_CARDS:
+      return {
+        ...state,
+      };
+    case GET_ALL_CARDS_SUCCESS:
+      return {
+        ...state,
+        currentCards: action.payload,
+      };
+    case GET_ALL_CARDS_FAILURE:
+      return {
+        ...state,
         error: action.payload.message,
       };
     default:

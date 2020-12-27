@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -37,14 +38,18 @@ function LobbyContainer() {
     loginModal
   );
 
-  // * USE_EFFECT
+  // * ===================
+  // *   USE_EFFECT
+  // * ===================
   useEffect(() => {
     if (loginSuccess) {
       dispatch(typeAuthUser());
     }
   }, [loginSuccess, dispatch]);
 
-  // * RENDER
+  // * ===================
+  // *   RENDER
+  // * ===================
   return <LobbyPage showLoginModal={showLoginModal} />;
 }
 

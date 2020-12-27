@@ -18,7 +18,7 @@ function FilterModalContainer({ modalHandler, tab }) {
     currentQueryTab: cards.currentQueryTab,
   }));
   const listArray = Object.keys(currentTab);
-  const FilterSelectHndler = (option) => {
+  const FilterSelectHandler = (option) => {
     dispatch(
       typeGetFilterCards(
         currentTabArea,
@@ -33,7 +33,7 @@ function FilterModalContainer({ modalHandler, tab }) {
     <li key={ele}>
       <button
         type="button"
-        onClick={() => FilterSelectHndler(ele)}
+        onClick={() => FilterSelectHandler(ele)}
         style={{
           background: 'none',
           border: 'none',

@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-
 import React from 'react';
 import styled from 'styled-components';
 import FilterBarContainer from '../../../containers/systems/filter_Bar/FilterBarContainer';
+import CardsContainer from '../../../containers/pages/lobby/cards/CardsContainer';
 
 // TODO =====================
 // TODO   LOBBY_PAGE (CP)
@@ -24,6 +23,7 @@ function LobbyPage({ showLoginModal }) {
       {showLoginModal}
       <Block>
         <FilterBarContainer />
+        <CardsContainer />
       </Block>
     </>
   );

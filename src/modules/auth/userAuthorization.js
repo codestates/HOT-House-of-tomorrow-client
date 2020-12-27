@@ -75,13 +75,9 @@ export function* logOutSaga(action) {
 }
 
 //* WATCHER_SAGA_FUNCTION
-export function* authWatcherSaga() {
+export function* userAuthorizationSaga() {
   yield takeLatest(AUTH_USER, authSaga);
-}
-export function* loginWatcherSaga() {
   yield takeLatest(LOGIN_USER, loginSaga);
-}
-export function* logOutWatcherSaga() {
   yield takeLatest(LOG_OUT_USER, logOutSaga);
 }
 
