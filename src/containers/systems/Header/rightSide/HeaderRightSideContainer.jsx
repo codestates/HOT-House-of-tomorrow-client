@@ -37,6 +37,7 @@ function HeaderRightSideContainer() {
   useEffect(() => {}, [loginSuccess]);
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
+  const profileImg = userStorage?.profileImg || 'null';
   let loginModal = (
     <HeaderRightSide
       openDropDown={openDropDown}
@@ -46,6 +47,7 @@ function HeaderRightSideContainer() {
       onSavedHandler={onSavedHandler}
       onSettingHandler={onSettingHandler}
       onLogOutHandler={onLogOutHandler}
+      profileImg={profileImg}
     />
   );
   if (!userStorage) {

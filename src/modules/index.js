@@ -5,17 +5,20 @@ import authorization, {
   authWatcherSaga,
   logOutWatcherSaga,
 } from './auth/userAuthorization';
-import cards, { getCardWatcherSaga } from './pages/lobby/cards';
+import cards, {
+  getAllCardWatcherSaga,
+  getFilteredCardWatcherSaga,
+} from './pages/lobby/cards';
 import config from './config/filterTabText';
-import modal from './config/dropDownMenu';
 
-const rootReducer = combineReducers({ authorization, config, cards, modal });
+const rootReducer = combineReducers({ authorization, config, cards });
 export function* rootSaga() {
   yield all([
     loginWatcherSaga(),
     authWatcherSaga(),
     logOutWatcherSaga(),
-    getCardWatcherSaga(),
+    getAllCardWatcherSaga(),
+    getFilteredCardWatcherSaga(),
   ]);
 }
 
