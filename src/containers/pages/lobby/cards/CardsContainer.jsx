@@ -10,15 +10,15 @@ function CardsContainer() {
   const { currentCards } = useSelector(({ cards }) => ({
     currentCards: cards.currentCards,
   }));
+
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
   useEffect(() => {
     if (userStorage) dispatch(typeGetAllCards());
   }, [dispatch]);
 
-  const cardList = currentCards.map((element) => {
-    console.log(element);
-    return <Card element={element} />;
-  });
+  const cardList = currentCards.map((element) => (
+    <Card key={element.id} element={element} />
+  ));
 
   return <CardsLayout cardList={cardList} />;
 }

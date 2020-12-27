@@ -15,7 +15,8 @@ const Block = styled.div`
   position: absolute;
   top: 50px;
   transform: translateX(-71px);
-  animation: ${boxFade} 0.6s forwards;
+  animation: ${boxFade} 0.4s forwards;
+  z-index: 2;
 `;
 
 const FakeBlock = styled.div`

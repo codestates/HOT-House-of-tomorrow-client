@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import HeaderRightSide from '../../../../components/systems/Header/rightSide/HeaderRightSide';
 import { typeLogOut } from '../../../../modules/auth/userAuthorization';
 
+// TODO ============================
+// TODO HeaderRightSideContainer(CT)
+// TODO ============================
+
 function HeaderRightSideContainer() {
   const [openDropDown, setOpenDropDown] = useState(false);
   const dropDownHandler = () => {

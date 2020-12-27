@@ -6,6 +6,7 @@ import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
 import loading from '../../../public/loading.gif';
 import { typeAuthUser } from '../../../modules/auth/userAuthorization';
+import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
 
 // TODO =====================
 // TODO   LOBBY_CONTAINER(CT)
@@ -44,6 +45,7 @@ function LobbyContainer() {
   useEffect(() => {
     if (loginSuccess) {
       dispatch(typeAuthUser());
+      dispatch(typeGetAllCards());
     }
   }, [loginSuccess, dispatch]);
 
