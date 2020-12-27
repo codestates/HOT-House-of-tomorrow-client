@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../components/modal/Modal';
+import { closeModal } from '../components/systems/Header/dropDownTab/Modal';
 import { setShowModal } from '../modules/config/dropDownMenu';
 
 const useModal = () => {

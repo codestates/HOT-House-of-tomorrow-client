@@ -5,7 +5,7 @@ import { BsPencil, BsHeart } from 'react-icons/bs';
 import LogoSrc from '../../../public/Logo.png';
 import useModal from '../../../hooks/useModal';
 import ProfileMenuContainer from '../../../containers/systems/Header/ProfileMenuContainer';
-import { openModal } from '../../modal/Modal';
+import { openModal } from './dropDownTab/Modal';
 
 const HeaderStyle = styled.div`
   background: white;
@@ -17,30 +17,44 @@ const HeaderStyle = styled.div`
   top: 0px;
   z-index: 0;
 `;
-const HeaderContents = styled.div`
+const HeaderBlock = styled.div`
   background: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 0 auto;
   align-items: center;
+  position: relative;
+  width: 1000px;
+}
 `;
-const Input = styled.input`
-  display: block;
-  width: 300px;
-  box-sizing: border-box;
-  padding: 5px 25px;
-  font-family: inherit;
-  font-size: 15px;
-  line-height: 20px;
-  background-color: #f5f5f5;
-  color: #424242;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  margin: 0 8vw;
-  &::-webkit-input-placeholder {
-    color: #bababa;
-    text-align: center;
+
+const LogoBlock = styled.div``;
+const InputBlock = styled.div`
+  input {
+    display: block;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 5px 25px;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 20px;
+    background-color: #f5f5f5;
+    color: #424242;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    &::-webkit-input-placeholder {
+      color: #bababa;
+      text-align: center;
+    }
+  }
+`;
+
+const RightBlock = styled.div`
+  button {
+    border: none;
+    background: none;
+    margin-right: 5px;
   }
 `;
 const Writing = styled(BsPencil)`
@@ -85,35 +99,49 @@ const Header = ({ logoutHandler }) => {
   const profileRef = useRef(null);
   return (
     <HeaderStyle>
-      <HeaderContents>
-        <Logo src={LogoSrc} />
-        <Input
-          type="text"
-          autoComplete="off"
-          size="1"
-          aria-autocomplete="list"
-          placeholder="내일의 집 통합 검색"
-          aria-label="내일의 집 통합 검색"
-        />
-        <Writing />
-        <Like />
-        <Profile
-          onClick={(e) => {
-            profileRef.current = e.target;
-            openModal({
-              content: (
-                <ProfileMenuContainer
-                  logoutHandler={logoutHandler}
-                  trigger={profileRef.current}
-                />
-              ),
-            });
-            showModal();
-          }}
-        >
-          <ProfileImg src={null} alt="profile" />
-        </Profile>
-      </HeaderContents>
+      <HeaderBlock>
+        <LogoBlock>
+          <Logo src={LogoSrc} />
+        </LogoBlock>
+
+        <InputBlock>
+          <input
+            type="text"
+            autoComplete="off"
+            size="1"
+            aria-autocomplete="list"
+            placeholder="내일의 집 통합 검색"
+            aria-label="내일의 집 통합 검색"
+          />
+        </InputBlock>
+
+        <RightBlock>
+          <button type="button">
+            <Writing />
+          </button>
+          <button type="button">
+            <Like />
+          </button>
+          <button type="button">
+            <Profile
+              onClick={(e) => {
+                profileRef.current = e.target;
+                openModal({
+                  content: (
+                    <ProfileMenuContainer
+                      logoutHandler={logoutHandler}
+                      trigger={profileRef.current}
+                    />
+                  ),
+                });
+                showModal();
+              }}
+            >
+              <ProfileImg src={null} alt="profile" />
+            </Profile>
+          </button>
+        </RightBlock>
+      </HeaderBlock>
     </HeaderStyle>
   );
 };
