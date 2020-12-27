@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Cards from '../../../../components/pages/lobby/cards/Cards';
 import { typeGetAllCards } from '../../../../modules/pages/lobby/cards';
+import CardsLayout from '../../../../components/pages/lobby/cards/CardsLayout';
+import Card from '../../../../components/pages/lobby/cards/Card';
 
 function CardsContainer() {
   const dispatch = useDispatch();
@@ -14,17 +15,12 @@ function CardsContainer() {
     if (userStorage) dispatch(typeGetAllCards());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (currentCards) {
-      console.log(currentCards);
-    }
-  }, [currentCards]);
+  const cardList = currentCards.map((element) => {
+    console.log(element);
+    return <Card element={element} />;
+  });
 
-  return (
-    <>
-      <Cards />
-    </>
-  );
+  return <CardsLayout cardList={cardList} />;
 }
 
 export default CardsContainer;
