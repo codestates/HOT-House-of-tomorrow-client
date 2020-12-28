@@ -13,6 +13,11 @@ const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS_CARDS';
 const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDSCARDS_SUCCESS';
 const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS_FAILURE';
 
+// * GET_FILTER_CARDS
+const GET_CARD = 'cards/GET_CARD';
+const GET_CARD_SUCCESS = 'cards/GET_CARD_SUCCESS';
+const GET_CARD_FAILURE = 'cards/GET_CARD_FAILURE';
+
 // * INITAIAL_CARDS
 const INITAIAL_CARDS = 'cards/INITAIAL_CARDS';
 
@@ -38,6 +43,11 @@ export const typeGetFilterCards = (
     currentTag,
     tag,
   },
+});
+
+export const typeGetCard = (postId) => ({
+  type: GET_CARD,
+  payload: postId,
 });
 
 export const typeInitialCards = () => ({
@@ -81,11 +91,28 @@ export function* getFilteredCardSaga(action) {
     });
   }
 }
+export function* getCardSaga(action) {
+  try {
+    const result = yield call(getCardApi.getCardAsync, action.payload);
+    yield put({
+      type: GET_CARD_SUCCESS,
+      payload: {
+        card: result,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: GET_CARD_FAILURE,
+      payload: e,
+    });
+  }
+}
 
 //* WATCHER_SAGA_FUNCTION
 export function* getCardWatcherSaga() {
   yield takeLatest(GET_ALL_CARDS, getAllCardSaga);
   yield takeLatest(GET_FILTER_CARDS, getFilteredCardSaga);
+  yield takeLatest(GET_CARD, getCardSaga);
 }
 
 const initialState = {
@@ -95,6 +122,7 @@ const initialState = {
   currentQueryTab: [],
   currentTag: {},
   load: null,
+  card: {},
 };
 
 //* REDUCER
@@ -114,6 +142,7 @@ export default function cards(state = initialState, action) {
         currentTag: action.payload.currentTag,
         currentCards: action.payload.cards,
         load: true,
+        card: {},
       };
     case GET_FILTER_CARDS_FAILURE:
       return {
@@ -145,6 +174,22 @@ export default function cards(state = initialState, action) {
         currentQuery: {},
         currentQueryTab: [],
         currentTag: {},
+      };
+
+    case GET_CARD:
+      return {
+        ...state,
+        load: false,
+      };
+    case GET_CARD_SUCCESS:
+      return {
+        ...state,
+        card: action.payload.card,
+      };
+    case GET_CARD_FAILURE:
+      return {
+        ...state,
+        error: action.payload.message,
       };
     default:
       return state;

@@ -22,7 +22,7 @@ const ContentsBlock = styled.div`
   margin: 0 auto;
   align-items: center;
   position: relative;
-  width: 1000px;
+  width: 1145px;
 }
 `;
 
