@@ -19,7 +19,9 @@ function FilterModalContainer({ modalHandler, tab }) {
     currentQueryTab: cards.currentQueryTab,
     currentTag: cards.currentTag,
   }));
+
   const listArray = Object.keys(currentTab);
+
   const FilterSelectHandler = (option) => {
     const tag = option;
     dispatch(
@@ -38,7 +40,10 @@ function FilterModalContainer({ modalHandler, tab }) {
     <li key={ele}>
       <button
         type="button"
-        onClick={() => FilterSelectHandler(ele)}
+        onClick={() => {
+          FilterSelectHandler(ele);
+          modalHandler('close', tab);
+        }}
         style={{
           background: 'none',
           border: 'none',
@@ -50,6 +55,7 @@ function FilterModalContainer({ modalHandler, tab }) {
           fontWeight: '400',
           color: '#414141',
           outline: 'none',
+          cursor: 'pointer',
         }}
       >
         {ele}

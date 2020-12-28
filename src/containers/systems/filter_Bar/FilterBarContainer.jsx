@@ -4,6 +4,7 @@ import FilterBarBlock from '../../../components/systems/filter_Bar/FilterBarBloc
 import FilterModalContainer from './FilterModalContainer';
 import { typeChangeTab } from '../../../modules/config/filterTabText';
 import { tabList } from '../../../data/lobby/filter_bar/tabList';
+import BottomTagsContainer from './bottom_tags/BottomTagsContainer';
 
 function FilterBarContainer() {
   const [openModal, setOpenModal] = useState({});
@@ -25,6 +26,7 @@ function FilterBarContainer() {
       setOpenModal({ ...openModal, [area]: false });
     }
   };
+
   return (
     <>
       <FilterBarBlock
@@ -32,6 +34,7 @@ function FilterBarContainer() {
         openModal={openModal}
         FilterModalContainer={FilterModalContainer}
       />
+      <BottomTagsContainer />
     </>
   );
 }

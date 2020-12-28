@@ -6,6 +6,7 @@ import { MdModeComment } from 'react-icons/md';
 const CardBlock = styled.div`
   z-index: 1;
   margin-right: 17px;
+  margin-bottom: 10px;
 `;
 const CardHeader = styled.div`
   display: flex;
@@ -145,15 +146,18 @@ const CommentBlock = styled.div`
 function Card({ element }) {
   const { User, view, roomImage, like, comments, description } = element;
 
-  const commentList = comments.map((comment) => (
-    <CommentlI key={comment.postId}>
-      <img src={comment.User.profileImg} alt="profileImage" />
-      <div>
-        <strong>{comment.User.nickname}</strong>
-        <span>{comment.comment}</span>
-      </div>
-    </CommentlI>
-  ));
+  const commentList = comments
+    ? comments.map((comment) => (
+        // eslint-disable-next-line react/jsx-indent
+        <CommentlI key={comment.postId}>
+          <img src={comment.User.profileImg} alt="profileImage" />
+          <div>
+            <strong>{comment.User.nickname}</strong>
+            <span>{comment.comment}</span>
+          </div>
+        </CommentlI>
+      ))
+    : null;
 
   return (
     <CardBlock>
@@ -180,7 +184,7 @@ function Card({ element }) {
         </button>
         <button type="button">
           <CommentBtn />
-          <span>{comments.length}</span>
+          <span>{comments ? comments.length : 0}</span>
         </button>
       </CardBottom>
       <DescriptionBlock>

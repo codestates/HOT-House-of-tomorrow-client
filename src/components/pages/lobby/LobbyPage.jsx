@@ -12,7 +12,7 @@ const Block = styled.div`
   padding: 10px;
   position: relative;
   margin: 0 auto;
-  width: 1000px;
+  width: 1150px;
   top: 100px;
 `;
 

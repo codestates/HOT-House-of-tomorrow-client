@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const CardsBlock = styled.div`
   display: flex;
+  flex-flow: wrap;
 `;
 
 function CardsLayout({ cardList }) {
