@@ -12,6 +12,22 @@ const CardHeader = styled.div`
   align-items: flex-start;
   margin-bottom: 12px;
 
+  span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #757575;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   img {
     margin-right: 10px;
     width: 30px;
@@ -22,6 +38,7 @@ const CardHeader = styled.div`
   strong {
     color: #474747;
     font-weight: 500;
+    margin-bottom: 3px;
   }
 `;
 const CardContents = styled.div`
@@ -142,9 +159,10 @@ function Card({ element }) {
     <CardBlock>
       <CardHeader>
         <img src={User.profileImg} alt="profileImage" />
-        <div>
+        <span>
           <strong>{User.nickname}</strong>
-        </div>
+          <p>{User.introduction}</p>
+        </span>
       </CardHeader>
       <CardContents>
         <img src={roomImage} alt="roomImage" />
