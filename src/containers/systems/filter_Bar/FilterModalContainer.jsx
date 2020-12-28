@@ -11,20 +11,25 @@ function FilterModalContainer({ modalHandler, tab }) {
     currentTabArea,
     currentQuery,
     currentQueryTab,
+    currentTag,
   } = useSelector(({ config, cards }) => ({
     currentTab: config.currentTab,
     currentTabArea: config.currentTabArea,
     currentQuery: cards.currentQuery,
     currentQueryTab: cards.currentQueryTab,
+    currentTag: cards.currentTag,
   }));
   const listArray = Object.keys(currentTab);
   const FilterSelectHandler = (option) => {
+    const tag = option;
     dispatch(
       typeGetFilterCards(
         currentTabArea,
         currentTab[option],
         currentQuery,
-        currentQueryTab
+        currentQueryTab,
+        currentTag,
+        tag
       )
     );
   };

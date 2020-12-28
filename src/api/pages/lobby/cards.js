@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 
 export async function getAllCardsAsync() {
@@ -8,7 +9,15 @@ export async function getAllCardsAsync() {
 }
 
 export async function getFilterdCardsAsync(options) {
-  const { currentTab, option, currentQuery, currentQueryTab } = options;
+  console.log(options);
+  const {
+    currentTab,
+    option,
+    currentQuery,
+    currentQueryTab,
+    currentTag,
+    tag,
+  } = options;
   const queryList = {
     sort: `sort=${option}`,
     housingType: `housingType=${option}`,
@@ -31,6 +40,7 @@ export async function getFilterdCardsAsync(options) {
     }
     return `${ele}&`;
   });
+  currentTag[currentTab] = tag;
   const query = stringQuery.join('');
-  return { currentQuery, currentTab, currentQueryTab, query };
+  return { currentQuery, currentTab, currentQueryTab, query, currentTag };
 }

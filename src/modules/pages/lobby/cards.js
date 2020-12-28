@@ -22,10 +22,19 @@ export const typeGetFilterCards = (
   currentTab,
   option,
   currentQuery,
-  currentQueryTab
+  currentQueryTab,
+  currentTag,
+  tag
 ) => ({
   type: GET_FILTER_CARDS,
-  payload: { currentTab, option, currentQuery, currentQueryTab },
+  payload: {
+    currentTab,
+    option,
+    currentQuery,
+    currentQueryTab,
+    currentTag,
+    tag,
+  },
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -54,6 +63,7 @@ export function* getFilteredCardSaga(action) {
         queryTab: result.currentTab,
         currentQueryTab: result.currentQueryTab,
         currentQuery: result.currentQuery,
+        currentTag: result.currentTag,
       },
     });
   } catch (e) {
@@ -75,6 +85,7 @@ const initialState = {
   query: '',
   currentQuery: {},
   currentQueryTab: [],
+  currentTag: {},
 };
 
 //* REDUCER
@@ -87,10 +98,10 @@ export default function cards(state = initialState, action) {
     case GET_FILTER_CARDS_SUCCESS:
       return {
         ...state,
-        currentCards: action.payload,
         currentQuery: action.payload.currentQuery,
         currentQueryTab: action.payload.currentQueryTab,
         query: action.payload.query,
+        currentTag: action.payload.currentTag,
       };
     case GET_FILTER_CARDS_FAILURE:
       return {
