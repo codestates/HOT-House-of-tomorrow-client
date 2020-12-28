@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { typeGetAllCards } from '../../../../modules/pages/lobby/cards';
@@ -23,10 +22,17 @@ function CardsContainer() {
   useEffect(() => {}, [currentCards]);
 
   const cardList = load
-    ? currentCards.map((element) => <Card key={element.id} element={element} />)
-    : fakeList.map((ele) => <FakeCard />);
+    ? currentCards.map((element) => (
+        // eslint-disable-next-line react/jsx-indent
+        <Card key={element.id} element={element} />
+      ))
+    : fakeList.map((ele) => <FakeCard key={ele} />);
 
-  return <CardsLayout cardList={cardList} />;
+  return (
+    <>
+      <CardsLayout cardList={cardList} />
+    </>
+  );
 }
 
 export default CardsContainer;

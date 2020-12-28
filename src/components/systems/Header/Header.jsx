@@ -13,7 +13,7 @@ const HeaderBlock = styled.div`
   display: flex;
   position: fixed;
   top: 0px;
-  z-index: 1;
+  z-index: 2;
 `;
 const ContentsBlock = styled.div`
   background: white;

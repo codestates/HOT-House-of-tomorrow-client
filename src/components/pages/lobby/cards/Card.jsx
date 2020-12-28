@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiFillHeart } from 'react-icons/ai';
 import { MdModeComment } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const CardBlock = styled.div`
   z-index: 1;
@@ -45,20 +46,34 @@ const CardHeader = styled.div`
 const CardContents = styled.div`
   position: relative;
   margin-bottom: 10px;
+  overflow: hidden;
+  width: 270px;
+  height: 270px;
+  border-radius: 10px;
+}
+
+  a {
+    cursor: pointer;
+  }
   img {
-    width: 270px;
-    border-radius: 10px;
+    right: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
   }
   div {
     position: absolute;
     right: 18px;
     bottom: 16px;
-}
   }
+
   span {
     font-size: 13px;
     color: #fff;
-    text-shadow: 0 0 4px rgba(0,0,0,.5);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     font-weight: 500;
   }
 `;
@@ -114,6 +129,7 @@ const CommentlI = styled.li`
   display: flex;
   align-items: flex-start;
 }
+
   img {
     margin-right: 5px;
     width: 20px;
@@ -144,7 +160,7 @@ const CommentBlock = styled.div`
   }
 `;
 function Card({ element }) {
-  const { User, view, roomImage, like, comments, description } = element;
+  const { id, User, view, roomImage, like, comments, description } = element;
 
   const commentList = comments
     ? comments.map((comment) => (
@@ -169,13 +185,15 @@ function Card({ element }) {
         </span>
       </CardHeader>
       <CardContents>
-        <img src={roomImage} alt="roomImage" />
-        <div>
-          <span>
-            조회수
-            {view}
-          </span>
-        </div>
+        <Link to={`card_collections/${id}`}>
+          <img src={roomImage} alt="roomImage" />
+          <div>
+            <span>
+              조회수
+              {view}
+            </span>
+          </div>
+        </Link>
       </CardContents>
       <CardBottom>
         <button type="button">

@@ -14,6 +14,7 @@ const Block = styled.div`
   margin: 0 auto;
   width: 1150px;
   top: 100px;
+  z-index: 1;
 `;
 
 function LobbyPage({ showLoginModal }) {
