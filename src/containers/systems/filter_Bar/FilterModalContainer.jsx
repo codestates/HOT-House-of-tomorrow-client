@@ -11,20 +11,27 @@ function FilterModalContainer({ modalHandler, tab }) {
     currentTabArea,
     currentQuery,
     currentQueryTab,
+    currentTag,
   } = useSelector(({ config, cards }) => ({
     currentTab: config.currentTab,
     currentTabArea: config.currentTabArea,
     currentQuery: cards.currentQuery,
     currentQueryTab: cards.currentQueryTab,
+    currentTag: cards.currentTag,
   }));
+
   const listArray = Object.keys(currentTab);
+
   const FilterSelectHandler = (option) => {
+    const tag = option;
     dispatch(
       typeGetFilterCards(
         currentTabArea,
         currentTab[option],
         currentQuery,
-        currentQueryTab
+        currentQueryTab,
+        currentTag,
+        tag
       )
     );
   };
@@ -33,7 +40,10 @@ function FilterModalContainer({ modalHandler, tab }) {
     <li key={ele}>
       <button
         type="button"
-        onClick={() => FilterSelectHandler(ele)}
+        onClick={() => {
+          FilterSelectHandler(ele);
+          modalHandler('close', tab);
+        }}
         style={{
           background: 'none',
           border: 'none',
@@ -45,6 +55,7 @@ function FilterModalContainer({ modalHandler, tab }) {
           fontWeight: '400',
           color: '#414141',
           outline: 'none',
+          cursor: 'pointer',
         }}
       >
         {ele}

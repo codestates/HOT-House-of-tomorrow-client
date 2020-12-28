@@ -29,12 +29,14 @@ const HeaderNavBtn = styled.button`
 
 const Writing = styled(BsPencil)`
   font-size: 25px;
+  color: #444444;
   &:hover {
     cursor: pointer;
   }
 `;
 const Like = styled(BsHeart)`
   font-size: 30px;
+  color: #444444;
   &:hover {
     cursor: pointer;
   }

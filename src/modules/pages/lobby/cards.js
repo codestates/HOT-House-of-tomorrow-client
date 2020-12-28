@@ -13,6 +13,9 @@ const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS_CARDS';
 const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDSCARDS_SUCCESS';
 const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS_FAILURE';
 
+// * INITAIAL_CARDS
+const INITAIAL_CARDS = 'cards/INITAIAL_CARDS';
+
 //* GENERATE_TYPE_FUNCTION
 export const typeGetAllCards = () => ({
   type: GET_ALL_CARDS,
@@ -22,10 +25,23 @@ export const typeGetFilterCards = (
   currentTab,
   option,
   currentQuery,
-  currentQueryTab
+  currentQueryTab,
+  currentTag,
+  tag
 ) => ({
   type: GET_FILTER_CARDS,
-  payload: { currentTab, option, currentQuery, currentQueryTab },
+  payload: {
+    currentTab,
+    option,
+    currentQuery,
+    currentQueryTab,
+    currentTag,
+    tag,
+  },
+});
+
+export const typeInitialCards = () => ({
+  type: INITAIAL_CARDS,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -54,6 +70,8 @@ export function* getFilteredCardSaga(action) {
         queryTab: result.currentTab,
         currentQueryTab: result.currentQueryTab,
         currentQuery: result.currentQuery,
+        currentTag: result.currentTag,
+        cards: result.cards,
       },
     });
   } catch (e) {
@@ -75,6 +93,8 @@ const initialState = {
   query: '',
   currentQuery: {},
   currentQueryTab: [],
+  currentTag: {},
+  load: null,
 };
 
 //* REDUCER
@@ -83,14 +103,17 @@ export default function cards(state = initialState, action) {
     case GET_FILTER_CARDS:
       return {
         ...state,
+        load: false,
       };
     case GET_FILTER_CARDS_SUCCESS:
       return {
         ...state,
-        currentCards: action.payload,
         currentQuery: action.payload.currentQuery,
         currentQueryTab: action.payload.currentQueryTab,
         query: action.payload.query,
+        currentTag: action.payload.currentTag,
+        currentCards: action.payload.cards,
+        load: true,
       };
     case GET_FILTER_CARDS_FAILURE:
       return {
@@ -102,16 +125,26 @@ export default function cards(state = initialState, action) {
     case GET_ALL_CARDS:
       return {
         ...state,
+        load: false,
       };
     case GET_ALL_CARDS_SUCCESS:
       return {
         ...state,
         currentCards: action.payload,
+        load: true,
       };
     case GET_ALL_CARDS_FAILURE:
       return {
         ...state,
         error: action.payload.message,
+      };
+    case INITAIAL_CARDS:
+      return {
+        ...state,
+        query: '',
+        currentQuery: {},
+        currentQueryTab: [],
+        currentTag: {},
       };
     default:
       return state;
