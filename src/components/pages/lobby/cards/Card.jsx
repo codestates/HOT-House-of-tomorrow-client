@@ -209,7 +209,7 @@ function Card({ element }) {
         <span>{description}</span>
       </DescriptionBlock>
       <CommentBlock>
-        <ul>{commentList}</ul>
+        <ul>{commentList[0]}</ul>
       </CommentBlock>
     </CardBlock>
   );

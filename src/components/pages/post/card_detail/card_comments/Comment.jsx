@@ -4,7 +4,7 @@ import CommentList from './CommentList';
 
 const Block = styled.div`
   margin: 60px 0 0;
-  padding: 60px 0 0;
+  padding: 60px 0px 60px 0;
   border-top: 1px solid #e5e5e5;
 `;
 
@@ -75,7 +75,7 @@ const ButtonBlock = styled.div`
   display: flex;
 `;
 
-function Comments({ comment, userData }) {
+function Comments({ comment, userData, timeDiffToday }) {
   return (
     <Block>
       <Section>
@@ -95,7 +95,7 @@ function Comments({ comment, userData }) {
             <button type="submit">등록</button>
           </ButtonBlock>
         </Form>
-        <CommentList comment={comment} />
+        <CommentList comment={comment} timeDiffToday={timeDiffToday} />
       </Section>
     </Block>
   );

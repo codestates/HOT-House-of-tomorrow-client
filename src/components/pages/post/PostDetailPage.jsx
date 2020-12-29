@@ -4,7 +4,7 @@ import CardDetail from './card_detail/CardDetail';
 import CardSideBar from './card_side_bar/CardSideBar';
 
 const Block = styled.div`
-  top: 100px;
+  top: 60px;
   position: relative;
   display: flex;
   margin: 0 auto;
@@ -13,13 +13,17 @@ const Block = styled.div`
 function PostDetailPage({ options, card, userData, timeDiffToday }) {
   return (
     <Block>
-      <CardDetail
-        options={options}
-        card={card}
-        userData={userData}
-        timeDiffToday={timeDiffToday}
-      />
-      <CardSideBar />
+      {card.postData.id ? (
+        <>
+          <CardDetail
+            options={options}
+            card={card}
+            userData={userData}
+            timeDiffToday={timeDiffToday}
+          />
+          <CardSideBar />
+        </>
+      ) : null}
     </Block>
   );
 }

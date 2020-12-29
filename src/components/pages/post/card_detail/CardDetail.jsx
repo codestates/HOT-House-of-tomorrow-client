@@ -23,7 +23,11 @@ function CardDetail({ options, card, userData, timeDiffToday }) {
       />
       <CardDescription postData={postData} />
       <CardFooter postData={postData} comment={comment} />
-      <Comments comment={comment} userData={userData} />
+      <Comments
+        comment={comment}
+        userData={userData}
+        timeDiffToday={timeDiffToday}
+      />
     </Block>
   );
 }
