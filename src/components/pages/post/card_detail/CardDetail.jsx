@@ -58,7 +58,7 @@ const CardFooter = styled.footer`
   }
 `;
 
-function CardDetail({ options, card, userData }) {
+function CardDetail({ options, card, userData, timeDiffToday }) {
   const { postData, comment } = card;
   return (
     <Block>
@@ -69,7 +69,7 @@ function CardDetail({ options, card, userData }) {
           <SpanAfter>{options.acreageAft}</SpanAfter>
           <span>{options.colorAft}</span>
         </div>
-        <span>{postData.date}</span>
+        <span>{postData.date ? timeDiffToday(postData.date) : null}</span>
       </Header>
       <CardImg>
         <img src={postData.roomImage} alt="roomImage" />

@@ -10,10 +10,15 @@ const Block = styled.div`
   margin: 0 auto;
   width: 1145px;
 `;
-function PostDetailPage({ options, card, userData }) {
+function PostDetailPage({ options, card, userData, timeDiffToday }) {
   return (
     <Block>
-      <CardDetail options={options} card={card} userData={userData} />
+      <CardDetail
+        options={options}
+        card={card}
+        userData={userData}
+        timeDiffToday={timeDiffToday}
+      />
       <CardSideBar />
     </Block>
   );
