@@ -10,10 +10,10 @@ const Block = styled.div`
   margin: 0 auto;
   width: 1145px;
 `;
-function PostDetailPage({ options, card }) {
+function PostDetailPage({ options, card, userData }) {
   return (
     <Block>
-      <CardDetail options={options} card={card} />
+      <CardDetail options={options} card={card} userData={userData} />
       <CardSideBar />
     </Block>
   );

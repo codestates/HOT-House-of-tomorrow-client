@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import Comments from './comments/Comment';
 
 const Block = styled.div`
   padding: 0 15px;
@@ -57,11 +58,8 @@ const CardFooter = styled.footer`
   }
 `;
 
-function CardDetail({ options, card }) {
+function CardDetail({ options, card, userData }) {
   const { postData, comment } = card;
-  useEffect(() => {
-    console.log(postData.roomImage);
-  }, [card]);
   return (
     <Block>
       <Header>
@@ -93,6 +91,7 @@ function CardDetail({ options, card }) {
           </span>
         </p>
       </CardFooter>
+      <Comments comment={comment} userData={userData} />
     </Block>
   );
 }

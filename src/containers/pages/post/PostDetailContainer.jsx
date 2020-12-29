@@ -9,9 +9,11 @@ import {
 import { tabList } from '../../../data/lobby/filter_bar/tabList';
 
 function PostContainer({ match }) {
-  const { card } = useSelector(({ cards }) => ({
+  const { card } = useSelector(({ cards, authorization }) => ({
     card: cards.card,
   }));
+
+  const userData = JSON.parse(localStorage.getItem('CURRENT_USER'));
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,6 +40,7 @@ function PostContainer({ match }) {
       <PostDetailPage
         options={optionGenerator(housingType, space, acreage, color)}
         card={card}
+        userData={userData}
       />
     </>
   );
