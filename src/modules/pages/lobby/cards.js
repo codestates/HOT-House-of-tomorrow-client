@@ -157,7 +157,6 @@ export default function cards(state = initialState, action) {
         currentTag: action.payload.currentTag,
         currentCards: action.payload.cards,
         load: true,
-        card: {},
       };
     case GET_FILTER_CARDS_FAILURE:
       return {

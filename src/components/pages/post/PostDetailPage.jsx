@@ -21,7 +21,7 @@ function PostDetailPage({ options, card, userData, timeDiffToday }) {
             userData={userData}
             timeDiffToday={timeDiffToday}
           />
-          <CardSideBar />
+          <CardSideBar card={card} />
         </>
       ) : null}
     </Block>
