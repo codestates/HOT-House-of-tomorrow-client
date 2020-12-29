@@ -19,36 +19,36 @@ const Block = styled.div`
     margin-right: 2px;
   }
 `;
-function RoomSize({ modalHandler, openModal, FilterModalContainer }) {
+function Acreage({ modalHandler, openModal, FilterModalContainer }) {
   return (
     <Block
-      onMouseEnter={() => modalHandler('open', 'roomSize')}
-      onMouseLeave={() => modalHandler('close', 'roomSize')}
+      onMouseEnter={() => modalHandler('open', 'acreage')}
+      onMouseLeave={() => modalHandler('close', 'acreage')}
     >
       <strong>평수</strong>
       <FiChevronDown />
-      {openModal.roomSize ? (
-        <FilterModalContainer modalHandler={modalHandler} tab="roomSize" />
+      {openModal.acreage ? (
+        <FilterModalContainer modalHandler={modalHandler} tab="acreage" />
       ) : null}
     </Block>
   );
 }
 
 //* PROP_TYPES
-RoomSize.defaultProps = {
+Acreage.defaultProps = {
   modalHandler: () => null,
   openModal: {
     sort: false,
     housingType: false,
     space: false,
-    roomSize: false,
+    acreage: false,
     color: false,
   },
 };
-RoomSize.propTypes = {
+Acreage.propTypes = {
   modalHandler: PropTypes.func,
   openModal: PropTypes.objectOf(Boolean),
   FilterModalContainer: PropTypes.func.isRequired,
 };
 
-export default RoomSize;
+export default Acreage;

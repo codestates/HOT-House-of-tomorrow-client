@@ -22,7 +22,7 @@ export async function getFilterdCardsAsync(options) {
     sort: `sort=${option}`,
     housingType: `housingType=${option}`,
     space: `space=${option}`,
-    roomSize: `roomSize=${option}`,
+    acreage: `acreage=${option}`,
     color: `color=${option}`,
   };
 

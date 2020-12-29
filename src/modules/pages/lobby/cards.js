@@ -21,6 +21,9 @@ const GET_CARD_FAILURE = 'cards/GET_CARD_FAILURE';
 // * INITAIAL_CARDS
 const INITAIAL_CARDS = 'cards/INITAIAL_CARDS';
 
+// * INITAIAL_CARD
+const INITAIAL_CARD = 'cards/INITAIAL_CARD';
+
 //* GENERATE_TYPE_FUNCTION
 export const typeGetAllCards = () => ({
   type: GET_ALL_CARDS,
@@ -52,6 +55,10 @@ export const typeGetCard = (postId) => ({
 
 export const typeInitialCards = () => ({
   type: INITAIAL_CARDS,
+});
+
+export const typeInitialCard = () => ({
+  type: INITAIAL_CARD,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -122,7 +129,15 @@ const initialState = {
   currentQueryTab: [],
   currentTag: {},
   load: null,
-  card: {},
+  card: {
+    postData: {
+      housingType: null,
+      space: null,
+      acreage: null,
+      color: null,
+    },
+    comment: [],
+  },
 };
 
 //* REDUCER
@@ -174,6 +189,20 @@ export default function cards(state = initialState, action) {
         currentQuery: {},
         currentQueryTab: [],
         currentTag: {},
+        card: {},
+      };
+    case INITAIAL_CARD:
+      return {
+        ...state,
+        card: {
+          postData: {
+            housingType: null,
+            space: null,
+            acreage: null,
+            color: null,
+          },
+          comment: [],
+        },
       };
 
     case GET_CARD:
