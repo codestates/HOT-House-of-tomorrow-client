@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import HeaderLeftSide from './leftSide/HeaderLeftSide';
 import HeaderSearchBar from './searchBar/HeaderSearchBar';
 import HeaderRightSideContainer from '../../../containers/systems/Header/rightSide/HeaderRightSideContainer';
@@ -26,13 +25,14 @@ const ContentsBlock = styled.div`
 }
 `;
 
-const Header = () => (
+const Header = ({ goLobby }) => (
   <HeaderBlock>
     <ContentsBlock>
-      <HeaderLeftSide />
+      <HeaderLeftSide goLobby={goLobby} />
       <HeaderSearchBar />
       <HeaderRightSideContainer />
     </ContentsBlock>
   </HeaderBlock>
 );
+
 export default Header;

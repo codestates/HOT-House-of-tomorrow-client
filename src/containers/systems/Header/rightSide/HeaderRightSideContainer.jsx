@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import HeaderRightSide from '../../../../components/systems/Header/rightSide/HeaderRightSide';
 import { typeLogOut } from '../../../../modules/auth/userAuthorization';
-
 // TODO ============================
 // TODO HeaderRightSideContainer(CT)
 // TODO ============================
 
-function HeaderRightSideContainer() {
+function HeaderRightSideContainer({ history }) {
   const [openDropDown, setOpenDropDown] = useState(false);
   const dropDownHandler = () => {
     setOpenDropDown(!openDropDown);
@@ -22,7 +22,7 @@ function HeaderRightSideContainer() {
   // * ========================
 
   const onProfileHandler = () => {
-    console.log('profile');
+    history.push('/mypage');
     dropDownHandler();
   };
   const onSavedHandler = () => {
@@ -60,4 +60,4 @@ function HeaderRightSideContainer() {
   return loginModal;
 }
 
-export default HeaderRightSideContainer;
+export default withRouter(HeaderRightSideContainer);

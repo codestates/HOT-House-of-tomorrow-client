@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import Header from '../../../components/systems/Header/Header';
 
-function HeaderContainer() {
+function HeaderContainer({ history }) {
+  const goLobby = () => {
+    history.push('/');
+  };
   return (
     <>
-      <Header />
+      <Header goLobby={goLobby} />
     </>
   );
 }
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);
