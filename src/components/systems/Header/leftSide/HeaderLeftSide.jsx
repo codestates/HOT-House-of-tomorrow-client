@@ -10,11 +10,11 @@ const Logo = styled.img`
   }
 `;
 
-function HeaderLeftSide() {
+function HeaderLeftSide({ goLobby }) {
   return (
     <>
       <LogoBlock>
-        <Logo src={logo} alt="pageLogo" />
+        <Logo src={logo} alt="pageLogo" onClick={goLobby} />
       </LogoBlock>
     </>
   );
