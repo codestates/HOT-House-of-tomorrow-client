@@ -9,7 +9,7 @@ import {
 import { tabList } from '../../../data/lobby/filter_bar/tabList';
 
 function PostContainer({ match }) {
-  const { card } = useSelector(({ cards, authorization }) => ({
+  const { card } = useSelector(({ cards }) => ({
     card: cards.card,
   }));
 
@@ -18,7 +18,6 @@ function PostContainer({ match }) {
   const timeDiffToday = (value) => {
     const today = new Date();
     const timeValue = new Date(value);
-
     const betweenTime = Math.floor(
       (today.getTime() - timeValue.getTime()) / 1000 / 60
     );

@@ -73,9 +73,23 @@ const Form = styled.form`
 
 const ButtonBlock = styled.div`
   display: flex;
+  button {
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
-function Comments({ comment, userData, timeDiffToday }) {
+function Comments({
+  comment,
+  userData,
+  timeDiffToday,
+  commentInput,
+  inputHandler,
+  submitHandler,
+  deleteHandler,
+}) {
   return (
     <Block>
       <Section>
@@ -83,19 +97,25 @@ function Comments({ comment, userData, timeDiffToday }) {
           댓글&nbsp;
           <span>{comment.length}</span>
         </h1>
-        <Form action="submit">
+        <Form action="submit" onSubmit={(event) => submitHandler(event)}>
           <div>
             <img src={userData.profileImg} alt="" />
           </div>
           <input
             type="text"
             placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)"
+            value={commentInput}
+            onChange={(event) => inputHandler(event)}
           />
           <ButtonBlock>
             <button type="submit">등록</button>
           </ButtonBlock>
         </Form>
-        <CommentList comment={comment} timeDiffToday={timeDiffToday} />
+        <CommentList
+          comment={comment}
+          timeDiffToday={timeDiffToday}
+          deleteHandler={deleteHandler}
+        />
       </Section>
     </Block>
   );

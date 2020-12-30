@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Comments = styled.ul`
@@ -63,19 +63,19 @@ const Footer = styled.footer`
     border: none;
     padding: 0;
     color: #767676;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
-function CommentList({ comment, timeDiffToday }) {
-  useEffect(() => {
-    console.log(comment);
-  }, [comment]);
-
+function CommentList({ comment, timeDiffToday, deleteHandler }) {
   const comments =
-    comment.length > 1
+    comment.length >= 1
       ? comment.map((data) => (
           // eslint-disable-next-line react/jsx-indent
-          <Comments key={data.date}>
+          <Comments key={data.comment}>
             <List>
               <article>
                 <p>
@@ -87,7 +87,9 @@ function CommentList({ comment, timeDiffToday }) {
                 </p>
                 <Footer>
                   <span>{timeDiffToday(data.date)}</span>
-                  <button type="button">답글</button>
+                  <button type="button" onClick={() => deleteHandler(data.id)}>
+                    삭제
+                  </button>
                 </Footer>
               </article>
             </List>
