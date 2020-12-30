@@ -8,3 +8,10 @@ export async function postCommentAsync(comment) {
     throw new Error(response.data.error);
   return response.data;
 }
+
+export async function deleteCommentAsync(comment) {
+  const response = await axios.post('/api/comment/delete', comment);
+  if (response.data.deleteComment === false)
+    throw new Error(response.data.error);
+  return response.data;
+}

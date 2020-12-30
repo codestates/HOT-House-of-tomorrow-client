@@ -60,5 +60,7 @@ export async function getCardAsync(postId) {
   const response = await axios.get(`/api/post/read/${postId}`);
   if (response.data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
-  return response.data.results;
+  const { UserAnotherPosts, comment, postData } = response.data.results;
+  comment.reverse();
+  return { UserAnotherPosts, comment, postData };
 }

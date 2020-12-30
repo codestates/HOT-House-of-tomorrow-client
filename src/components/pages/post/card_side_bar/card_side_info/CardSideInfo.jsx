@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import { BsHeart } from 'react-icons/bs';
 import styled from 'styled-components';
@@ -124,6 +124,29 @@ const EmptyBlock = styled.div`
 `;
 
 function CardSideInfo({ card }) {
+  const renderSwitch = (ele, param) => {
+    switch ((ele, param)) {
+      case 0:
+        return <RelatedPostImg1 src={ele.roomImage} alt="relatedPostImage" />;
+      case 1:
+        return <RelatedPostImg2 src={ele.roomImage} alt="relatedPostImage" />;
+      case 2:
+        return <RelatedPostImg3 src={ele.roomImage} alt="relatedPostImage" />;
+      case 3:
+        return <RelatedPostImg4 src={ele.roomImage} alt="relatedPostImage" />;
+      default:
+        return <EmptyBlock />;
+    }
+  };
+
+  const list =
+    card.UserAnotherPosts.length >= 1
+      ? card.UserAnotherPosts.map((ele, index) => (
+          <li>
+            <Link to={ele.id}>{renderSwitch(ele, index)}</Link>
+          </li>
+        ))
+      : null;
   return (
     <Block>
       <BtnBlock>
@@ -146,52 +169,7 @@ function CardSideInfo({ card }) {
         </div>
       </UserInfoBlock>
       <RelatedPostsBlock>
-        <ul>
-          <li>
-            <Link to={`${card.UserAnotherPosts[0].id}`}>
-              <RelatedPostImg1
-                src={card.UserAnotherPosts[0]?.roomImage}
-                alt="relatedPostImage"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link to={`${card.UserAnotherPosts[1].id}`}>
-              {card.UserAnotherPosts[1] ? (
-                <RelatedPostImg2
-                  src={card.UserAnotherPosts[1]?.roomImage}
-                  alt="relatedPostImage"
-                />
-              ) : (
-                <EmptyBlock />
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link to={`${card.UserAnotherPosts[2].id}`}>
-              {card.UserAnotherPosts[2] ? (
-                <RelatedPostImg3
-                  src={card.UserAnotherPosts[2]?.roomImage}
-                  alt="relatedPostImage"
-                />
-              ) : (
-                <EmptyBlock />
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link to={`${card.UserAnotherPosts[3].id}`}>
-              {card.UserAnotherPosts[3] ? (
-                <RelatedPostImg4
-                  src={card.UserAnotherPosts[3]?.roomImage}
-                  alt="relatedPostImage"
-                />
-              ) : (
-                <EmptyBlock />
-              )}
-            </Link>
-          </li>
-        </ul>
+        <ul>{list}</ul>
       </RelatedPostsBlock>
     </Block>
   );

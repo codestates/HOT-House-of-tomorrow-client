@@ -188,7 +188,15 @@ export default function cards(state = initialState, action) {
         currentQuery: {},
         currentQueryTab: [],
         currentTag: {},
-        card: {},
+        card: {
+          postData: {
+            housingType: null,
+            space: null,
+            acreage: null,
+            color: null,
+          },
+          comment: [],
+        },
       };
     case INITAIAL_CARD:
       return {

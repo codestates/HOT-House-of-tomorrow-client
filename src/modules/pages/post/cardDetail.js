@@ -8,10 +8,19 @@ const POST_COMMENT = 'cards/POST_COMMENT';
 const POST_COMMENT_SUCCESS = 'POST_COMMENT_SUCCESS';
 const POST_COMMENT_FAILURE = 'POST_COMMENT_FAILURE';
 
+const DELETE_COMMENT = 'cards/DELETE_COMMENT';
+const DELETE_COMMENT_SUCCESS = 'cards/DELETE_COMMENT_SUCCESS';
+const DELETE_COMMENT_FAILURE = 'cards/DELETE_COMMENT_FAILURE';
+
 //* GENERATE_TYPE_FUNCTION
 
 export const typePostComment = (obj) => ({
   type: POST_COMMENT,
+  payload: obj,
+});
+
+export const typeDeleteComment = (obj) => ({
+  type: DELETE_COMMENT,
   payload: obj,
 });
 
@@ -23,7 +32,7 @@ export function* postCommentSaga(action) {
     yield put({
       type: POST_COMMENT_SUCCESS,
       payload: {
-        result: result.writeComment,
+        result,
       },
     });
   } catch (e) {
@@ -34,9 +43,27 @@ export function* postCommentSaga(action) {
   }
 }
 
+export function* deleteCommentSaga(action) {
+  try {
+    const result = yield call(cardDetailApi.deleteCommentAsync, action.payload);
+    yield put({
+      type: DELETE_COMMENT_SUCCESS,
+      payload: {
+        result: result.deleteComment,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: DELETE_COMMENT_FAILURE,
+      payload: e,
+    });
+  }
+}
+
 //* WATCHER_SAGA_FUNCTION
 export function* postCommentWatcherSaga() {
   yield takeLatest(POST_COMMENT, postCommentSaga);
+  yield takeLatest(DELETE_COMMENT, deleteCommentSaga);
 }
 
 //* REDUCER
@@ -49,13 +76,30 @@ export default function cardDetail(state = {}, action) {
     case POST_COMMENT_SUCCESS:
       return {
         ...state,
-        result: action.payload.result,
+        result: action.payload.result.writeComment,
+        commentId: action.payload.result.commentId,
       };
     case POST_COMMENT_FAILURE:
       return {
         ...state,
         error: true,
       };
+
+    case DELETE_COMMENT:
+      return {
+        ...state,
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        result: action.payload.result,
+      };
+    case DELETE_COMMENT_FAILURE:
+      return {
+        ...state,
+        error: true,
+      };
+
     default:
       return state;
   }

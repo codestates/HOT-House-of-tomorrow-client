@@ -75,28 +75,26 @@ function CommentList({ comment, timeDiffToday, deleteHandler }) {
     comment.length >= 1
       ? comment.map((data) => (
           // eslint-disable-next-line react/jsx-indent
-          <Comments key={data.comment}>
-            <List>
-              <article>
-                <p>
-                  <a href="/">
-                    <Image src={data.User.profileImg} alt="profileImage" />
-                    <span>{data.User.nickname}</span>
-                  </a>
-                  <span>{data.comment}</span>
-                </p>
-                <Footer>
-                  <span>{timeDiffToday(data.date)}</span>
-                  <button type="button" onClick={() => deleteHandler(data.id)}>
-                    삭제
-                  </button>
-                </Footer>
-              </article>
-            </List>
-          </Comments>
+          <List key={data.id}>
+            <article>
+              <p>
+                <a href="/">
+                  <Image src={data.User.profileImg} alt="profileImage" />
+                  <span>{data.User.nickname}</span>
+                </a>
+                <span>{data.comment}</span>
+              </p>
+              <Footer>
+                <span>{timeDiffToday(data.date)}</span>
+                <button type="button" onClick={() => deleteHandler(data.id)}>
+                  삭제
+                </button>
+              </Footer>
+            </article>
+          </List>
         ))
       : null;
-  return <>{comments}</>;
+  return <Comments>{comments}</Comments>;
 }
 
 export default CommentList;

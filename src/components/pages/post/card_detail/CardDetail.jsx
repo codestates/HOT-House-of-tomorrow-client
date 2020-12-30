@@ -25,7 +25,7 @@ function CardDetail({ options, card, userData, timeDiffToday }) {
       <CardFooter postData={postData} comment={comment} />
 
       <CommentFeedContainer
-        comment={comment.reverse()}
+        comment={comment}
         userData={userData}
         postId={postData.id}
         timeDiffToday={timeDiffToday}
