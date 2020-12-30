@@ -12,6 +12,10 @@ const DELETE_COMMENT = 'cards/DELETE_COMMENT';
 const DELETE_COMMENT_SUCCESS = 'cards/DELETE_COMMENT_SUCCESS';
 const DELETE_COMMENT_FAILURE = 'cards/DELETE_COMMENT_FAILURE';
 
+const LIKE_POST = 'cards/LIKE_POST';
+const LIKE_POST_SUCCESS = 'cards/LIKE_POST_SUCCESS';
+const LIKE_POST_FAILURE = 'cards/LIKE_POST_FAILURE';
+
 //* GENERATE_TYPE_FUNCTION
 
 export const typePostComment = (obj) => ({
@@ -22,6 +26,11 @@ export const typePostComment = (obj) => ({
 export const typeDeleteComment = (obj) => ({
   type: DELETE_COMMENT,
   payload: obj,
+});
+
+export const typeLikePost = (postId) => ({
+  type: LIKE_POST,
+  payload: postId,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -60,10 +69,28 @@ export function* deleteCommentSaga(action) {
   }
 }
 
+export function* likePostSaga(action) {
+  try {
+    const result = yield call(cardDetailApi.likePostAsync, action.payload);
+    yield put({
+      type: LIKE_POST_SUCCESS,
+      payload: {
+        result: result.updateSuccess,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: LIKE_POST_FAILURE,
+      payload: e,
+    });
+  }
+}
+
 //* WATCHER_SAGA_FUNCTION
 export function* postCommentWatcherSaga() {
   yield takeLatest(POST_COMMENT, postCommentSaga);
   yield takeLatest(DELETE_COMMENT, deleteCommentSaga);
+  yield takeLatest(LIKE_POST, likePostSaga);
 }
 
 //* REDUCER
@@ -95,6 +122,21 @@ export default function cardDetail(state = {}, action) {
         result: action.payload.result,
       };
     case DELETE_COMMENT_FAILURE:
+      return {
+        ...state,
+        error: true,
+      };
+
+    case LIKE_POST:
+      return {
+        ...state,
+      };
+    case LIKE_POST_SUCCESS:
+      return {
+        ...state,
+        likeResult: action.payload.result,
+      };
+    case LIKE_POST_FAILURE:
       return {
         ...state,
         error: true,

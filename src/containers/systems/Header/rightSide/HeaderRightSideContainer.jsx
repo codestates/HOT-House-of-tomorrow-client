@@ -22,15 +22,12 @@ function HeaderRightSideContainer() {
   // * ========================
 
   const onProfileHandler = () => {
-    console.log('profile');
     dropDownHandler();
   };
   const onSavedHandler = () => {
-    console.log('saved');
     dropDownHandler();
   };
   const onSettingHandler = () => {
-    console.log('setting');
     dropDownHandler();
   };
   const onLogOutHandler = () => {

@@ -123,7 +123,7 @@ const EmptyBlock = styled.div`
   height: 145px;
 `;
 
-function CardSideInfo({ card }) {
+function CardSideInfo({ card, onLikeHandler }) {
   const renderSwitch = (ele, param) => {
     switch ((ele, param)) {
       case 0:
@@ -142,15 +142,15 @@ function CardSideInfo({ card }) {
   const list =
     card.UserAnotherPosts.length >= 1
       ? card.UserAnotherPosts.map((ele, index) => (
-          <li>
-            <Link to={ele.id}>{renderSwitch(ele, index)}</Link>
+          <li key={ele.id}>
+            <Link to={String(ele.id)}>{renderSwitch(ele, index)}</Link>
           </li>
         ))
       : null;
   return (
     <Block>
       <BtnBlock>
-        <button type="button">
+        <button type="button" onClick={() => onLikeHandler(card.postData.id)}>
           <Like />
           <span>{card.postData.like}</span>
         </button>

@@ -83,10 +83,12 @@ function DropDownTab({
             </ListBtn>
           </li>
           <li>
-            <ListBtn type="button" onClick={onLogOutHandler}>
-              <BsPower />
-              <strong>로그아웃</strong>
-            </ListBtn>
+            <a href="/">
+              <ListBtn type="button" onClick={onLogOutHandler}>
+                <BsPower />
+                <strong>로그아웃</strong>
+              </ListBtn>
+            </a>
           </li>
         </ListBlock>
       </OutsideClickHandler>
