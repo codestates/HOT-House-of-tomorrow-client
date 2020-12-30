@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CardDetail from './card_detail/CardDetail';
-import CardSideBar from './card_side_bar/CardSideBar';
+import SideBarContainer from '../../../containers/pages/post/card_side_bar/SideBarContainer';
 
 const Block = styled.div`
   top: 60px;
@@ -21,7 +21,7 @@ function PostDetailPage({ options, card, userData, timeDiffToday }) {
             userData={userData}
             timeDiffToday={timeDiffToday}
           />
-          <CardSideBar card={card} />
+          <SideBarContainer card={card} />
         </>
       ) : null}
     </Block>
