@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { RiFileCopyFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const Block = styled.div`
   padding: 0;
@@ -35,6 +36,7 @@ const Ul = styled.ul`
         }
       }
       img {
+        height: 100%;
         width: 305px;
       }
     }
@@ -43,12 +45,14 @@ const Ul = styled.ul`
 function UserCards({ userPosts }) {
   const cards = userPosts.map((card) => (
     <li key={card.id}>
-      <div>
-        <span>
-          <RiFileCopyFill />
-        </span>
-        <img src={card?.roomImage} alt="#" />
-      </div>
+      <Link to={`/card_collections/${card.id}`}>
+        <div>
+          <span>
+            <RiFileCopyFill />
+          </span>
+          <img src={card?.roomImage} alt="#" />
+        </div>
+      </Link>
     </li>
   ));
   return (

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AiFillHeart } from 'react-icons/ai';
 import { MdModeComment } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { RiFileCopyFill } from 'react-icons/ri';
 
 const CardBlock = styled.div`
   z-index: 1;
@@ -70,11 +71,28 @@ const CardContents = styled.div`
     bottom: 16px;
   }
 
-  span {
-    font-size: 13px;
-    color: #fff;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    font-weight: 500;
+`;
+
+const ViewSpan = styled.span`
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+`;
+
+const ContentsIcon = styled.span`
+  cursor: pointer;
+  svg {
+    z-index: 1;
+    right: 10px;
+    font-size: 20px;
+    color: #ffffffd6;
+    position: absolute;
+    top: 10px;
+    box-shadow: -3px 9px 11px rgba(0, 0, 0, 0.1);
+    &: hover {
+      color: white;
+    }
   }
 `;
 
@@ -186,12 +204,15 @@ function Card({ element }) {
       </CardHeader>
       <CardContents>
         <Link to={`card_collections/${id}`}>
+          <ContentsIcon>
+            <RiFileCopyFill />
+          </ContentsIcon>
           <img src={roomImage} alt="roomImage" />
           <div>
-            <span>
+            <ViewSpan>
               조회수
               {view}
-            </span>
+            </ViewSpan>
           </div>
         </Link>
       </CardContents>

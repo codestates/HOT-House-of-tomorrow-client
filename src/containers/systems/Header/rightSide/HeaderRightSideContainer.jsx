@@ -13,17 +13,18 @@ function HeaderRightSideContainer({ history }) {
     setOpenDropDown(!openDropDown);
   };
   const dispatch = useDispatch();
-  const { loginSuccess } = useSelector(({ authorization }) => ({
+  const { isAuth, loginSuccess } = useSelector(({ authorization }) => ({
     loginSuccess: authorization.loginSuccess,
+    isAuth: authorization.isAuth,
   }));
 
   // * ========================
   // *   RIGHT_SIDE_BTN_HANDLER
   // * ========================
 
-  const onProfileHandler = () => {
+  const onProfileHandler = (id) => {
     dropDownHandler();
-    history.push('/mypage');
+    history.push(`/users/${id}`);
   };
   const onSavedHandler = () => {
     dropDownHandler();
@@ -42,6 +43,7 @@ function HeaderRightSideContainer({ history }) {
   const profileImg = userStorage?.profileImg || 'null';
   let loginModal = (
     <HeaderRightSide
+      isAuth={isAuth}
       openDropDown={openDropDown}
       setOpenDropDown={setOpenDropDown}
       dropDownHandler={dropDownHandler}

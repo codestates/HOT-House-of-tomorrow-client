@@ -48,6 +48,7 @@ const ProfileImg = styled.img`
 `;
 
 function HeaderRightSide({
+  isAuth,
   openDropDown,
   dropDownHandler,
   onProfileHandler,
@@ -70,6 +71,7 @@ function HeaderRightSide({
         </HeaderNavBtn>
         {openDropDown ? (
           <DropDownTab
+            isAuth={isAuth}
             dropDownHandler={dropDownHandler}
             onProfileHandler={onProfileHandler}
             onSavedHandler={onSavedHandler}

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -68,7 +67,7 @@ const ListCount = styled.span`
   }
 `;
 const BtnWrap = styled.div``;
-const UserProfile = ({ goEdit, userInfo, userPosts }) => (
+const UserProfile = ({ isAuth, goEdit, userInfo, userPosts }) => (
   <Wrap>
     <ImgBlock>
       <div>
@@ -79,7 +78,9 @@ const UserProfile = ({ goEdit, userInfo, userPosts }) => (
       <Nickname>
         <strong>{userInfo.nickname}</strong>
         <BtnWrap>
-          <EditButton onClick={goEdit}>프로필 편집</EditButton>
+          {isAuth?.nickname === userInfo.nickname ? (
+            <EditButton onClick={goEdit}>프로필 편집</EditButton>
+          ) : null}
         </BtnWrap>
       </Nickname>
       <ListCount>
