@@ -25,16 +25,23 @@ const Option = styled.option`
   color: #000;
 `;
 
-const Selects = () => (
+const Selects = ({
+  housingType,
+  color,
+  space,
+  onSelectColor,
+  onSelectSpace,
+  onSelectHousingType,
+}) => (
   <SelectWrap>
-    <Select>
+    <Select value={space} onChange={onSelectSpace}>
       <Option value="0">10평 미만</Option>
       <Option value="1">20평대</Option>
       <Option value="2">30평대</Option>
       <Option value="3">40평대</Option>
       <Option value="4">50평 이상</Option>
     </Select>
-    <Select>
+    <Select value={housingType} onChange={onSelectHousingType}>
       <Option value="0">원룸 오피스텔</Option>
       <Option value="1">아파트</Option>
       <Option value="2">빌라연립</Option>
@@ -42,7 +49,7 @@ const Selects = () => (
       <Option value="4">사무공간</Option>
       <Option value="5">상업공간</Option>
     </Select>
-    <Select>
+    <Select value={color} onChange={onSelectColor}>
       <Option value="0">그레이</Option>
       <Option value="1">베이지</Option>
       <Option value="2">화이트</Option>
