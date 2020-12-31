@@ -4,7 +4,7 @@ import logo from '../../../../public/Logo.png';
 
 const LogoBlock = styled.div``;
 const Logo = styled.img`
-  width: 150px;
+  width: 100px;
   &:hover {
     cursor: pointer;
   }

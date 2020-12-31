@@ -22,15 +22,13 @@ function HeaderRightSideContainer({ history }) {
   // * ========================
 
   const onProfileHandler = () => {
-    history.push('/mypage');
     dropDownHandler();
+    history.push('/mypage');
   };
   const onSavedHandler = () => {
-    console.log('saved');
     dropDownHandler();
   };
   const onSettingHandler = () => {
-    console.log('setting');
     dropDownHandler();
   };
   const onLogOutHandler = () => {

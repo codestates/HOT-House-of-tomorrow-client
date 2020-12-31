@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
-import loading from '../../../public/loading.gif';
 import { typeAuthUser } from '../../../modules/auth/userAuthorization';
 import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
 
@@ -12,17 +10,10 @@ import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
 // TODO =====================
 
 // * STYLED_COMPONENTS
-const LoadingImg = styled.img`
-  position: fixed;
-  width: 15vw;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`;
 
 function LobbyContainer() {
   const dispatch = useDispatch();
-  const { load, loginSuccess } = useSelector(({ authorization }) => ({
-    load: authorization.load,
+  const { loginSuccess } = useSelector(({ authorization }) => ({
     loginSuccess: authorization.loginSuccess,
   }));
 
@@ -32,11 +23,7 @@ function LobbyContainer() {
     loginModal = <LoginContainer />;
   }
 
-  const showLoginModal = load ? (
-    <LoadingImg src={loading} alt="loading" />
-  ) : (
-    loginModal
-  );
+  const showLoginModal = loginModal;
 
   // * ===================
   // *   USE_EFFECT

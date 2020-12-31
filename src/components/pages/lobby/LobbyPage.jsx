@@ -13,7 +13,7 @@ const Block = styled.div`
   position: relative;
   margin: 0 auto;
   width: 1150px;
-  top: 100px;
+  top: 70px;
   z-index: 1;
 `;
 

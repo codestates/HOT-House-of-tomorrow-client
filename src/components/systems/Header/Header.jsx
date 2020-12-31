@@ -7,7 +7,7 @@ import HeaderRightSideContainer from '../../../containers/systems/Header/rightSi
 const HeaderBlock = styled.div`
   background: white;
   border-bottom: solid 1px #ededed;
-  height: 100px;
+  height: 60px;
   width: 100%;
   display: flex;
   position: fixed;
@@ -21,7 +21,7 @@ const ContentsBlock = styled.div`
   margin: 0 auto;
   align-items: center;
   position: relative;
-  width: 1000px;
+  width: 1145px;
 }
 `;
 

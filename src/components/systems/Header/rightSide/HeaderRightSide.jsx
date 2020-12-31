@@ -11,7 +11,7 @@ const RightBlock = styled.div`
 const HeaderNavBtn = styled.button`
   border: none;
   background: none;
-  margin-right: 5px;
+  margin-right: 10px;
   overflow: hidden;
   border-radius: 100%;
 

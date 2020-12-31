@@ -13,8 +13,16 @@ const GET_FILTER_CARDS = 'cards/GET_FILTER_CARDS_CARDS';
 const GET_FILTER_CARDS_SUCCESS = 'cards/GET_FILTER_CARDSCARDS_SUCCESS';
 const GET_FILTER_CARDS_FAILURE = 'cards/GET_FILTER_CARDS_FAILURE';
 
+// * GET_FILTER_CARDS
+const GET_CARD = 'cards/GET_CARD';
+const GET_CARD_SUCCESS = 'cards/GET_CARD_SUCCESS';
+const GET_CARD_FAILURE = 'cards/GET_CARD_FAILURE';
+
 // * INITAIAL_CARDS
 const INITAIAL_CARDS = 'cards/INITAIAL_CARDS';
+
+// * INITAIAL_CARD
+const INITAIAL_CARD = 'cards/INITAIAL_CARD';
 
 //* GENERATE_TYPE_FUNCTION
 export const typeGetAllCards = () => ({
@@ -40,8 +48,17 @@ export const typeGetFilterCards = (
   },
 });
 
+export const typeGetCard = (postId) => ({
+  type: GET_CARD,
+  payload: postId,
+});
+
 export const typeInitialCards = () => ({
   type: INITAIAL_CARDS,
+});
+
+export const typeInitialCard = () => ({
+  type: INITAIAL_CARD,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -81,11 +98,28 @@ export function* getFilteredCardSaga(action) {
     });
   }
 }
+export function* getCardSaga(action) {
+  try {
+    const result = yield call(getCardApi.getCardAsync, action.payload);
+    yield put({
+      type: GET_CARD_SUCCESS,
+      payload: {
+        card: result,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: GET_CARD_FAILURE,
+      payload: e,
+    });
+  }
+}
 
 //* WATCHER_SAGA_FUNCTION
 export function* getCardWatcherSaga() {
   yield takeLatest(GET_ALL_CARDS, getAllCardSaga);
   yield takeLatest(GET_FILTER_CARDS, getFilteredCardSaga);
+  yield takeLatest(GET_CARD, getCardSaga);
 }
 
 const initialState = {
@@ -95,6 +129,15 @@ const initialState = {
   currentQueryTab: [],
   currentTag: {},
   load: null,
+  card: {
+    postData: {
+      housingType: null,
+      space: null,
+      acreage: null,
+      color: null,
+    },
+    comment: [],
+  },
 };
 
 //* REDUCER
@@ -145,6 +188,44 @@ export default function cards(state = initialState, action) {
         currentQuery: {},
         currentQueryTab: [],
         currentTag: {},
+        card: {
+          postData: {
+            housingType: null,
+            space: null,
+            acreage: null,
+            color: null,
+          },
+          comment: [],
+        },
+      };
+    case INITAIAL_CARD:
+      return {
+        ...state,
+        card: {
+          postData: {
+            housingType: null,
+            space: null,
+            acreage: null,
+            color: null,
+          },
+          comment: [],
+        },
+      };
+
+    case GET_CARD:
+      return {
+        ...state,
+        load: false,
+      };
+    case GET_CARD_SUCCESS:
+      return {
+        ...state,
+        card: action.payload.card,
+      };
+    case GET_CARD_FAILURE:
+      return {
+        ...state,
+        error: action.payload.message,
       };
     default:
       return state;

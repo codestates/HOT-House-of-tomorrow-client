@@ -21,9 +21,9 @@ export async function isAuthAsync() {
 
 export async function logOutAsync() {
   const response = await axios.get('/api/auth/logout');
+  localStorage.removeItem('CURRENT_USER');
   if (!response.data.logout) {
     throw new Error('로그 아웃에 실패했습니다.');
   }
-  localStorage.removeItem('CURRENT_USER');
   return response.data;
 }

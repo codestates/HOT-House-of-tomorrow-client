@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
-import { arrayOf } from 'prop-types';
 
 export async function getAllCardsAsync() {
   const response = await axios.get('/api/lobby/getposts');
   if (response.data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
-  console.log(response.data.results);
   return response.data.results;
 }
 
@@ -23,7 +20,7 @@ export async function getFilterdCardsAsync(options) {
     sort: `sort=${option}`,
     housingType: `housingType=${option}`,
     space: `space=${option}`,
-    roomSize: `roomSize=${option}`,
+    acreage: `acreage=${option}`,
     color: `color=${option}`,
   };
 
@@ -48,8 +45,6 @@ export async function getFilterdCardsAsync(options) {
   if (data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
 
-  console.log(data);
-
   const cards = data.results;
   return {
     currentQuery,
@@ -59,4 +54,13 @@ export async function getFilterdCardsAsync(options) {
     currentTag,
     cards,
   };
+}
+
+export async function getCardAsync(postId) {
+  const response = await axios.get(`/api/post/read/${postId}`);
+  if (response.data.postLoad === false)
+    throw new Error('포스트 불러오기에 실패했습니다.');
+  const { UserAnotherPosts, comment, postData } = response.data.results;
+  comment.reverse();
+  return { UserAnotherPosts, comment, postData };
 }
