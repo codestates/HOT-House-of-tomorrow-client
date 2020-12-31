@@ -42,6 +42,7 @@ const CardHeader = styled.div`
     color: #474747;
     font-weight: 500;
     margin-bottom: 3px;
+    cursor: pointer;
   }
 `;
 const CardContents = styled.div`
@@ -177,6 +178,11 @@ const CommentBlock = styled.div`
     width: 270px;
   }
 `;
+
+const LinkTag = styled(Link)`
+  text-decoration: none;
+`;
+
 function Card({ element }) {
   const { id, User, view, roomImage, like, comments, description } = element;
 
@@ -196,9 +202,13 @@ function Card({ element }) {
   return (
     <CardBlock>
       <CardHeader>
-        <img src={User.profileImg} alt="profileImage" />
+        <LinkTag to={`users/${User.nickname}`}>
+          <img src={User.profileImg} alt="profileImage" />
+        </LinkTag>
         <span>
-          <strong>{User.nickname}</strong>
+          <LinkTag to={`users/${User.oAuthId}`}>
+            <strong>{User.nickname}</strong>
+          </LinkTag>
           <p>{User.introduction}</p>
         </span>
       </CardHeader>
