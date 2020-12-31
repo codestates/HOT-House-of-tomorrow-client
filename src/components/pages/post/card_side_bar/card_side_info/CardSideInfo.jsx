@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
-import { BsHeart } from 'react-icons/bs';
+import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -9,10 +9,14 @@ const Block = styled.div`
   top: 80px;
 `;
 
-const Like = styled(BsHeart)`
+const Like = styled(AiFillHeart)`
   font-size: 20px;
-  color: #444444;
   margin-right: 10px;
+  fill: ${(props) => (props.like === 'true' ? '#2fd8b7' : 'transparent')};
+  stroke: ${(props) => (props.like === 'true' ? '#2fd8b7' : ' #8b8b8b')};
+
+  stroke-width: 66.1px;
+  transition: fill 0.1s, stroke 0.1s;
   &:hover {
     cursor: pointer;
   }
@@ -21,8 +25,8 @@ const Like = styled(BsHeart)`
 const BtnBlock = styled.div`
   margin-bottom: 40px;
   display: flex;
-
   button {
+    cursor: pointer;
     background-color: #f5f5f5;
     border: none;
     width: 140px;
@@ -33,7 +37,9 @@ const BtnBlock = styled.div`
     justify-content: center;
     display: flex;
     align-items: center;
-
+    &:focus {
+      outline: none;
+    }
     span {
       font-size: 15px;
       color: #444444;
@@ -123,7 +129,7 @@ const EmptyBlock = styled.div`
   height: 145px;
 `;
 
-function CardSideInfo({ card, onLikeHandler }) {
+function CardSideInfo({ card, onLikeHandler, like }) {
   const renderSwitch = (ele, param) => {
     switch ((ele, param)) {
       case 0:
@@ -151,12 +157,8 @@ function CardSideInfo({ card, onLikeHandler }) {
     <Block>
       <BtnBlock>
         <button type="button" onClick={() => onLikeHandler(card.postData.id)}>
-          <Like />
-          <span>{card.postData.like}</span>
-        </button>
-        <button type="button">
-          <Like />
-          <span>{card.postData.like}</span>
+          <Like like={String(like.pressLike)} />
+          <span>{like.likes}</span>
         </button>
       </BtnBlock>
       <UserInfoBlock>
