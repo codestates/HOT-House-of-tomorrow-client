@@ -1,5 +1,4 @@
 import React from 'react';
-import { MdCancel } from 'react-icons/md';
 
 function Tag({ tag }) {
   return (
@@ -8,7 +7,6 @@ function Tag({ tag }) {
         <button type="button">
           <span>
             <strong>{tag}</strong>
-            <MdCancel />
           </span>
         </button>
       </li>

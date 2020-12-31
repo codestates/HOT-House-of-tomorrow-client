@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderLeftSide from './leftSide/HeaderLeftSide';
-import HeaderSearchBar from './searchBar/HeaderSearchBar';
 import HeaderRightSideContainer from '../../../containers/systems/Header/rightSide/HeaderRightSideContainer';
 
 const HeaderBlock = styled.div`
@@ -29,7 +28,6 @@ const Header = ({ goLobby }) => (
   <HeaderBlock>
     <ContentsBlock>
       <HeaderLeftSide goLobby={goLobby} />
-      <HeaderSearchBar />
       <HeaderRightSideContainer />
     </ContentsBlock>
   </HeaderBlock>

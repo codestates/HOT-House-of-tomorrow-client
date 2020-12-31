@@ -75,12 +75,6 @@ function DropDownTab({
             </ListBtn>
           </li>
           <li>
-            <ListBtn type="button" onClick={onSavedHandler}>
-              <BsHeart />
-              <strong>저장됨</strong>
-            </ListBtn>
-          </li>
-          <li>
             <ListBtn type="button" onClick={onSettingHandler}>
               <BsGearWide />
               <strong>설정</strong>

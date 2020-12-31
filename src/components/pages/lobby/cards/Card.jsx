@@ -34,7 +34,7 @@ const CardHeader = styled.div`
   img {
     margin-right: 10px;
     width: 30px;
-    border: 3px solid #fcf4f4;
+    border: 3px solid #fcf4f400;
     border-radius: 100%;
   }
 

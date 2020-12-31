@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
-import { BsPencil, BsHeart } from 'react-icons/bs';
+import { CgMenuGridO } from 'react-icons/cg';
 import DropDownTab from '../dropDownTab/DropDownTab';
 
 const RightBlock = styled.div`
@@ -27,16 +28,9 @@ const HeaderNavBtn = styled.button`
   }
 `;
 
-const Writing = styled(BsPencil)`
+const Menu = styled(CgMenuGridO)`
   font-size: 25px;
-  color: #444444;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const Like = styled(BsHeart)`
-  font-size: 30px;
-  color: #444444;
+  color: #343434;
   &:hover {
     cursor: pointer;
   }
@@ -52,21 +46,18 @@ function HeaderRightSide({
   openDropDown,
   dropDownHandler,
   onProfileHandler,
-  onSavedHandler,
   onSettingHandler,
   onLogOutHandler,
   profileImg,
+  goMyPageHandler,
 }) {
   return (
     <>
       <RightBlock>
-        <HeaderNavBtn type="button">
-          <Writing />
-        </HeaderNavBtn>
-        <HeaderNavBtn type="button">
-          <Like />
-        </HeaderNavBtn>
         <HeaderNavBtn type="button" onClick={dropDownHandler}>
+          <Menu />
+        </HeaderNavBtn>
+        <HeaderNavBtn type="button" onClick={goMyPageHandler}>
           <ProfileImg src={profileImg} alt="profile" />
         </HeaderNavBtn>
         {openDropDown ? (
@@ -74,7 +65,6 @@ function HeaderRightSide({
             isAuth={isAuth}
             dropDownHandler={dropDownHandler}
             onProfileHandler={onProfileHandler}
-            onSavedHandler={onSavedHandler}
             onSettingHandler={onSettingHandler}
             onLogOutHandler={onLogOutHandler}
           />

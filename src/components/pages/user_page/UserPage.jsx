@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserProfile from './user_profile/UserProfile';
 import UserCards from './user_cards/UserCards';
@@ -63,9 +63,6 @@ const MyWriteListWrap = styled.div`
 function UserPage({ isAuth, goEdit, userPosts, userInfo, likePosts }) {
   const currentUser = JSON.parse(localStorage.getItem('CURRENT_USER')).nickname;
   const [activeId, setActiveId] = useState(0);
-  useEffect(() => {
-    console.log(isAuth);
-  }, []);
 
   return (
     <Block>

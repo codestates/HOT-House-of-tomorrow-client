@@ -26,15 +26,16 @@ function HeaderRightSideContainer({ history }) {
     dropDownHandler();
     history.push(`/users/${id}`);
   };
-  const onSavedHandler = () => {
-    dropDownHandler();
-  };
   const onSettingHandler = () => {
     dropDownHandler();
   };
   const onLogOutHandler = () => {
     dispatch(typeLogOut());
     dropDownHandler();
+  };
+
+  const goMyPageHandler = () => {
+    history.push(`/users/${isAuth.oAuthId}`);
   };
 
   useEffect(() => {}, [loginSuccess]);
@@ -48,10 +49,10 @@ function HeaderRightSideContainer({ history }) {
       setOpenDropDown={setOpenDropDown}
       dropDownHandler={dropDownHandler}
       onProfileHandler={onProfileHandler}
-      onSavedHandler={onSavedHandler}
       onSettingHandler={onSettingHandler}
       onLogOutHandler={onLogOutHandler}
       profileImg={profileImg}
+      goMyPageHandler={goMyPageHandler}
     />
   );
   if (!userStorage) {

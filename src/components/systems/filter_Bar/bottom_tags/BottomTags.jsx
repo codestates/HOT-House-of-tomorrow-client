@@ -4,7 +4,6 @@ import Tag from './Tag';
 
 const Block = styled.div`
   margin: 12px 0px 30px 0px;
-  margin: 12px 0px 30px 0px;
   ul {
     padding: 0;
     display: flex;
@@ -26,10 +25,13 @@ const Block = styled.div`
       }
       button {
         cursor: pointer;
-        padding: 3px 3px 1px 11px;
+        padding: 3px 6px 2px 11px;
         border-radius: 15px;
         border: none;
         background: #54d0a7;
+        &:focue {
+          outline: none;
+        }
 
         svg {
           color: aliceblue;
@@ -46,6 +48,9 @@ const InitialBtn = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
   span {
     font-size: 15px;
     font-weight: 800;
