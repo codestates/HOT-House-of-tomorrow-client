@@ -54,6 +54,7 @@ function PostContainer({ match }) {
   };
 
   const { housingType, space, acreage, color } = card.postData;
+
   useEffect(() => {}, [card]);
 
   return (

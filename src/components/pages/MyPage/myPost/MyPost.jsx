@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import EmptyState from './EmptyState';
-import MyWriteList from './MyWriteList';
+import EmptyState from '../EmptyState';
+import MyWriteList from '../MyWriteList';
 
 const MyPost = ({ myWriteLists }) => {
   const history = useHistory();
