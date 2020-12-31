@@ -55,11 +55,12 @@ function HeaderRightSide({
   onSettingHandler,
   onLogOutHandler,
   profileImg,
+  goWriting,
 }) {
   return (
     <>
       <RightBlock>
-        <HeaderNavBtn type="button">
+        <HeaderNavBtn type="button" onClick={goWriting}>
           <Writing />
         </HeaderNavBtn>
         <HeaderNavBtn type="button">
