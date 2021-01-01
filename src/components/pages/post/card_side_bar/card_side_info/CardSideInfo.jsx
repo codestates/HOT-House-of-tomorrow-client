@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
@@ -129,7 +130,13 @@ const EmptyBlock = styled.div`
   height: 145px;
 `;
 
-function CardSideInfo({ card, onLikeHandler, like }) {
+function CardSideInfo({
+  card,
+  onLikeHandler,
+  like,
+  deleteCardHandler,
+  isAuth,
+}) {
   const renderSwitch = (ele, param) => {
     switch ((ele, param)) {
       case 0:
@@ -147,11 +154,14 @@ function CardSideInfo({ card, onLikeHandler, like }) {
 
   const list =
     card.UserAnotherPosts.length >= 1
-      ? card.UserAnotherPosts.map((ele, index) => (
-          <li key={ele.id}>
-            <Link to={String(ele.id)}>{renderSwitch(ele, index)}</Link>
-          </li>
-        ))
+      ? card.UserAnotherPosts.map((ele, index) => {
+          if (index === 4) return;
+          return (
+            <li key={ele.id}>
+              <Link to={String(ele.id)}>{renderSwitch(ele, index)}</Link>
+            </li>
+          );
+        })
       : null;
   return (
     <Block>
@@ -160,6 +170,14 @@ function CardSideInfo({ card, onLikeHandler, like }) {
           <Like like={String(like.pressLike)} />
           <span>{like.likes}</span>
         </button>
+        {isAuth.oAuthId === card.postData.userId ? (
+          <button
+            type="button"
+            onClick={() => deleteCardHandler(card.postData.id)}
+          >
+            <span>게시물 삭제</span>
+          </button>
+        ) : null}
       </BtnBlock>
       <UserInfoBlock>
         <div>

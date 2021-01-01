@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import LobbyPage from '../../../components/pages/lobby/LobbyPage';
 import LoginContainer from '../../systems/user_login/LoginContainer';
 import { typeAuthUser } from '../../../modules/auth/userAuthorization';
-import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
+import {
+  typeGetAllCards,
+  typeInitalTag,
+} from '../../../modules/pages/lobby/cards';
 
 // TODO =====================
 // TODO   LOBBY_CONTAINER(CT)
@@ -37,6 +40,10 @@ function LobbyContainer() {
     }
     dispatch(typeAuthUser());
   }, [loginSuccess]);
+
+  useEffect(() => {
+    dispatch(typeInitalTag());
+  }, []);
 
   // * ===================
   // *   RENDER

@@ -22,3 +22,10 @@ export async function likePostAsync(postId) {
     throw new Error(response.data.updateSuccess);
   return response.data;
 }
+
+export async function deletePostAsync(postId) {
+  const response = await axios.post('/api/post/delete', { postId });
+  if (response.data.postDeleted === false)
+    throw new Error(`postDeleted : ${response.data.postDeleted}`);
+  return response.data.postDeleted;
+}

@@ -9,10 +9,16 @@ const Block = styled.div`
   padding-left: 40px;
 `;
 
-function CardSideBar({ card, onLikeHandler, like }) {
+function CardSideBar({ card, onLikeHandler, like, deleteCardHandler, isAuth }) {
   return (
     <Block>
-      <CardSideInfo card={card} onLikeHandler={onLikeHandler} like={like} />
+      <CardSideInfo
+        card={card}
+        onLikeHandler={onLikeHandler}
+        like={like}
+        deleteCardHandler={deleteCardHandler}
+        isAuth={isAuth}
+      />
     </Block>
   );
 }

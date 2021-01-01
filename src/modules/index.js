@@ -4,6 +4,7 @@ import authorization, { userAuthorizationSaga } from './auth/userAuthorization';
 import cards, { getCardWatcherSaga } from './pages/lobby/cards';
 import cardDetail, { postCommentWatcherSaga } from './pages/post/cardDetail';
 import userPage, { getUserCardsWatcherSaga } from './pages/user_page/userPage';
+import writeCard, { writeCardWatcherSaga } from './pages/write_page/wrtiePage';
 import config from './config/filterTabText';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   cards,
   cardDetail,
   userPage,
+  writeCard,
 });
 export function* rootSaga() {
   yield all([
@@ -19,6 +21,7 @@ export function* rootSaga() {
     getCardWatcherSaga(),
     postCommentWatcherSaga(),
     getUserCardsWatcherSaga(),
+    writeCardWatcherSaga(),
   ]);
 }
 

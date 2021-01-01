@@ -8,7 +8,7 @@ import {
 } from '../../../modules/pages/lobby/cards';
 import { tabList } from '../../../data/lobby/filter_bar/tabList';
 
-function PostContainer({ match }) {
+function PostContainer({ match, history }) {
   const { card, isAuth } = useSelector(({ cards, authorization }) => ({
     card: cards.card,
     isAuth: authorization.isAuth,
@@ -66,6 +66,7 @@ function PostContainer({ match }) {
         userData={userData}
         timeDiffToday={timeDiffToday}
         isAuth={isAuth}
+        history={history}
       />
     </>
   );

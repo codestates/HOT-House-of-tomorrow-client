@@ -16,6 +16,12 @@ const LIKE_POST = 'cards/LIKE_POST';
 const LIKE_POST_SUCCESS = 'cards/LIKE_POST_SUCCESS';
 const LIKE_POST_FAILURE = 'cards/LIKE_POST_FAILURE';
 
+const DELETE_POST = 'cards/DELETE_POST';
+const DELETE_POST_SUCCESS = 'cards/DELETE_POST_SUCCESS';
+const DELETE_POST_FAILURE = 'cards/DELETE_POST_FAILURE';
+
+const INIT_POST_STATE = 'cards/INIT_POST_STATE';
+
 //* GENERATE_TYPE_FUNCTION
 
 export const typePostComment = (obj) => ({
@@ -31,6 +37,13 @@ export const typeDeleteComment = (obj) => ({
 export const typeLikePost = (postId) => ({
   type: LIKE_POST,
   payload: postId,
+});
+export const typeDeletePost = (postId) => ({
+  type: DELETE_POST,
+  payload: postId,
+});
+export const typeInitPostState = () => ({
+  type: INIT_POST_STATE,
 });
 
 //* MAIN_SAGA_FUNCTION
@@ -86,11 +99,29 @@ export function* likePostSaga(action) {
   }
 }
 
+export function* deletePostSaga(action) {
+  try {
+    const result = yield call(cardDetailApi.deletePostAsync, action.payload);
+    yield put({
+      type: DELETE_POST_SUCCESS,
+      payload: {
+        result,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: DELETE_POST_FAILURE,
+      payload: e,
+    });
+  }
+}
+
 //* WATCHER_SAGA_FUNCTION
 export function* postCommentWatcherSaga() {
   yield takeLatest(POST_COMMENT, postCommentSaga);
   yield takeLatest(DELETE_COMMENT, deleteCommentSaga);
   yield takeLatest(LIKE_POST, likePostSaga);
+  yield takeLatest(DELETE_POST, deletePostSaga);
 }
 
 //* REDUCER
@@ -140,6 +171,27 @@ export default function cardDetail(state = {}, action) {
       return {
         ...state,
         error: true,
+      };
+
+    case DELETE_POST:
+      return {
+        ...state,
+      };
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        deletePost: action.payload.result,
+      };
+    case DELETE_POST_FAILURE:
+      return {
+        ...state,
+        error: action.payload.e,
+      };
+
+    case INIT_POST_STATE:
+      return {
+        ...state,
+        deletePost: null,
       };
 
     default:

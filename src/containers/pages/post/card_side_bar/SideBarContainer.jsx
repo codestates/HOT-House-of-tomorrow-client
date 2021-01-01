@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CardSideBar from '../../../../components/pages/post/card_side_bar/CardSideBar';
-import { typeLikePost } from '../../../../modules/pages/post/cardDetail';
+import {
+  typeLikePost,
+  typeDeletePost,
+  typeInitPostState,
+} from '../../../../modules/pages/post/cardDetail';
 
-function SideBarContainer({ card, isAuth }) {
+function SideBarContainer({ card, isAuth, history }) {
+  const { deletePost } = useSelector(({ cardDetail }) => ({
+    deletePost: cardDetail.deletePost,
+  }));
   const dispatch = useDispatch();
 
   const [like, setLike] = useState({
@@ -22,6 +29,18 @@ function SideBarContainer({ card, isAuth }) {
     }
   }, [isAuth]);
 
+  const deleteCardHandler = (postId) => {
+    dispatch(typeDeletePost(postId));
+    dispatch(typeInitPostState());
+  };
+
+  useEffect(() => {
+    if (deletePost) {
+      history.push('/');
+    }
+    dispatch(typeInitPostState());
+  }, [deletePost]);
+
   const onLikeHandler = (postId) => {
     if (like.pressLike === true) {
       dispatch(typeLikePost(postId));
@@ -37,7 +56,13 @@ function SideBarContainer({ card, isAuth }) {
   };
   return (
     <>
-      <CardSideBar card={card} onLikeHandler={onLikeHandler} like={like} />
+      <CardSideBar
+        card={card}
+        onLikeHandler={onLikeHandler}
+        like={like}
+        deleteCardHandler={deleteCardHandler}
+        isAuth={isAuth}
+      />
     </>
   );
 }

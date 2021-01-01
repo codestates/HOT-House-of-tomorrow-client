@@ -83,6 +83,11 @@ const ViewSpan = styled.span`
 
 const ContentsIcon = styled.span`
   cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  color: white;
 `;
 
 const CardBottom = styled.div`
@@ -164,7 +169,7 @@ const LinkTag = styled(Link)`
 `;
 const LikeIcon = styled(AiFillHeart)`
   font-size: 25px;
-  margin-right: 10px;
+  margin-right: 2px;
   fill: ${(props) => (props.like === 'true' ? '#2fd8b7' : 'transparent')};
   stroke: ${(props) => (props.like === 'true' ? '#2fd8b7' : ' #8b8b8b')};
 
@@ -177,6 +182,7 @@ const LikeIcon = styled(AiFillHeart)`
 
 function Card({ element, userLike, onLikeHandler }) {
   const { id, User, view, roomImage, like, comments, description } = element;
+
   const [cardLike, setCardLike] = useState({
     like: null,
     press: false,
@@ -199,18 +205,18 @@ function Card({ element, userLike, onLikeHandler }) {
         });
       }
     }
-  }, [userLike]);
+  }, []);
 
   const pressLikeHandler = (postId) => {
-    onLikeHandler(postId);
     // eslint-disable-next-line no-unused-expressions
     cardLike.press
       ? setCardLike({
           ...cardLike,
           like: cardLike.like - 1,
-          press: !cardLike.press,
+          press: false,
         })
       : setCardLike({ ...cardLike, like: cardLike.like + 1, press: true });
+    onLikeHandler(postId);
   };
 
   const commentList = comments
