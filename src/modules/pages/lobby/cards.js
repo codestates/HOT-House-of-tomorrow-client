@@ -24,9 +24,16 @@ const INITAIAL_CARDS = 'cards/INITAIAL_CARDS';
 // * INITAIAL_CARD
 const INITAIAL_CARD = 'cards/INITAIAL_CARD';
 
+// * INITAIAL_TAG
+const INITAIAL_TAG = 'cards/INITAIAL_TAG';
+
 //* GENERATE_TYPE_FUNCTION
 export const typeGetAllCards = () => ({
   type: GET_ALL_CARDS,
+});
+
+export const typeInitalTag = () => ({
+  type: INITAIAL_TAG,
 });
 
 export const typeGetFilterCards = (
@@ -184,6 +191,7 @@ export default function cards(state = initialState, action) {
     case INITAIAL_CARDS:
       return {
         ...state,
+        currentCards: [],
         query: '',
         currentQuery: {},
         currentQueryTab: [],
@@ -226,6 +234,12 @@ export default function cards(state = initialState, action) {
       return {
         ...state,
         error: action.payload.message,
+      };
+
+    case INITAIAL_TAG:
+      return {
+        ...state,
+        currentTag: {},
       };
     default:
       return state;

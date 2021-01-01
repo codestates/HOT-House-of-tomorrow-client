@@ -34,7 +34,27 @@ const WritePageContainer = ({ history }) => {
     dispatch(typeUploadImage(formData));
   };
 
-  const submitCard = (formData) => {
+  const currentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month =
+      today.getMonth() + 1 >= 10
+        ? today.getMonth() + 1
+        : `0${today.getMonth() + 1}`; // 달
+    const getDate =
+      today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`; // 달
+    const hours =
+      today.getHours() >= 10 ? today.getHours() : `0${today.getHours()}`; // 분
+    const minutes =
+      today.getMinutes() >= 10 ? today.getMinutes() : `0${today.getMinutes()}`; // 분
+    const seconds =
+      today.getSeconds() >= 10 ? today.getSeconds() : `0${today.getSeconds()}`; // 초
+
+    const fullMoment = `${year}-${month}-${getDate}T${hours}:${minutes}:${seconds}`;
+    return fullMoment;
+  };
+
+  const submitCard = () => {
     const data = {
       acreage,
       housingType,
@@ -42,7 +62,7 @@ const WritePageContainer = ({ history }) => {
       description,
       roomImage: url,
       color,
-      date: new Date(),
+      date: currentDate(),
     };
     dispatch(typeWriteCard(data));
   };
@@ -52,7 +72,7 @@ const WritePageContainer = ({ history }) => {
       history.push(`/card_collections/${postId}`);
       dispatch(typeInitUploadCard());
     }
-  }, [postId]);
+  }, [postId, dispatch]);
 
   return (
     <WritePage

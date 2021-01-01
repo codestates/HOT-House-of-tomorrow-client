@@ -10,7 +10,14 @@ const Block = styled.div`
   margin: 0 auto;
   width: 1145px;
 `;
-function PostDetailPage({ options, card, userData, timeDiffToday, isAuth }) {
+function PostDetailPage({
+  options,
+  card,
+  userData,
+  timeDiffToday,
+  isAuth,
+  history,
+}) {
   return (
     <Block>
       {card.postData.id ? (
@@ -21,7 +28,7 @@ function PostDetailPage({ options, card, userData, timeDiffToday, isAuth }) {
             userData={userData}
             timeDiffToday={timeDiffToday}
           />
-          <SideBarContainer card={card} isAuth={isAuth} />
+          <SideBarContainer card={card} isAuth={isAuth} history={history} />
         </>
       ) : null}
     </Block>
