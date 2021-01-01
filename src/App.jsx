@@ -6,7 +6,7 @@ import HeaderContainer from './containers/systems/Header/HeaderContainer';
 import PostDetailContainer from './containers/pages/post/PostDetailContainer';
 import UserPageContainer from './containers/pages/user_page/UserPageContainer';
 import EditContainer from './containers/pages/edit/EditContainer';
-import RootRouter from './routers/RootRouter';
+import WritePageContainer from './containers/pages/write_page/WritePageContainer';
 
 function App() {
   return (
@@ -18,9 +18,9 @@ function App() {
           <Route path="/card_collections/:id" component={PostDetailContainer} />
           <Route path="/users/:id" component={UserPageContainer} />
           <Route path="/edit" component={EditContainer} />
+          <Route exact path="/writing" component={WritePageContainer} />
         </Switch>
       </Router>
-      <RootRouter />
     </div>
   );
 }

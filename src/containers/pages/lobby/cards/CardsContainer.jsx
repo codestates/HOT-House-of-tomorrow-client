@@ -18,9 +18,9 @@ function CardsContainer({ isAuth }) {
 
   useEffect(() => {
     if (userStorage) dispatch(typeGetAllCards());
-  }, [dispatch]);
+  }, []);
 
-  useEffect(() => {}, [currentCards]);
+  useEffect(() => {}, [isAuth]);
 
   const userLike = isAuth
     ? isAuth?.likeposts.split(',').map((e) => Number(e))

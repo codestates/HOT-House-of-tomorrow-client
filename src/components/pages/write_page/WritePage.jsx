@@ -1,9 +1,7 @@
-import axios from 'axios';
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { AiFillCamera } from 'react-icons/ai';
-import { uploadImg } from '../../../api/pages/writing/uploadImg';
 import logoRow from '../../../public/logoRow.png';
 import Selects from './Selects';
 
@@ -165,40 +163,23 @@ const CameraText = styled.span`
   line-height: 20px;
   color: #757575;
 `;
-const Writing = ({ goLobby }) => {
-  const history = useHistory();
-  const [description, setDescription] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
-  const [acreage, setAcreage] = useState('0');
-  const [color, setColor] = useState('0');
-  const [housingType, setHousingType] = useState('0');
-  const [space, setSpace] = useState('0');
+const WritePage = ({
+  goLobby,
+  uploadImage,
+  submitCard,
+  setImage,
+  setDescription,
+  setAcreage,
+  setColor,
+  setHousingType,
+  setSpace,
+  description,
+  acreage,
+  color,
+  housingType,
+  space,
+}) => {
   const [preview, setPreview] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const onSubmit = async () => {
-    if (!selectedFile || loading) {
-      return;
-    }
-    setLoading(true);
-    const formData = new FormData();
-    formData.append('uploadImg', selectedFile);
-    const postId = 0;
-    const imgRes = await uploadImg(formData);
-    const data = {
-      acreage,
-      housingType,
-      space,
-      description,
-      roomImage: imgRes?.data?.imageUrl,
-      color,
-      date: new Date(),
-    };
-    const res = await axios.post('/api/post/write', data);
-    if (res.data.posting) {
-      history.push(`/card_collections/${postId}`);
-    }
-    setLoading(false);
-  };
 
   const onChangeText = (e) => {
     setDescription(e.target.value);
@@ -206,13 +187,15 @@ const Writing = ({ goLobby }) => {
 
   const onSelectFiles = (e) => {
     e.preventDefault();
-    setSelectedFile(e.target.files[0]);
+
+    uploadImage(e.target.files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onloadend = (file) => {
       setPreview(file.target.result);
     };
   };
+
   const onSelectAcreage = (e) => {
     setAcreage(e.target.value);
   };
@@ -249,7 +232,7 @@ const Writing = ({ goLobby }) => {
               <FileInput
                 type="file"
                 multiple
-                name={uploadImg}
+                name="uploadImg"
                 maxLength={1}
                 accept="image/*"
                 onChange={onSelectFiles}
@@ -286,13 +269,11 @@ const Writing = ({ goLobby }) => {
       <Footer>
         <div />
         <FooterBtnWrap>
-          <UploadBtn disabled={loading} onClick={onSubmit}>
-            올리기
-          </UploadBtn>
+          <UploadBtn onClick={submitCard}>올리기</UploadBtn>
         </FooterBtnWrap>
       </Footer>
     </Wrap>
   );
 };
 
-export default Writing;
+export default WritePage;
