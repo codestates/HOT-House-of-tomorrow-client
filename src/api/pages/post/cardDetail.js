@@ -17,7 +17,6 @@ export async function deleteCommentAsync(comment) {
 }
 
 export async function likePostAsync(postId) {
-  console.log(postId);
   const response = await axios.post('/api/lobby/likepost', { postId });
   if (response.data.updateSuccess === false)
     throw new Error(response.data.updateSuccess);

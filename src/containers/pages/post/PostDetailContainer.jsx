@@ -9,8 +9,9 @@ import {
 import { tabList } from '../../../data/lobby/filter_bar/tabList';
 
 function PostContainer({ match }) {
-  const { card } = useSelector(({ cards }) => ({
+  const { card, isAuth } = useSelector(({ cards, authorization }) => ({
     card: cards.card,
+    isAuth: authorization.isAuth,
   }));
 
   const userData = JSON.parse(localStorage.getItem('CURRENT_USER'));
@@ -64,6 +65,7 @@ function PostContainer({ match }) {
         card={card}
         userData={userData}
         timeDiffToday={timeDiffToday}
+        isAuth={isAuth}
       />
     </>
   );

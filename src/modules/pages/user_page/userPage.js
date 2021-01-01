@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as userPageApi from '../../../api/pages/user_page/userPage';
 
 //* CREATE_REQUEST_ACTION_TYPES
@@ -62,7 +62,7 @@ export function* getUserLikesSaga(action) {
 //* WATCHER_SAGA_FUNCTION
 export function* getUserCardsWatcherSaga() {
   yield takeLatest(GET_USER_CARDS, getUserCardsSaga);
-  yield takeLatest(GET_USER_LIKES, getUserLikesSaga);
+  yield takeEvery(GET_USER_LIKES, getUserLikesSaga);
 }
 const initialState = {
   userCards: { getMyPost: false, userPosts: [], userInfo: {} },

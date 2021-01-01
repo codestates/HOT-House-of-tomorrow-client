@@ -120,7 +120,7 @@ function UserPage({ isAuth, goEdit, userPosts, userInfo, likePosts }) {
           {!activeId ? (
             <UserCards userPosts={userPosts} />
           ) : (
-            <UserCards userPosts={likePosts.post} />
+            <UserCards userPosts={likePosts?.post ? likePosts.post : []} />
           )}
         </>
       ) : null}

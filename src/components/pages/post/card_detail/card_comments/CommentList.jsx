@@ -70,7 +70,7 @@ const Footer = styled.footer`
   }
 `;
 
-function CommentList({ comment, timeDiffToday, deleteHandler }) {
+function CommentList({ userData, comment, timeDiffToday, deleteHandler }) {
   const comments =
     comment.length >= 1
       ? comment.map((data) => (
@@ -86,9 +86,11 @@ function CommentList({ comment, timeDiffToday, deleteHandler }) {
               </p>
               <Footer>
                 <span>{timeDiffToday(data.date)}</span>
-                <button type="button" onClick={() => deleteHandler(data.id)}>
-                  삭제
-                </button>
+                {userData?.nickname === data.User.nickname ? (
+                  <button type="button" onClick={() => deleteHandler(data.id)}>
+                    삭제
+                  </button>
+                ) : null}
               </Footer>
             </article>
           </List>

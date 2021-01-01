@@ -28,9 +28,14 @@ function CommentFeedContainer({ comment, userData, timeDiffToday, postId }) {
     event.preventDefault();
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const getDate = today.getDate();
-    const hours = today.getHours(); // 시
+    const month =
+      today.getMonth() + 1 >= 10
+        ? today.getMonth() + 1
+        : `0${today.getMonth() + 1}`; // 달
+    const getDate =
+      today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`; // 달
+    const hours =
+      today.getHours() >= 10 ? today.getHours() : `0${today.getHours()}`; // 분
     const minutes =
       today.getMinutes() >= 10 ? today.getMinutes() : `0${today.getMinutes()}`; // 분
     const seconds =

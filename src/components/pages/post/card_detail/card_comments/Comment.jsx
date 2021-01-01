@@ -112,6 +112,7 @@ function Comments({
           </ButtonBlock>
         </Form>
         <CommentList
+          userData={userData}
           comment={comment}
           timeDiffToday={timeDiffToday}
           deleteHandler={deleteHandler}
