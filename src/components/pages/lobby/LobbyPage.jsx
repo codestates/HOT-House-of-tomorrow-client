@@ -17,14 +17,14 @@ const Block = styled.div`
   z-index: 1;
 `;
 
-function LobbyPage({ showLoginModal }) {
+function LobbyPage({ showLoginModal, isAuth }) {
   // * RENDER
   return (
     <>
       {showLoginModal}
       <Block>
         <FilterBarContainer />
-        <CardsContainer />
+        <CardsContainer isAuth={isAuth} />
       </Block>
     </>
   );

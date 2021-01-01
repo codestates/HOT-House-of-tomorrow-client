@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AiFillHeart } from 'react-icons/ai';
 import { MdModeComment } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { RiFileCopyFill } from 'react-icons/ri';
 
 const CardBlock = styled.div`
   z-index: 1;
@@ -33,7 +34,7 @@ const CardHeader = styled.div`
   img {
     margin-right: 10px;
     width: 30px;
-    border: 3px solid #fcf4f4;
+    border: 3px solid #fcf4f400;
     border-radius: 100%;
   }
 
@@ -41,6 +42,7 @@ const CardHeader = styled.div`
     color: #474747;
     font-weight: 500;
     margin-bottom: 3px;
+    cursor: pointer;
   }
 `;
 const CardContents = styled.div`
@@ -70,12 +72,17 @@ const CardContents = styled.div`
     bottom: 16px;
   }
 
-  span {
-    font-size: 13px;
-    color: #fff;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    font-weight: 500;
-  }
+`;
+
+const ViewSpan = styled.span`
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+`;
+
+const ContentsIcon = styled.span`
+  cursor: pointer;
 `;
 
 const CardBottom = styled.div`
@@ -98,14 +105,6 @@ const CardBottom = styled.div`
     font-size: 12px;
     color: #424242;
   }
-`;
-
-const HeartBtn = styled(AiFillHeart)`
-  fill: transparent;
-  stroke: #424242;
-  stroke-width: 33px;
-  transition: fill 0.1s, stroke 0.1s;
-  font-size: 28px;
 `;
 
 const CommentBtn = styled(MdModeComment)`
@@ -159,8 +158,60 @@ const CommentBlock = styled.div`
     width: 270px;
   }
 `;
-function Card({ element }) {
+
+const LinkTag = styled(Link)`
+  text-decoration: none;
+`;
+const LikeIcon = styled(AiFillHeart)`
+  font-size: 25px;
+  margin-right: 10px;
+  fill: ${(props) => (props.like === 'true' ? '#2fd8b7' : 'transparent')};
+  stroke: ${(props) => (props.like === 'true' ? '#2fd8b7' : ' #8b8b8b')};
+
+  stroke-width: 66.1px;
+  transition: fill 0.1s, stroke 0.1s;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+function Card({ element, userLike, onLikeHandler }) {
   const { id, User, view, roomImage, like, comments, description } = element;
+  const [cardLike, setCardLike] = useState({
+    like: null,
+    press: false,
+  });
+
+  useEffect(() => {
+    setCardLike({
+      ...cardLike,
+      like,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (userLike) {
+      if (userLike.includes(id)) {
+        setCardLike({
+          ...cardLike,
+          like,
+          press: true,
+        });
+      }
+    }
+  }, [userLike]);
+
+  const pressLikeHandler = (postId) => {
+    onLikeHandler(postId);
+    // eslint-disable-next-line no-unused-expressions
+    cardLike.press
+      ? setCardLike({
+          ...cardLike,
+          like: cardLike.like - 1,
+          press: !cardLike.press,
+        })
+      : setCardLike({ ...cardLike, like: cardLike.like + 1, press: true });
+  };
 
   const commentList = comments
     ? comments.map((comment) => (
@@ -178,27 +229,34 @@ function Card({ element }) {
   return (
     <CardBlock>
       <CardHeader>
-        <img src={User.profileImg} alt="profileImage" />
+        <LinkTag to={`users/${User.oAuthId}`}>
+          <img src={User.profileImg} alt="profileImage" />
+        </LinkTag>
         <span>
-          <strong>{User.nickname}</strong>
+          <LinkTag to={`users/${User.oAuthId}`}>
+            <strong>{User.nickname}</strong>
+          </LinkTag>
           <p>{User.introduction}</p>
         </span>
       </CardHeader>
       <CardContents>
         <Link to={`card_collections/${id}`}>
+          <ContentsIcon>
+            <RiFileCopyFill />
+          </ContentsIcon>
           <img src={roomImage} alt="roomImage" />
           <div>
-            <span>
+            <ViewSpan>
               조회수
               {view}
-            </span>
+            </ViewSpan>
           </div>
         </Link>
       </CardContents>
       <CardBottom>
-        <button type="button">
-          <HeartBtn />
-          <span>{like}</span>
+        <button type="button" onClick={() => pressLikeHandler(id)}>
+          <LikeIcon like={String(cardLike.press)} />
+          <span>{cardLike.like}</span>
         </button>
         <button type="button">
           <CommentBtn />

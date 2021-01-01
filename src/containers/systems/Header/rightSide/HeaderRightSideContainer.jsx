@@ -13,20 +13,18 @@ function HeaderRightSideContainer({ history }) {
     setOpenDropDown(!openDropDown);
   };
   const dispatch = useDispatch();
-  const { loginSuccess } = useSelector(({ authorization }) => ({
+  const { isAuth, loginSuccess } = useSelector(({ authorization }) => ({
     loginSuccess: authorization.loginSuccess,
+    isAuth: authorization.isAuth,
   }));
 
   // * ========================
   // *   RIGHT_SIDE_BTN_HANDLER
   // * ========================
 
-  const onProfileHandler = () => {
+  const onProfileHandler = (id) => {
     dropDownHandler();
-    history.push('/mypage');
-  };
-  const onSavedHandler = () => {
-    dropDownHandler();
+    history.push(`/users/${id}`);
   };
   const onSettingHandler = () => {
     dropDownHandler();
@@ -35,6 +33,10 @@ function HeaderRightSideContainer({ history }) {
   const onLogOutHandler = () => {
     dispatch(typeLogOut());
     dropDownHandler();
+  };
+
+  const goMyPageHandler = () => {
+    history.push(`/users/${isAuth.oAuthId}`);
   };
   const goWriting = () => {
     history.push('/writing');
@@ -45,14 +47,15 @@ function HeaderRightSideContainer({ history }) {
   const profileImg = userStorage?.profileImg || 'null';
   let loginModal = (
     <HeaderRightSide
+      isAuth={isAuth}
       openDropDown={openDropDown}
       setOpenDropDown={setOpenDropDown}
       dropDownHandler={dropDownHandler}
       onProfileHandler={onProfileHandler}
-      onSavedHandler={onSavedHandler}
       onSettingHandler={onSettingHandler}
       onLogOutHandler={onLogOutHandler}
       profileImg={profileImg}
+      goMyPageHandler={goMyPageHandler}
       goWriting={goWriting}
     />
   );

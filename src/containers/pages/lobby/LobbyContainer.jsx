@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LobbyPage from '../../../components/pages/lobby/LobbyPage';
@@ -13,8 +14,9 @@ import { typeGetAllCards } from '../../../modules/pages/lobby/cards';
 
 function LobbyContainer() {
   const dispatch = useDispatch();
-  const { loginSuccess } = useSelector(({ authorization }) => ({
+  const { loginSuccess, isAuth } = useSelector(({ authorization }) => ({
     loginSuccess: authorization.loginSuccess,
+    isAuth: authorization.isAuth,
   }));
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
@@ -28,17 +30,18 @@ function LobbyContainer() {
   // * ===================
   // *   USE_EFFECT
   // * ===================
+
   useEffect(() => {
     if (loginSuccess) {
-      dispatch(typeAuthUser());
       dispatch(typeGetAllCards());
     }
-  }, [loginSuccess, dispatch]);
+    dispatch(typeAuthUser());
+  }, [loginSuccess]);
 
   // * ===================
   // *   RENDER
   // * ===================
-  return <LobbyPage showLoginModal={showLoginModal} />;
+  return <LobbyPage showLoginModal={showLoginModal} isAuth={isAuth} />;
 }
 
 export default LobbyContainer;

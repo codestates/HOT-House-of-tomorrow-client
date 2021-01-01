@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import emptyImg from '../../../public/empty-placeholder.png';
+import emptyImg from '../../../../public/empty-placeholder.png';
 
 const Wrap = styled.div`
   display: flex;

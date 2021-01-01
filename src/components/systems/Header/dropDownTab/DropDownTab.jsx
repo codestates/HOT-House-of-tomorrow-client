@@ -7,7 +7,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 const Block = styled.div`
   position: absolute;
   right: 5px;
-  top: 80px;
+  top: 55px;
   z-index: 2;
 `;
 const ListBlock = styled.ul`
@@ -50,6 +50,7 @@ const ListBtn = styled.button`
   }
 `;
 function DropDownTab({
+  isAuth,
   dropDownHandler,
   onProfileHandler,
   onSavedHandler,
@@ -65,15 +66,12 @@ function DropDownTab({
       >
         <ListBlock>
           <li>
-            <ListBtn type="button" onClick={onProfileHandler}>
+            <ListBtn
+              type="button"
+              onClick={() => onProfileHandler(isAuth.oAuthId)}
+            >
               <BsPeopleCircle />
               <strong>프로필</strong>
-            </ListBtn>
-          </li>
-          <li>
-            <ListBtn type="button" onClick={onSavedHandler}>
-              <BsHeart />
-              <strong>저장됨</strong>
             </ListBtn>
           </li>
           <li>

@@ -163,7 +163,7 @@ function CardSideInfo({ card, onLikeHandler, like }) {
       </BtnBlock>
       <UserInfoBlock>
         <div>
-          <Link to={`card_collections/${card.UserAnotherPosts[0].id}`}>
+          <Link to={`/users/${card.postData.userId}`}>
             <img src={card.postData.User.profileImg} alt="profile_image" />
             <span>{card.postData.User.nickname}</span>
           </Link>
