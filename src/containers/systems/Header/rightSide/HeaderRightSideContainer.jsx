@@ -30,12 +30,15 @@ function HeaderRightSideContainer({ history }) {
   };
   const onSettingHandler = () => {
     dropDownHandler();
+    history.push('/edit');
   };
   const onLogOutHandler = () => {
     dispatch(typeLogOut());
     dropDownHandler();
   };
-
+  const goWriting = () => {
+    history.push('/writing');
+  };
   useEffect(() => {}, [loginSuccess]);
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
@@ -50,6 +53,7 @@ function HeaderRightSideContainer({ history }) {
       onSettingHandler={onSettingHandler}
       onLogOutHandler={onLogOutHandler}
       profileImg={profileImg}
+      goWriting={goWriting}
     />
   );
   if (!userStorage) {
