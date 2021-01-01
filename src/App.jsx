@@ -6,6 +6,7 @@ import HeaderContainer from './containers/systems/Header/HeaderContainer';
 import PostDetailContainer from './containers/pages/post/PostDetailContainer';
 import UserPageContainer from './containers/pages/user_page/UserPageContainer';
 import EditContainer from './containers/pages/edit/EditContainer';
+import RootRouter from './routers/RootRouter';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/edit" component={EditContainer} />
         </Switch>
       </Router>
+      <RootRouter />
     </div>
   );
 }

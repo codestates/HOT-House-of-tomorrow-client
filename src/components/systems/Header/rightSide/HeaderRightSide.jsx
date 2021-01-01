@@ -50,10 +50,14 @@ function HeaderRightSide({
   onLogOutHandler,
   profileImg,
   goMyPageHandler,
+  goWriting,
 }) {
   return (
     <>
       <RightBlock>
+        <HeaderNavBtn type="button" onClick={goWriting}>
+          <Writing />
+        </HeaderNavBtn>
         <HeaderNavBtn type="button" onClick={dropDownHandler}>
           <Menu />
         </HeaderNavBtn>

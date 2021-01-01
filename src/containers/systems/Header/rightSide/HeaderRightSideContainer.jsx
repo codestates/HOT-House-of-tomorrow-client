@@ -28,6 +28,7 @@ function HeaderRightSideContainer({ history }) {
   };
   const onSettingHandler = () => {
     dropDownHandler();
+    history.push('/edit');
   };
   const onLogOutHandler = () => {
     dispatch(typeLogOut());
@@ -37,7 +38,9 @@ function HeaderRightSideContainer({ history }) {
   const goMyPageHandler = () => {
     history.push(`/users/${isAuth.oAuthId}`);
   };
-
+  const goWriting = () => {
+    history.push('/writing');
+  };
   useEffect(() => {}, [loginSuccess]);
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
@@ -53,6 +56,7 @@ function HeaderRightSideContainer({ history }) {
       onLogOutHandler={onLogOutHandler}
       profileImg={profileImg}
       goMyPageHandler={goMyPageHandler}
+      goWriting={goWriting}
     />
   );
   if (!userStorage) {
