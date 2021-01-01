@@ -61,6 +61,7 @@ function SideBarContainer({ card, isAuth, history }) {
         onLikeHandler={onLikeHandler}
         like={like}
         deleteCardHandler={deleteCardHandler}
+        isAuth={isAuth}
       />
     </>
   );

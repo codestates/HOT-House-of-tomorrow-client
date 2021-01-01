@@ -130,7 +130,13 @@ const EmptyBlock = styled.div`
   height: 145px;
 `;
 
-function CardSideInfo({ card, onLikeHandler, like, deleteCardHandler }) {
+function CardSideInfo({
+  card,
+  onLikeHandler,
+  like,
+  deleteCardHandler,
+  isAuth,
+}) {
   const renderSwitch = (ele, param) => {
     switch ((ele, param)) {
       case 0:
@@ -164,12 +170,14 @@ function CardSideInfo({ card, onLikeHandler, like, deleteCardHandler }) {
           <Like like={String(like.pressLike)} />
           <span>{like.likes}</span>
         </button>
-        <button
-          type="button"
-          onClick={() => deleteCardHandler(card.postData.id)}
-        >
-          <span>게시물 삭제</span>
-        </button>
+        {isAuth.oAuthId === card.postData.userId ? (
+          <button
+            type="button"
+            onClick={() => deleteCardHandler(card.postData.id)}
+          >
+            <span>게시물 삭제</span>
+          </button>
+        ) : null}
       </BtnBlock>
       <UserInfoBlock>
         <div>
