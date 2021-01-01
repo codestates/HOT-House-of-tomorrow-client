@@ -182,12 +182,8 @@ const Writing = ({ goLobby }) => {
     setLoading(true);
     const formData = new FormData();
     formData.append('uploadImg', selectedFile);
-    const postId = Math.floor(Math.random() * 100_000);
-    const imgRes = await uploadImg({
-      postId,
-      file: formData,
-    });
-
+    const postId = 0;
+    const imgRes = await uploadImg(formData);
     const data = {
       acreage,
       housingType,
@@ -253,6 +249,7 @@ const Writing = ({ goLobby }) => {
               <FileInput
                 type="file"
                 multiple
+                name={uploadImg}
                 maxLength={1}
                 accept="image/*"
                 onChange={onSelectFiles}

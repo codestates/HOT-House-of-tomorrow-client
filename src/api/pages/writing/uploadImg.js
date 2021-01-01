@@ -2,7 +2,9 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-export async function uploadImg({ postId, file }) {
-  const res = await axios.post(`/api/utils/uploadimg?postId${postId}`, file);
+export async function uploadImg(data) {
+  const res = await axios.post(`api/utils/uploadimg`, data, {
+    header: { 'content-type': 'multipart/form-data' },
+  });
   return res;
 }
