@@ -197,7 +197,6 @@ function Card({ element, userLike, onLikeHandler }) {
 
   useEffect(() => {
     if (userLike) {
-      console.log(userLike, id);
       if (userLike.includes(id)) {
         setCardLike({
           ...cardLike,

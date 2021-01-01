@@ -25,7 +25,6 @@ export async function likePostAsync(postId) {
 
 export async function deletePostAsync(postId) {
   const response = await axios.post('/api/post/delete', { postId });
-  console.log(response);
   if (response.data.postDeleted === false)
     throw new Error(`postDeleted : ${response.data.postDeleted}`);
   return response.data.postDeleted;
