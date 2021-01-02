@@ -16,12 +16,12 @@ const HeaderNavBtn = styled.button`
   margin-right: 10px;
   overflow: hidden;
   border-radius: 100%;
-
-  width: 38px;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px;
   outline: none;
 
   &:hover {
@@ -37,9 +37,9 @@ const Menu = styled(CgMenuGridO)`
   }
 `;
 const ProfileImg = styled.img`
-  width: 100%;
-  overflow: hidden;
   border-radius: 100%;
+  width: 30px;
+  height: 30px;
 `;
 
 const WriteBtn = styled.button`

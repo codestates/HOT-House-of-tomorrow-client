@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WritePage from '../../../components/pages/write_page/WritePage';
@@ -14,8 +12,6 @@ const WritePageContainer = ({ history }) => {
     url: writeCard.url,
     postId: writeCard.uploadCard.postId,
   }));
-
-  const [image, setImage] = useState('');
 
   const [description, setDescription] = useState('');
   const [acreage, setAcreage] = useState('0');
@@ -79,7 +75,6 @@ const WritePageContainer = ({ history }) => {
       goLobby={goLobby}
       uploadImage={uploadImage}
       submitCard={submitCard}
-      setImage={setImage}
       setDescription={setDescription}
       setAcreage={setAcreage}
       setColor={setColor}
