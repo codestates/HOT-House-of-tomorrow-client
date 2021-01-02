@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -45,23 +46,29 @@ const SubTiltle = styled.span`
 `;
 const InputWrap = styled.div`
   padding-top: 30px;
-`;
-const EditInput = styled.input`
-  box-sizing: border-box;
-  height: 40px;
-  width: 400px;
-  padding: 0 15px;
-  line-height: 40px;
-  border-radius: 4px;
-  border: solid 1px #dbdbdb;
-  background-color: #ffffff;
-  color: #424242;
-  font-size: 15px;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(130, 224, 250, 0.5);
+  input {
+    box-sizing: border-box;
+    height: 40px;
+    width: 400px;
+    padding: 0 15px;
+    line-height: 40px;
+    border-radius: 4px;
+    border: solid 1px #dbdbdb;
+    background-color: #ffffff;
+    color: #424242;
+    font-size: 15px;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(130, 224, 250, 0.5);
+    }
+  }
+  span {
+    padding: 10px 20px;
+    background: #efefef;
+    border-radius: 3px;
   }
 `;
+
 const EditImgTitle = styled.span`
   padding-top: 30px;
   width: 100px;
@@ -107,7 +114,16 @@ const EditButton = styled.button`
     background-color: #09addb;
   }
 `;
-function Edit() {
+function Edit({
+  email,
+  nickname,
+  setNickname,
+  img,
+  setImg,
+  introduction,
+  setIntroduction,
+  onUpldateInfo,
+}) {
   return (
     <Wrap>
       <EditWrap>
@@ -116,10 +132,10 @@ function Edit() {
           <EditTitle>
             이메일
             <br />
-            <SubTiltle>* 필수항목</SubTiltle>
+            <SubTiltle>* 변경불가</SubTiltle>
           </EditTitle>
           <InputWrap>
-            <EditInput />
+            <span>{email || ''}</span>
           </InputWrap>
         </EditRow>
         <EditRow>
@@ -129,19 +145,12 @@ function Edit() {
             <SubTiltle>* 필수항목</SubTiltle>
           </EditTitle>
           <InputWrap>
-            <EditInput />
-          </InputWrap>
-        </EditRow>
-        <EditRow>
-          <EditTitle>홈페이지</EditTitle>
-          <InputWrap>
-            <EditInput />
-          </InputWrap>
-        </EditRow>
-        <EditRow>
-          <EditTitle>생년월일</EditTitle>
-          <InputWrap>
-            <EditInput />
+            <input
+              value={nickname || ''}
+              onChange={(e) => {
+                setNickname(e.target.value);
+              }}
+            />
           </InputWrap>
         </EditRow>
         <EditRow>
@@ -153,10 +162,15 @@ function Edit() {
         <EditRow>
           <EditTitle>한줄 소개</EditTitle>
           <InputWrap>
-            <EditInput />
+            <input
+              value={introduction || ''}
+              onChange={(e) => {
+                setIntroduction(e.target.value);
+              }}
+            />
           </InputWrap>
         </EditRow>
-        <EditButton>회원 정보 수정</EditButton>
+        <EditButton onClick={onUpldateInfo}>회원 정보 수정</EditButton>
       </EditWrap>
     </Wrap>
   );
