@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { AiFillCamera } from 'react-icons/ai';
 
 const Wrap = styled.div`
   display: flex;
@@ -29,6 +29,7 @@ const Title = styled.span`
 `;
 const EditRow = styled.div`
   display: flex;
+  margin-bottom: 25px;
 `;
 const EditTitle = styled.span`
   padding-top: 30px;
@@ -79,13 +80,7 @@ const EditImgTitle = styled.span`
   position: relative;
   top: 10px;
 `;
-const ImgWrap = styled.div`
-  padding-top: 30px;
-`;
-const Img = styled.button`
-  width: 200px;
-  height: 200px;
-`;
+
 const EditButton = styled.button`
   margin: 50px 0 0 100px;
   width: 290px;
@@ -114,16 +109,69 @@ const EditButton = styled.button`
     background-color: #09addb;
   }
 `;
+
+const BtnWrap = styled.div`
+  flex: 1;
+`;
+const FileLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: opacity 0.1s;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-color: ${(props) => (props.isPreview ? '#fff' : '#f5f5f5')};
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+const PreviewImg = styled.img`
+  max-width: 300px;
+  border-radius: 8px;
+`;
+const CameraIconWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+const CameraIcon = styled.div`
+  font-size: 60px;
+  color: #757575;
+`;
+const CameraText = styled.span`
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #757575;
+`;
+
 function Edit({
   email,
   nickname,
   setNickname,
-  img,
-  setImg,
   introduction,
   setIntroduction,
-  onUpldateInfo,
+  onUpdateInfo,
+  uploadImage,
 }) {
+  const [preview, setPreview] = useState(null);
+  const onSelectFiles = (e) => {
+    e.preventDefault();
+
+    uploadImage(e.target.files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onloadend = (file) => {
+      setPreview(file.target.result);
+    };
+  };
   return (
     <Wrap>
       <EditWrap>
@@ -155,9 +203,28 @@ function Edit({
         </EditRow>
         <EditRow>
           <EditImgTitle>프로필 이미지</EditImgTitle>
-          <ImgWrap>
-            <Img />
-          </ImgWrap>
+          <BtnWrap>
+            <FileLabel isPreview={!!preview}>
+              <FileInput
+                type="file"
+                multiple
+                name="uploadImg"
+                maxLength={1}
+                accept="image/*"
+                onChange={onSelectFiles}
+              />
+              {preview ? (
+                <PreviewImg src={preview} alt="" />
+              ) : (
+                <CameraIconWrap>
+                  <CameraIcon>
+                    <AiFillCamera />
+                  </CameraIcon>
+                  <CameraText>사진 올리기</CameraText>
+                </CameraIconWrap>
+              )}
+            </FileLabel>
+          </BtnWrap>
         </EditRow>
         <EditRow>
           <EditTitle>한줄 소개</EditTitle>
@@ -170,7 +237,7 @@ function Edit({
             />
           </InputWrap>
         </EditRow>
-        <EditButton onClick={onUpldateInfo}>회원 정보 수정</EditButton>
+        <EditButton onClick={onUpdateInfo}>회원 정보 수정</EditButton>
       </EditWrap>
     </Wrap>
   );

@@ -8,10 +8,13 @@ const GET_USER_INFO = 'userEdit/GET_USER_INFO';
 const GET_USER_INFO_SUCCESS = 'userEdit/GET_USER_INFO_SUCCESS';
 const GET_USER_INFO_FAILURE = 'userEdit/GET_USER_INFO_FAILURE';
 
-//* AUTH_USER
+//* POST_UPDATE_USER_INFO
 const POST_UPDATE_USER_INFO = 'userEdit/POST_UPDATE_USER_INFO';
 const POST_UPDATE_USER_INFO_SUCCESS = 'userEdit/POST_UPDATE_USER_INFO_SUCCESS';
 const POST_UPDATE_USER_INFO_FAILURE = 'userEdit/POST_UPDATE_USER_INFO_FAILURE';
+
+//* INIT_UPDATE_INFO
+const INIT_UPDATE_INFO = 'userEdit/INIT_UPDATE_INFO';
 
 //* GENERATE_TYPE_FUNCTION
 export const typeGetUserInfo = () => ({
@@ -20,6 +23,11 @@ export const typeGetUserInfo = () => ({
 
 export const typeUpdateUserInfo = (data) => ({
   type: POST_UPDATE_USER_INFO,
+  payload: data,
+});
+
+export const typeInitUpdateInfo = (data) => ({
+  type: INIT_UPDATE_INFO,
   payload: data,
 });
 
@@ -96,6 +104,12 @@ export default function userEdit(state = initialState, action) {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case INIT_UPDATE_INFO:
+      return {
+        ...state,
+        update: {},
       };
 
     default:

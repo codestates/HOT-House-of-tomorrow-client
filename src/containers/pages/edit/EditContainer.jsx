@@ -1,16 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Edit from '../../../components/systems/edit/Edit';
+import Edit from '../../../components/pages/edit/Edit';
 import {
   typeGetUserInfo,
   typeUpdateUserInfo,
+  typeInitUpdateInfo,
 } from '../../../modules/pages/edit/userEdit';
+import { typeUploadImage } from '../../../modules/pages/write_page/wrtiePage';
 
-const EditContainer = () => {
+const EditContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { info } = useSelector(({ userEdit }) => ({
+  const { info, update, url } = useSelector(({ userEdit, writeCard }) => ({
     info: userEdit.info,
+    url: writeCard.url,
+    update: userEdit.update,
   }));
 
   const [nickname, setNickname] = useState('');
@@ -26,15 +30,27 @@ const EditContainer = () => {
     setIntroduction(info.introduction);
   }, [info]);
 
-  const onUpldateInfo = () => {
+  const uploadImage = (imageFormData) => {
+    const formData = new FormData();
+    formData.append('uploadImg', imageFormData);
+    dispatch(typeUploadImage(formData));
+  };
+
+  const onUpdateInfo = () => {
     const data = {
       nickname,
-      profileImg: img,
+      profileImg: url,
       introduction,
     };
-    console.log(data);
     dispatch(typeUpdateUserInfo(data));
   };
+
+  useEffect(() => {
+    if (update?.updateSuccess) {
+      dispatch(typeInitUpdateInfo());
+      history.push('/');
+    }
+  }, [update]);
 
   return (
     <>
@@ -46,7 +62,8 @@ const EditContainer = () => {
         setImg={setImg}
         introduction={introduction}
         setIntroduction={setIntroduction}
-        onUpldateInfo={onUpldateInfo}
+        onUpdateInfo={onUpdateInfo}
+        uploadImage={uploadImage}
       />
     </>
   );
