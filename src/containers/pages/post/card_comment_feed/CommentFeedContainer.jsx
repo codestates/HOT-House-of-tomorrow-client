@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Comment from '../../../../components/pages/post/card_detail/card_comments/Comment';
+import Comment from '../../../../components/pages/post_detail/card_detail/card_comments/Comment';
 import {
   typePostComment,
   typeDeleteComment,

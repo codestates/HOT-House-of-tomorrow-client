@@ -13,7 +13,7 @@ const Block = styled.div`
 const Like = styled(AiFillHeart)`
   font-size: 20px;
   margin-right: 10px;
-  fill: ${(props) => (props.like === 'true' ? '#2fd8b7' : 'transparent')};
+  fill: ${(props) => (props.like === 'true' ? 'white' : 'transparent')};
   stroke: ${(props) => (props.like === 'true' ? '#2fd8b7' : ' #8b8b8b')};
 
   stroke-width: 66.1px;
@@ -26,25 +26,54 @@ const Like = styled(AiFillHeart)`
 const BtnBlock = styled.div`
   margin-bottom: 40px;
   display: flex;
-  button {
-    cursor: pointer;
-    background-color: #f5f5f5;
-    border: none;
-    width: 140px;
-    margin-right: 8px;
-    height: 45px;
-    padding: 7px 8px;
-    border-radius: 10px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    &:focus {
-      outline: none;
-    }
-    span {
-      font-size: 15px;
-      color: #444444;
-    }
+  flex-wrap: wrap;
+
+  span {
+    font-size: 15px;
+    color: #444444;
+  }
+`;
+
+const EditOrDeleteBtn = styled.button`
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  border: none;
+  width: 140px;
+  margin-right: 8px;
+  height: 45px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const LikeBtn = styled.button`
+  background: #2fd8b7;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: none;
+  width: 140px;
+  margin-right: 8px;
+  height: 45px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  &:focus {
+    outline: none;
+  }
+  svg {
+    stroke: #ffffff;
+  }
+  span {
+    color: white;
+    font-weight: 500;
   }
 `;
 
@@ -166,18 +195,26 @@ function CardSideInfo({
   return (
     <Block>
       <BtnBlock>
-        <button type="button" onClick={() => onLikeHandler(card.postData.id)}>
-          <Like like={String(like.pressLike)} />
-          <span>{like.likes}</span>
-        </button>
         {isAuth.oAuthId === card.postData.userId ? (
-          <button
+          <EditOrDeleteBtn
+            type="button"
+            onClick={() => deleteCardHandler(card.postData.id)}
+          >
+            <span>게시물 수정</span>
+          </EditOrDeleteBtn>
+        ) : null}
+        {isAuth.oAuthId === card.postData.userId ? (
+          <EditOrDeleteBtn
             type="button"
             onClick={() => deleteCardHandler(card.postData.id)}
           >
             <span>게시물 삭제</span>
-          </button>
+          </EditOrDeleteBtn>
         ) : null}
+        <LikeBtn type="button" onClick={() => onLikeHandler(card.postData.id)}>
+          <Like like={String(like.pressLike)} />
+          <span>{like.likes}</span>
+        </LikeBtn>
       </BtnBlock>
       <UserInfoBlock>
         <div>
