@@ -95,7 +95,7 @@ const PostEditContainer = ({ match, history }) => {
     }
   }, [postId, dispatch]);
 
-  return result.postData ? (
+  return result?.postData ? (
     <PostEditPage
       goLobby={goLobby}
       uploadImage={uploadImage}

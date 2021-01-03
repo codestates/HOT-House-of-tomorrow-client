@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CardDetail from './card_detail/CardDetail';
-import SideBarContainer from '../../../containers/pages/post/card_side_bar/SideBarContainer';
+import SideBarContainer from '../../../containers/pages/post_detail/card_side_bar/SideBarContainer';
 
 const Block = styled.div`
   top: 60px;
