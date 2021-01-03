@@ -19,12 +19,13 @@ const buttonBlock = {
   padding: '13px 5px',
   width: '100%',
   marginBottom: '5px',
+  outline: 'none',
 };
 
 const ButtoninnerText = styled.h3`
   margin: 0;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
 `;
 
