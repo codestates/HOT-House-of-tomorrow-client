@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PostDetailPage from '../../../components/pages/post/PostDetailPage';
+import PostDetailPage from '../../../components/pages/post_detail/PostDetailPage';
 import {
   typeGetCard,
   typeInitialCard,

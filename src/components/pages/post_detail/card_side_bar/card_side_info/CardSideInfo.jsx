@@ -159,6 +159,10 @@ const EmptyBlock = styled.div`
   height: 145px;
 `;
 
+const A = styled(Link)`
+  text-decoration: none;
+`;
+
 function CardSideInfo({
   card,
   onLikeHandler,
@@ -196,12 +200,11 @@ function CardSideInfo({
     <Block>
       <BtnBlock>
         {isAuth.oAuthId === card.postData.userId ? (
-          <EditOrDeleteBtn
-            type="button"
-            onClick={() => deleteCardHandler(card.postData.id)}
-          >
-            <span>게시물 수정</span>
-          </EditOrDeleteBtn>
+          <A to={`/edit_card/${card.postData.id}`}>
+            <EditOrDeleteBtn>
+              <span>게시물 수정</span>
+            </EditOrDeleteBtn>
+          </A>
         ) : null}
         {isAuth.oAuthId === card.postData.userId ? (
           <EditOrDeleteBtn

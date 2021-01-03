@@ -140,9 +140,6 @@ const UploadBtn = styled.button`
     cursor: default;
     background-color: #ddd;
   }
-  &:focus {
-    outline: none;
-  }
 `;
 const FileInput = styled.input`
   display: none;
@@ -218,7 +215,7 @@ const WritePage = ({
         <Logo src={logoRow} onClick={goLobby} />
       </LogoWrap>
       <BodyWrap>
-        <Title>사진 올리기</Title>
+        <Title>사진 수정</Title>
         <SelectWrap>
           <Selects
             onSelectColor={onSelectColor}

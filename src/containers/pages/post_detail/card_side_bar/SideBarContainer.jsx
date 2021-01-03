@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CardSideBar from '../../../../components/pages/post/card_side_bar/CardSideBar';
+import CardSideBar from '../../../../components/pages/post_detail/card_side_bar/CardSideBar';
 import {
   typeLikePost,
   typeDeletePost,

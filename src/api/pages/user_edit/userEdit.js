@@ -7,7 +7,6 @@ export async function getUserInfoAsync() {
 }
 
 export async function postUserUpdateAsync(data) {
-  const response = await axios.post('/api/auth/updateuser', { data });
-  console.log(response);
+  const response = await axios.post('/api/auth/updateuser', data);
   return response.data;
 }
