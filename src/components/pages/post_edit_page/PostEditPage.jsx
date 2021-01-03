@@ -151,22 +151,13 @@ const PreviewImg = styled.img`
   max-width: 436px;
   border-radius: 8px;
 `;
-const CameraIconWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+
+const BeforeImg = styled.div`
+  img {
+    width: 500px;
+  }
 `;
-const CameraIcon = styled.div`
-  font-size: 60px;
-  color: #757575;
-`;
-const CameraText = styled.span`
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 20px;
-  color: #757575;
-`;
-const WritePage = ({
+const PostEditPage = ({
   goLobby,
   uploadImage,
   submitCard,
@@ -181,6 +172,7 @@ const WritePage = ({
   color,
   housingType,
   space,
+  img,
 }) => {
   const [preview, setPreview] = useState(null);
 
@@ -218,7 +210,7 @@ const WritePage = ({
         <Logo src={logoRow} onClick={goLobby} />
       </LogoWrap>
       <BodyWrap>
-        <Title>사진 올리기</Title>
+        <Title>사진 수정</Title>
         <SelectWrap>
           <Selects
             onSelectColor={onSelectColor}
@@ -243,12 +235,9 @@ const WritePage = ({
               {preview ? (
                 <PreviewImg src={preview} alt="" />
               ) : (
-                <CameraIconWrap>
-                  <CameraIcon>
-                    <AiFillCamera />
-                  </CameraIcon>
-                  <CameraText>사진 올리기</CameraText>
-                </CameraIconWrap>
+                <BeforeImg>
+                  <img src={img} alt="roomImage" />
+                </BeforeImg>
               )}
             </FileLabel>
           </BtnWrap>
@@ -279,4 +268,4 @@ const WritePage = ({
   );
 };
 
-export default WritePage;
+export default PostEditPage;
