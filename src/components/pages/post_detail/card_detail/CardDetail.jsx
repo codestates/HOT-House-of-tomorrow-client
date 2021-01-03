@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import CommentFeedContainer from '../../../../containers/pages/post/card_comment_feed/CommentFeedContainer';
+import CommentFeedContainer from '../../../../containers/pages/post_detail/card_comment_feed/CommentFeedContainer';
 import CardHeader from './card_header/CardHeader';
 import CardDescription from './card_description/CardDescription';
 import CardFooter from './card_footer/CardFooter';
