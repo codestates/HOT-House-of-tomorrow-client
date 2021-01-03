@@ -45,7 +45,7 @@ const KakaoLogin = ({ socialLogin }) => {
   return (
     <>
       <KaKaoLogin
-        token="f9574a6bd6ae74f082dde7b437f6abd1"
+        token="dbffe5ff113e509cae44af75348b8c55"
         onSuccess={responseKakao}
         // eslint-disable-next-line no-console
         onFail={console.error}
