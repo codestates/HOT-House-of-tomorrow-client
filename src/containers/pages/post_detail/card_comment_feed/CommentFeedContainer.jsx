@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
