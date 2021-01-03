@@ -7,7 +7,7 @@ export async function uploadImageAsync(data) {
     return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
   };
   const res = await axios.post(
-    `/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
+    `http://3.140.150.124:5000/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
     data,
     {
       header: { 'content-type': 'multipart/form-data' },
@@ -17,6 +17,9 @@ export async function uploadImageAsync(data) {
 }
 
 export async function writeCardAsync(formData) {
-  const res = await axios.post('/api/post/write', formData);
+  const res = await axios.post(
+    'http://3.140.150.124:5000/api/post/write',
+    formData
+  );
   return res.data;
 }
