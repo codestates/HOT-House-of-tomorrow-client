@@ -37,8 +37,8 @@ function LobbyContainer() {
   useEffect(() => {
     if (loginSuccess) {
       dispatch(typeGetAllCards());
+      dispatch(typeAuthUser());
     }
-    dispatch(typeAuthUser());
   }, [loginSuccess]);
 
   useEffect(() => {

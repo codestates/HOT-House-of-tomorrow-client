@@ -53,7 +53,7 @@ const RightInnerBlock = styled.div`
   margin: 0 auto;
   position: relative;
   height: 85px;
-  top: 85px;
+  top: 115px;
 
   img {
     margin-bottom: 5px;

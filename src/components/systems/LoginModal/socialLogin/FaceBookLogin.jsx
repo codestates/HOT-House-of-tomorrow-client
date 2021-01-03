@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import KaKaoLogin from 'react-kakao-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 // TODO =====================
 // TODO   FACE_BOOK(CP)
 // TODO =====================
 
-const buttonBlock = {
-  border: '2px solid white',
-  borderRadius: '8px',
-  fontSize: '17px',
-  color: 'white',
-  cursor: 'pointer',
-  background: '#227bef',
-  justifyContent: 'center',
-  padding: '13px 5px',
-  width: '100%',
-  marginBottom: '5px',
-};
+const ButtonBlock = styled.button`
+  font-size: 17px;
+  padding: 13px 5px;
+  background: #3779e5;
+  width: 99%;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  &:focus {
+    outline: none;
+  }
+`;
 
 const ButtoninnerText = styled.h3`
   margin: 0;
@@ -26,27 +27,26 @@ const ButtoninnerText = styled.h3`
   cursor: pointer;
 `;
 
-const FaceBookLogin = ({ oAuthLoginHandler }) => {
+const FaceBookLogin = ({ socialLogin }) => {
   const responseKakao = (response) => {
-    const { id } = response.profile;
-    const { email } = response.profile.kakao_account;
-    oAuthLoginHandler(id, email);
+    const userData = {
+      oAuthId: Number(response.id.substring(0, 7)),
+      email: response.email,
+    };
+    socialLogin(userData);
   };
   return (
-    <>
-      <KaKaoLogin
-        token={process.env.REACT_APP_KAKAO_APP_KEY}
-        buttonText="kakao"
-        onSuccess={responseKakao}
-        // eslint-disable-next-line no-console
-        onFail={console.error}
-        // eslint-disable-next-line no-console
-        onLogout={console.info}
-        style={buttonBlock}
-      >
-        <ButtoninnerText>FaceBook 계정으로 로그인</ButtoninnerText>
-      </KaKaoLogin>
-    </>
+    <FacebookLogin
+      appId="3877367725661613"
+      autoLoad={false}
+      fields="name,email,picture"
+      callback={responseKakao}
+      render={(renderProps) => (
+        <ButtonBlock type="button" onClick={renderProps.onClick}>
+          <ButtoninnerText>페이스북 계정으로 로그인</ButtoninnerText>
+        </ButtonBlock>
+      )}
+    />
   );
 };
 export default FaceBookLogin;

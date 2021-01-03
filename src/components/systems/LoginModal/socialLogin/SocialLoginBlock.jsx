@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import KakaoLogin from './KakaoLogin';
 import FaceBookLogin from './FaceBookLogin';
-import NaverLogin from './NaverLogin';
 
 //* STYLED_COMPONENTS
 const Block = styled.div`
@@ -18,8 +17,7 @@ function SocialLoginBlock({ socialLogin }) {
   return (
     <Block>
       <KakaoLogin socialLogin={socialLogin} />
-      <FaceBookLogin />
-      <NaverLogin />
+      <FaceBookLogin socialLogin={socialLogin} />
     </Block>
   );
 }
