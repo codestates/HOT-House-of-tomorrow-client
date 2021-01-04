@@ -31,8 +31,10 @@ function HeaderRightSideContainer({ history }) {
     history.push('/edit');
   };
   const onLogOutHandler = () => {
+    localStorage.removeItem('CURRENT_USER');
     dispatch(typeLogOut());
     dropDownHandler();
+    history.push('/');
   };
 
   const goMyPageHandler = () => {

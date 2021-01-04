@@ -5,7 +5,7 @@
 //   app.use(
 //     '/api',
 //     createProxyMiddleware({
-//       target: 'http://3.140.150.124:5000',
+//       target: 'http://localhost:5000/',
 //       changeOrigin: true,
 //     })
 //   );

@@ -137,6 +137,7 @@ const CommentlI = styled.li`
 
   img {
     margin-right: 5px;
+    height: 20px;
     width: 20px;
     border: 3px solid #fcf4f4;
     border-radius: 100%;

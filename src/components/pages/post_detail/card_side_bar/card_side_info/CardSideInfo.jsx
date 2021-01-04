@@ -199,14 +199,14 @@ function CardSideInfo({
   return (
     <Block>
       <BtnBlock>
-        {isAuth.oAuthId === card.postData.userId ? (
+        {isAuth?.oAuthId === card.postData.userId ? (
           <A to={`/edit_card/${card.postData.id}`}>
             <EditOrDeleteBtn>
               <span>게시물 수정</span>
             </EditOrDeleteBtn>
           </A>
         ) : null}
-        {isAuth.oAuthId === card.postData.userId ? (
+        {isAuth?.oAuthId === card.postData.userId ? (
           <EditOrDeleteBtn
             type="button"
             onClick={() => deleteCardHandler(card.postData.id)}
