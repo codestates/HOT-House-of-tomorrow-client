@@ -42,7 +42,6 @@ export async function getFilterdCardsAsync(options) {
   });
   currentTag[currentTab] = tag;
   const query = stringQuery.join('');
-
   const { data } = await axios.get(
     `http://3.140.150.124:5000/api/lobby/filter/?${query}`
   );

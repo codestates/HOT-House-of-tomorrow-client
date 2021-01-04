@@ -15,8 +15,6 @@ const LOGIN_USER_FAILURE = 'userAuthorization/LOGIN_USER_FAILURE';
 
 //* LOG_OUT_USER
 const LOG_OUT_USER = 'userAuthorization/LOG_OUT_USER';
-const LOG_OUT_USER_SUCCESS = 'userAuthorization/LOG_OUT_USER_SUCCESS';
-const LOG_OUT_USER_FAILURE = 'userAuthorization/LOG_OUT_USER_FAILURE';
 
 //* GENERATE_TYPE_FUNCTION
 export const typeAuthUser = () => ({
@@ -59,26 +57,11 @@ export function* loginSaga(action) {
     });
   }
 }
-export function* logOutSaga(action) {
-  try {
-    const loginRusult = yield call(loginApi.logOutAsync, action.payload);
-    yield put({
-      type: LOG_OUT_USER_SUCCESS,
-      payload: loginRusult,
-    });
-  } catch (e) {
-    yield put({
-      type: LOG_OUT_USER_FAILURE,
-      payload: e,
-    });
-  }
-}
 
 //* WATCHER_SAGA_FUNCTION
 export function* userAuthorizationSaga() {
   yield takeLatest(AUTH_USER, authSaga);
   yield takeLatest(LOGIN_USER, loginSaga);
-  yield takeLatest(LOG_OUT_USER, logOutSaga);
 }
 
 //* REDUCER
@@ -132,19 +115,8 @@ export default function authorization(state = {}, action) {
     case LOG_OUT_USER:
       return {
         ...state,
-      };
-    case LOG_OUT_USER_SUCCESS:
-      return {
-        ...state,
-        logout: action.payload.logout,
-        isAuth: null,
-        loginSuccess: null,
-        token: null,
-      };
-    case LOG_OUT_USER_FAILURE:
-      return {
-        ...state,
-        error: action.payload.message,
+        isAuth: {},
+        logoutSuccess: true,
       };
 
     default:

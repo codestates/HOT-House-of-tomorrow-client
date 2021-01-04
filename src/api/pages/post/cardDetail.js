@@ -3,9 +3,17 @@
 import axios from 'axios';
 
 export async function postCommentAsync(comment) {
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
     'http://3.140.150.124:5000/api/comment/write',
-    comment
+    comment,
+    {
+      headers: {
+        xauth: token,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
   );
   if (response.data.writeComment === false)
     throw new Error(response.data.error);
@@ -13,9 +21,17 @@ export async function postCommentAsync(comment) {
 }
 
 export async function deleteCommentAsync(comment) {
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
     'http://3.140.150.124:5000/api/comment/delete',
-    comment
+    comment,
+    {
+      headers: {
+        xauth: token,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
   );
   if (response.data.deleteComment === false)
     throw new Error(response.data.error);
@@ -23,9 +39,17 @@ export async function deleteCommentAsync(comment) {
 }
 
 export async function likePostAsync(postId) {
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
     'http://3.140.150.124:5000/api/lobby/likepost',
-    { postId }
+    { postId },
+    {
+      headers: {
+        xauth: token,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
   );
   if (response.data.updateSuccess === false)
     throw new Error(response.data.updateSuccess);
@@ -33,9 +57,17 @@ export async function likePostAsync(postId) {
 }
 
 export async function deletePostAsync(postId) {
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
     'http://3.140.150.124:5000/api/post/delete',
-    { postId }
+    { postId },
+    {
+      headers: {
+        xauth: token,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
   );
   if (response.data.postDeleted === false)
     throw new Error(`postDeleted : ${response.data.postDeleted}`);
