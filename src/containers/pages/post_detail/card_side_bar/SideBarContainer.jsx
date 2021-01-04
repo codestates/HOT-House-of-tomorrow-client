@@ -6,6 +6,7 @@ import {
   typeDeletePost,
   typeInitPostState,
 } from '../../../../modules/pages/post/cardDetail';
+import { typeAuthUser } from '../../../../modules/auth/userAuthorization';
 
 function SideBarContainer({ card, isAuth, history }) {
   const { deletePost } = useSelector(({ cardDetail }) => ({
@@ -21,11 +22,13 @@ function SideBarContainer({ card, isAuth, history }) {
 
   useEffect(() => {
     const userLike = isAuth?.likeposts.split(',').map((e) => Number(e));
-    if (userLike.includes(card.postData.id)) {
-      setLike({
-        ...like,
-        pressLike: true,
-      });
+    if (userLike) {
+      if (userLike.includes(card.postData.id)) {
+        setLike({
+          ...like,
+          pressLike: true,
+        });
+      }
     }
   }, [isAuth]);
 
@@ -53,6 +56,7 @@ function SideBarContainer({ card, isAuth, history }) {
       dispatch(typeLikePost(postId));
       setLike({ ...like, pressLike: !like.pressLike, likes: like.likes + 1 });
     }
+    dispatch(dispatch(typeAuthUser()));
   };
   return (
     <>

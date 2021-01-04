@@ -6,17 +6,27 @@ export async function uploadImageAsync(data) {
     const maxNum = Math.floor(max);
     return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
   };
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const res = await axios.post(
-    `/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
+    `http://3.140.150.124:5000/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
     data,
     {
-      header: { 'content-type': 'multipart/form-data' },
+      headers: { 'content-type': 'multipart/form-data', xauth: token },
+      withCredentials: true,
     }
   );
   return res.data;
 }
 
 export async function writeCardAsync(formData) {
-  const res = await axios.post('/api/post/write', formData);
+  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
+  const res = await axios.post(
+    'http://3.140.150.124:5000/api/post/write',
+    formData,
+    {
+      headers: { xauth: token, 'Content-Type': 'application/json' },
+      withCredentials: true,
+    }
+  );
   return res.data;
 }

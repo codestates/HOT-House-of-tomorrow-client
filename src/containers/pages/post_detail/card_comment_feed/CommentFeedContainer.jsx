@@ -72,6 +72,12 @@ function CommentFeedContainer({ comment, userData, timeDiffToday, postId }) {
     }
   }, [lastCommentId]);
 
+  useEffect(() => {
+    let data = [...commentList];
+    data.unshift();
+    setCommentList(data);
+  }, []);
+
   const deleteHandler = (deleteId) => {
     const currentIndex = commentList.find((ele) => ele.id === deleteId);
     const index = commentList.indexOf(currentIndex);

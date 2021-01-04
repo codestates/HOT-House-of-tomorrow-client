@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { typeGetAllCards } from '../../../../modules/pages/lobby/cards';
 import { typeLikePost } from '../../../../modules/pages/post/cardDetail';
@@ -12,35 +12,38 @@ function CardsContainer({ isAuth }) {
     currentCards: cards.currentCards,
     load: cards.load,
   }));
+  const [likeList, setLikeList] = useState([]);
 
-  const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const fakeList = [1, 2, 3, 5, 6, 7, 8, 9];
 
   useEffect(() => {
-    if (userStorage) dispatch(typeGetAllCards());
+    dispatch(typeGetAllCards());
   }, []);
 
-  useEffect(() => {}, [isAuth]);
-
-  const userLike = isAuth
-    ? isAuth?.likeposts.split(',').map((e) => Number(e))
-    : null;
+  useEffect(() => {
+    setLikeList(isAuth?.likeposts);
+  }, [isAuth]);
 
   const onLikeHandler = (postId) => {
     dispatch(typeLikePost(postId));
   };
 
-  const cardList = load
-    ? currentCards.map((element) => (
-        // eslint-disable-next-line react/jsx-indent
-        <Card
-          key={element.id}
-          element={element}
-          onLikeHandler={onLikeHandler}
-          userLike={userLike}
-        />
-      ))
-    : fakeList.map((ele) => <FakeCard key={ele} />);
+  const cardList =
+    load && likeList
+      ? currentCards.map((element) => (
+          // eslint-disable-next-line react/jsx-indent
+          <Card
+            key={element.id}
+            element={element}
+            onLikeHandler={onLikeHandler}
+            userLike={
+              likeList.length >= 1
+                ? likeList.split(',').map((e) => Number(e))
+                : null
+            }
+          />
+        ))
+      : fakeList.map((ele) => <FakeCard key={ele} />);
 
   return (
     <>
