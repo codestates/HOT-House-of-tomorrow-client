@@ -99,7 +99,7 @@ function Comments({
         </h1>
         <Form action="submit" onSubmit={(event) => submitHandler(event)}>
           <div>
-            <img src={userData.profileImg} alt="" />
+            <img src={userData?.profileImg} alt="" />
           </div>
           <input
             type="text"

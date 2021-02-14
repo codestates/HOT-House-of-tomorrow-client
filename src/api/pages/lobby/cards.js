@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 export async function getAllCardsAsync() {
-  const response = await axios.get(
-    'http://3.140.150.124:5000/api/lobby/getposts'
-  );
+  const response = await axios.get('/api/lobby/getposts');
   if (response.data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
   return response.data.results;
@@ -42,9 +40,7 @@ export async function getFilterdCardsAsync(options) {
   });
   currentTag[currentTab] = tag;
   const query = stringQuery.join('');
-  const { data } = await axios.get(
-    `http://3.140.150.124:5000/api/lobby/filter/?${query}`
-  );
+  const { data } = await axios.get(`/api/lobby/filter/?${query}`);
   if (data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
 
@@ -60,9 +56,7 @@ export async function getFilterdCardsAsync(options) {
 }
 
 export async function getCardAsync(postId) {
-  const response = await axios.get(
-    `http://3.140.150.124:5000/api/post/read/${postId}`
-  );
+  const response = await axios.get(`/api/post/read/${postId}`);
   if (response.data.postLoad === false)
     throw new Error('포스트 불러오기에 실패했습니다.');
   const { UserAnotherPosts, comment, postData } = response.data.results;
