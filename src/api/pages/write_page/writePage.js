@@ -8,7 +8,7 @@ export async function uploadImageAsync(data) {
   };
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const res = await axios.post(
-    `http://3.140.150.124:5000/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
+    `/api/utils/uploadimg/${getRandomInt(0, 9999)}`,
     data,
     {
       headers: { 'content-type': 'multipart/form-data', xauth: token },
@@ -20,13 +20,9 @@ export async function uploadImageAsync(data) {
 
 export async function writeCardAsync(formData) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
-  const res = await axios.post(
-    'http://3.140.150.124:5000/api/post/write',
-    formData,
-    {
-      headers: { xauth: token, 'Content-Type': 'application/json' },
-      withCredentials: true,
-    }
-  );
+  const res = await axios.post('/api/post/write', formData, {
+    headers: { xauth: token, 'Content-Type': 'application/json' },
+    withCredentials: true,
+  });
   return res.data;
 }

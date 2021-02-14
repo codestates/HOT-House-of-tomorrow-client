@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { typeGetAllCards } from '../../../../modules/pages/lobby/cards';
@@ -5,8 +6,14 @@ import { typeLikePost } from '../../../../modules/pages/post/cardDetail';
 import CardsLayout from '../../../../components/pages/lobby/cards/CardsLayout';
 import Card from '../../../../components/pages/lobby/cards/Card';
 import FakeCard from '../../../../components/pages/lobby/cards/FakeCard';
+import LoginContainer from '../../../systems/user_login/LoginContainer';
+
+//* import custom Hook
+import useLogin from '../../../../hooks/useLogin';
 
 function CardsContainer({ isAuth }) {
+  const { onLoginModal, loginModal } = useLogin();
+
   const dispatch = useDispatch();
   const { currentCards, load } = useSelector(({ cards }) => ({
     currentCards: cards.currentCards,
@@ -21,7 +28,9 @@ function CardsContainer({ isAuth }) {
   }, []);
 
   useEffect(() => {
-    setLikeList(isAuth?.likeposts);
+    if (isAuth) {
+      setLikeList(isAuth?.likeposts);
+    }
   }, [isAuth]);
 
   const onLikeHandler = (postId) => {
@@ -41,6 +50,7 @@ function CardsContainer({ isAuth }) {
                 ? likeList.split(',').map((e) => Number(e))
                 : null
             }
+            onLoginModal={onLoginModal}
           />
         ))
       : fakeList.map((ele) => <FakeCard key={ele} />);

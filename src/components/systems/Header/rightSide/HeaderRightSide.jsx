@@ -72,30 +72,38 @@ function HeaderRightSide({
   profileImg,
   goMyPageHandler,
   goWriting,
+  onLoginModal,
 }) {
   return (
     <>
-      <RightBlock>
-        <HeaderNavBtn type="button" onClick={dropDownHandler}>
-          <Menu />
-        </HeaderNavBtn>
-        <HeaderNavBtn type="button" onClick={goMyPageHandler}>
-          <ProfileImg src={profileImg} alt="profile" />
-        </HeaderNavBtn>
-        <WriteBtn type="button" onClick={goWriting}>
-          <span>글쓰기</span>
-          <HiOutlinePencilAlt />
+      {isAuth || localStorage.getItem('CURRENT_USER') ? (
+        <RightBlock>
+          <HeaderNavBtn type="button" onClick={dropDownHandler}>
+            <Menu />
+          </HeaderNavBtn>
+          <HeaderNavBtn type="button" onClick={goMyPageHandler}>
+            <ProfileImg src={profileImg} alt="profile" />
+          </HeaderNavBtn>
+          <WriteBtn type="button" onClick={goWriting}>
+            <span>글쓰기</span>
+            <HiOutlinePencilAlt />
+          </WriteBtn>
+
+          {openDropDown ? (
+            <DropDownTab
+              isAuth={isAuth}
+              dropDownHandler={dropDownHandler}
+              onProfileHandler={onProfileHandler}
+              onSettingHandler={onSettingHandler}
+              onLogOutHandler={onLogOutHandler}
+            />
+          ) : null}
+        </RightBlock>
+      ) : (
+        <WriteBtn type="button" onClick={onLoginModal}>
+          <span>로그인</span>
         </WriteBtn>
-        {openDropDown ? (
-          <DropDownTab
-            isAuth={isAuth}
-            dropDownHandler={dropDownHandler}
-            onProfileHandler={onProfileHandler}
-            onSettingHandler={onSettingHandler}
-            onLogOutHandler={onLogOutHandler}
-          />
-        ) : null}
-      </RightBlock>
+      )}
     </>
   );
 }

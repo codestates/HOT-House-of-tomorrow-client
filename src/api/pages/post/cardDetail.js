@@ -4,17 +4,13 @@ import axios from 'axios';
 
 export async function postCommentAsync(comment) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
-  const response = await axios.post(
-    'http://3.140.150.124:5000/api/comment/write',
-    comment,
-    {
-      headers: {
-        xauth: token,
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    }
-  );
+  const response = await axios.post('/api/comment/write', comment, {
+    headers: {
+      xauth: token,
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  });
   if (response.data.writeComment === false)
     throw new Error(response.data.error);
   return response.data;
@@ -22,17 +18,13 @@ export async function postCommentAsync(comment) {
 
 export async function deleteCommentAsync(comment) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
-  const response = await axios.post(
-    'http://3.140.150.124:5000/api/comment/delete',
-    comment,
-    {
-      headers: {
-        xauth: token,
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    }
-  );
+  const response = await axios.post('/api/comment/delete', comment, {
+    headers: {
+      xauth: token,
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  });
   if (response.data.deleteComment === false)
     throw new Error(response.data.error);
   return response.data;
@@ -41,7 +33,7 @@ export async function deleteCommentAsync(comment) {
 export async function likePostAsync(postId) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
-    'http://3.140.150.124:5000/api/lobby/likepost',
+    '/api/lobby/likepost',
     { postId },
     {
       headers: {
@@ -59,7 +51,7 @@ export async function likePostAsync(postId) {
 export async function deletePostAsync(postId) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
-    'http://3.140.150.124:5000/api/post/delete',
+    '/api/post/delete',
     { postId },
     {
       headers: {

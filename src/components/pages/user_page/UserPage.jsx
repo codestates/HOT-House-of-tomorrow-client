@@ -61,7 +61,9 @@ const MyWriteListWrap = styled.div`
 `;
 
 function UserPage({ isAuth, goEdit, userPosts, userInfo, likePosts }) {
-  const currentUser = JSON.parse(localStorage.getItem('CURRENT_USER')).nickname;
+  const currentUser = localStorage.getItem('CURRENT_USER')
+    ? JSON.parse(localStorage.getItem('CURRENT_USER')).nickname
+    : null;
   const [activeId, setActiveId] = useState(0);
 
   return (

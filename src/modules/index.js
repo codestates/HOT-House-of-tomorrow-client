@@ -10,9 +10,11 @@ import postEdit, {
   cardUpdateWatcherSaga,
 } from './pages/post_edit_page/postEdit';
 import config from './config/filterTabText';
+import modal from './config/modal';
 
 const rootReducer = combineReducers({
   authorization,
+  modal,
   config,
   cards,
   cardDetail,

@@ -21,13 +21,15 @@ function SideBarContainer({ card, isAuth, history }) {
   });
 
   useEffect(() => {
-    const userLike = isAuth?.likeposts.split(',').map((e) => Number(e));
-    if (userLike) {
-      if (userLike.includes(card.postData.id)) {
-        setLike({
-          ...like,
-          pressLike: true,
-        });
+    if (isAuth) {
+      const userLike = isAuth?.likeposts.split(',').map((e) => Number(e));
+      if (userLike) {
+        if (userLike.includes(card.postData.id)) {
+          setLike({
+            ...like,
+            pressLike: true,
+          });
+        }
       }
     }
   }, [isAuth]);

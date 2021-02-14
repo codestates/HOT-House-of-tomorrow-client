@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import HeaderRightSide from '../../../../components/systems/Header/rightSide/HeaderRightSide';
 import { typeLogOut } from '../../../../modules/auth/userAuthorization';
+import useLogin from '../../../../hooks/useLogin';
 // TODO ============================
 // TODO HeaderRightSideContainer(CT)
 // TODO ============================
 
 function HeaderRightSideContainer({ history }) {
+  const { onLoginModal } = useLogin();
   const [openDropDown, setOpenDropDown] = useState(false);
   const dropDownHandler = () => {
     setOpenDropDown(!openDropDown);
@@ -47,8 +49,10 @@ function HeaderRightSideContainer({ history }) {
 
   const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const profileImg = userStorage?.profileImg || 'null';
-  let loginModal = (
+
+  return (
     <HeaderRightSide
+      onLoginModal={onLoginModal}
       isAuth={isAuth}
       openDropDown={openDropDown}
       setOpenDropDown={setOpenDropDown}
@@ -61,10 +65,6 @@ function HeaderRightSideContainer({ history }) {
       goWriting={goWriting}
     />
   );
-  if (!userStorage) {
-    loginModal = <div />;
-  }
-  return loginModal;
 }
 
 export default withRouter(HeaderRightSideContainer);

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import FilterBarContainer from '../../../containers/systems/filter_Bar/FilterBarContainer';
 import CardsContainer from '../../../containers/pages/lobby/cards/CardsContainer';
+import LoginContainer from '../../../containers/systems/user_login/LoginContainer';
+import useLogin from '../../../hooks/useLogin';
 
 // TODO =====================
 // TODO   LOBBY_PAGE (CP)
@@ -17,12 +19,13 @@ const Block = styled.div`
   z-index: 1;
 `;
 
-function LobbyPage({ showLoginModal, isAuth }) {
+function LobbyPage({ isAuth }) {
+  const { loginModal } = useLogin();
   // * RENDER
   return (
     <>
-      {showLoginModal}
       <Block>
+        {loginModal && <LoginContainer />}
         <FilterBarContainer />
         <CardsContainer isAuth={isAuth} />
       </Block>
