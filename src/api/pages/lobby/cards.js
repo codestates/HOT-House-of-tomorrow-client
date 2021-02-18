@@ -1,9 +1,15 @@
 import axios from 'axios';
 
 export async function getAllCardsAsync() {
-  const response = await axios.get('/api/lobby/getposts');
-  if (response.data.postLoad === false)
+  const response = await axios.get(
+    'https://www.houseoftomorrow.gq/api/lobby/getposts',
+    {
+      withCredentials: true,
+    }
+  );
+  if (!response.data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
   return response.data.results;
 }
 
@@ -40,9 +46,12 @@ export async function getFilterdCardsAsync(options) {
   });
   currentTag[currentTab] = tag;
   const query = stringQuery.join('');
-  const { data } = await axios.get(`/api/lobby/filter/?${query}`);
-  if (data.postLoad === false)
+  const { data } = await axios.get(
+    `https://houseoftomorrow.gq/api/lobby/filter/?${query}`
+  );
+  if (!data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
 
   const cards = data.results;
   return {
@@ -56,9 +65,12 @@ export async function getFilterdCardsAsync(options) {
 }
 
 export async function getCardAsync(postId) {
-  const response = await axios.get(`/api/post/read/${postId}`);
-  if (response.data.postLoad === false)
+  const response = await axios.get(
+    `https://houseoftomorrow.gq/api/post/read/${postId}`
+  );
+  if (!response.data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
   const { UserAnotherPosts, comment, postData } = response.data.results;
   comment.reverse();
   return { UserAnotherPosts, comment, postData };
