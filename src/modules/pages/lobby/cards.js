@@ -135,7 +135,7 @@ const initialState = {
   currentQuery: {},
   currentQueryTab: [],
   currentTag: {},
-  load: null,
+  load: false,
   card: {
     postData: {
       housingType: null,
@@ -170,6 +170,8 @@ export default function cards(state = initialState, action) {
         ...state,
         loginSuccess: false,
         error: action.payload.message,
+        load: false,
+        currentCards: [],
       };
 
     case GET_ALL_CARDS:
@@ -187,6 +189,8 @@ export default function cards(state = initialState, action) {
       return {
         ...state,
         error: action.payload.message,
+        currentCards: [],
+        load: false,
       };
     case INITAIAL_CARDS:
       return {

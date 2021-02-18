@@ -4,7 +4,7 @@ import axios from 'axios';
 export async function getUserInfoAsync() {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    'http://3.140.150.124:5000/api/auth/getuser',
+    'https://houseoftomorrow.gq/api/auth/getuser',
     {
       headers: {
         xauth: token,
@@ -19,7 +19,7 @@ export async function getUserInfoAsync() {
 export async function postUserUpdateAsync(data) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
-    'http://3.140.150.124:5000/api/auth/updateuser',
+    'https://houseoftomorrow.gq/api/auth/updateuser',
     data,
     {
       headers: {
