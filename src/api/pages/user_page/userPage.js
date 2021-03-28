@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export async function getUserCardsAsync(userId) {
   const response = await axios.get(
-    `https://houseoftomorrow.gq/api/mypage/getpost/${userId}`,
+    `https://hotserver.gq/api/mypage/getpost/${userId}`,
     {
       withCredentials: true,
     }
@@ -16,7 +16,7 @@ export async function getUserCardsAsync(userId) {
 export async function getUserLikesAsync(userId) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    `https://houseoftomorrow.gq/api/mypage/getlikepost`,
+    `https://hotserver.gq/api/mypage/getlikepost`,
     {
       headers: {
         xauth: token,

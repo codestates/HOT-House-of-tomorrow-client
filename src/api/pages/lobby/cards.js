@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getAllCardsAsync() {
   const response = await axios.get(
-    'https://www.houseoftomorrow.gq/api/lobby/getposts',
+    'https://hotserver.gq/api/lobby/getposts', 
     {
       withCredentials: true,
     }
@@ -47,7 +47,7 @@ export async function getFilterdCardsAsync(options) {
   currentTag[currentTab] = tag;
   const query = stringQuery.join('');
   const { data } = await axios.get(
-    `https://houseoftomorrow.gq/api/lobby/filter/?${query}`
+    `https://hotserver.gq/api/lobby/filter/?${query}`
   );
   if (!data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
@@ -66,7 +66,7 @@ export async function getFilterdCardsAsync(options) {
 
 export async function getCardAsync(postId) {
   const response = await axios.get(
-    `https://houseoftomorrow.gq/api/post/read/${postId}`
+    `https://hotserver.gq/api/post/read/${postId}`
   );
   if (!response.data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');

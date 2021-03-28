@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function loginAsync(formData) {
   const response = await axios.post(
-    'https://www.houseoftomorrow.gq/api/auth/login',
+    'https://hotserver.gq/api/auth/login',
     formData,
     { withCredentials: true }
   );
@@ -17,7 +17,7 @@ export async function loginAsync(formData) {
 export async function isAuthAsync() {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    'https://houseoftomorrow.gq/api/auth/isAuth',
+    'https://hotserver.gq/api/auth/isAuth',
     {
       headers: {
         xauth: token,
