@@ -182,7 +182,7 @@ const LikeIcon = styled(AiFillHeart)`
   }
 `;
 
-function Card({ element, userLike, onLikeHandler }) {
+function Card({ element, userLike, onLikeHandler, onLoginModal }) {
   const { id, User, view, roomImage, like, comments, description } = element;
 
   const [cardLike, setCardLike] = useState({
@@ -262,7 +262,16 @@ function Card({ element, userLike, onLikeHandler }) {
         </Link>
       </CardContents>
       <CardBottom>
-        <button type="button" onClick={() => pressLikeHandler(id)}>
+        <button
+          type="button"
+          onClick={() => {
+            if (localStorage.getItem('CURRENT_USER')) {
+              pressLikeHandler(id);
+            } else {
+              onLoginModal();
+            }
+          }}
+        >
           <LikeIcon like={String(cardLike.press)} />
           <span>{cardLike.like}</span>
         </button>

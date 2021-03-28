@@ -3,14 +3,9 @@
 import axios from 'axios';
 
 export async function getUserCardsAsync(userId) {
-  const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    `http://3.140.150.124:5000/api/mypage/getpost/${userId}`,
+    `https://hotserver.gq/api/mypage/getpost/${userId}`,
     {
-      headers: {
-        xauth: token,
-        'Content-Type': 'application/json',
-      },
       withCredentials: true,
     }
   );
@@ -21,7 +16,7 @@ export async function getUserCardsAsync(userId) {
 export async function getUserLikesAsync(userId) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    `http://3.140.150.124:5000/api/mypage/getlikepost`,
+    `https://hotserver.gq/api/mypage/getlikepost`,
     {
       headers: {
         xauth: token,

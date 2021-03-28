@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal/Fade';
+import { FaRegTimesCircle } from 'react-icons/fa';
 import SocialLoginBlock from './socialLogin/SocialLoginBlock';
 import logoRow from '../../../public/logoRow.png';
 import teamLogo from '../../../public/teamLogo.png';
 
 //* STYLED_COMPONENTS
 const BackgroundBlock = styled.div`
-  background: rgb(0, 0, 0, 0.3);
+  background: rgb(255 255 255 / 50%);
   height: 100vh;
+  left: 0;
+  top: 0;
   z-index: 2;
   position: relative;
   position: fixed;
@@ -65,13 +68,26 @@ const TextBox = styled.div`
   margin-bottom: 40px;
   align-items: center;
 `;
-
+const CloseModalButton = styled.button`
+  background: none;
+  border: none;
+  position: absolute;
+  font-size: 25px;
+  right: 15px;
+  top: 15px;
+  color: gray;
+  cursor: pointer;
+  outline: none;
+`;
 //* RENDER
-function Login({ socialLogin }) {
+function Login({ socialLogin, onLoginModal }) {
   return (
     <BackgroundBlock>
       <Fade top>
         <LoginModal>
+          <CloseModalButton type="button" onClick={onLoginModal}>
+            <FaRegTimesCircle />
+          </CloseModalButton>
           <LeftInnerBlock>
             <img src={teamLogo} alt="teamLogo" />
             <strong> &lt;Team_hot /&gt;</strong>

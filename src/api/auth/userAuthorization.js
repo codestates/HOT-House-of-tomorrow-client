@@ -2,8 +2,9 @@ import axios from 'axios';
 
 export async function loginAsync(formData) {
   const response = await axios.post(
-    'http://3.140.150.124:5000/api/auth/login',
-    formData
+    'https://hotserver.gq/api/auth/login',
+    formData,
+    { withCredentials: true }
   );
   if (!response.data.loginSuccess) {
     throw new Error('로그인에 실패했습니다.');
@@ -16,7 +17,7 @@ export async function loginAsync(formData) {
 export async function isAuthAsync() {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    'http://3.140.150.124:5000/api/auth/isAuth',
+    'https://hotserver.gq/api/auth/isAuth',
     {
       headers: {
         xauth: token,

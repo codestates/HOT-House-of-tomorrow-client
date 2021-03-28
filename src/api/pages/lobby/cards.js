@@ -2,10 +2,14 @@ import axios from 'axios';
 
 export async function getAllCardsAsync() {
   const response = await axios.get(
-    'http://3.140.150.124:5000/api/lobby/getposts'
+    'https://hotserver.gq/api/lobby/getposts', 
+    {
+      withCredentials: true,
+    }
   );
-  if (response.data.postLoad === false)
+  if (!response.data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
   return response.data.results;
 }
 
@@ -43,10 +47,11 @@ export async function getFilterdCardsAsync(options) {
   currentTag[currentTab] = tag;
   const query = stringQuery.join('');
   const { data } = await axios.get(
-    `http://3.140.150.124:5000/api/lobby/filter/?${query}`
+    `https://hotserver.gq/api/lobby/filter/?${query}`
   );
-  if (data.postLoad === false)
+  if (!data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
 
   const cards = data.results;
   return {
@@ -61,10 +66,11 @@ export async function getFilterdCardsAsync(options) {
 
 export async function getCardAsync(postId) {
   const response = await axios.get(
-    `http://3.140.150.124:5000/api/post/read/${postId}`
+    `https://hotserver.gq/api/post/read/${postId}`
   );
-  if (response.data.postLoad === false)
+  if (!response.data.results) {
     throw new Error('포스트 불러오기에 실패했습니다.');
+  }
   const { UserAnotherPosts, comment, postData } = response.data.results;
   comment.reverse();
   return { UserAnotherPosts, comment, postData };
