@@ -3,7 +3,7 @@ import axios from 'axios';
 export async function getCardInfoAsync(postId) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.get(
-    `https://houseoftomorrow.gq/api/post/read/${postId}`,
+    `https://hotserver.gq/api/post/read/${postId}`,
     {
       headers: {
         xauth: token,
@@ -18,7 +18,7 @@ export async function getCardInfoAsync(postId) {
 export async function updateCardInfoAsync(formData) {
   const { token } = JSON.parse(localStorage.getItem('CURRENT_USER'));
   const response = await axios.post(
-    'https://houseoftomorrow.gq/api/post/update',
+    'https://hotserver.gq/api/post/update',
     formData,
     {
       headers: {
